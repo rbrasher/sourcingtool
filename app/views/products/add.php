@@ -45,14 +45,28 @@
         </div>
         
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Qty Per Package</label>
                     <input type="text" name="quantity_per_package" id="quantity_per_package" class="form-control" value="<?php echo set_value('quantity_per_package');?>" placeholder="Enter Qty Per Package" />
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Total Price</label>
+                    <input type="text" name="total_price" id="total_price" class="form-control" value="<?php echo set_value('total_price');?>" placeholder="Total Price" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Item Price</label>
+                    <input type="text" name="item_price" id="item_price" class="form-control" value="<?php echo set_value('item_price');?>" placeholder="Item Price" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Graphics</label>
                     <select name="graphics" id="graphics" class="form-control">
@@ -64,14 +78,14 @@
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Packaging</label>
                     <input type="text" name="packaging" id="packaging" class="form-control" value="<?php echo set_value('packaging');?>" placeholder="Enter Packaging" />
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Confidence Level</label>
                     <select name="confidence_level" id="confidence_level" class="form-control">
@@ -146,7 +160,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Date of Deposit</label>
-                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control" value="<?php echo set_value('date_of_deposit');?>" />
+                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control datep" value="<?php echo set_value('date_of_deposit');?>" />
                 </div>
             </div>
             
@@ -160,7 +174,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Expected Ship Date</label>
-                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control" value="<?php echo set_value('expected_ship_date');?>" />
+                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php echo set_value('expected_ship_date');?>" />
                 </div>
             </div>
             
@@ -180,21 +194,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Arrival Date</label>
-                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control" value="<?php echo set_value('estimated_arrival_date');?>" />
+                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control datep" value="<?php echo set_value('estimated_arrival_date');?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Date at FBA</label>
-                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control" value="<?php echo set_value('estimated_date_as_fba');?>" />
+                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php echo set_value('estimated_date_as_fba');?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Launch Date</label>
-                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control" value="<?php echo set_value('estimated_launch_date');?>" />
+                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php echo set_value('estimated_launch_date');?>" />
                 </div>
             </div>
             

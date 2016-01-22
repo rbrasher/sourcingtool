@@ -1,8 +1,13 @@
 </div>
 <!-- end wrapper -->
-
-<script src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
-<script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.datep').datepicker({
+            inline: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
 
 </body>
 </html>

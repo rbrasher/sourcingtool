@@ -6,16 +6,16 @@ class Products extends CI_Controller {
         parent::__construct();
         $this->load->model('Products_model');
         
-        if(!$this->session->userdata('logged_in')) {
-            redirect('authenticate/login');
-        }
+//        if(!$this->session->userdata('logged_in')) {
+//            redirect('authenticate/login');
+//        }
     }
     
     /**
      * All products.
      */
     public function index() {
-        $data['products'] = $this->Products_model->get_products('id', 'DESC');
+        $data['products'] = $this->Products_model->get_products('id', 'ASC');
         
         //load view
         $this->load->view('header', $data);
@@ -30,7 +30,9 @@ class Products extends CI_Controller {
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('status', 'Status', 'trim|xss_clean');
-        $this->form_validation->set_rules('qty_per_package', 'Qty Per Package', 'trim|xss_clean');
+        $this->form_validation->set_rules('quantity_per_package', 'Quantity Per Package', 'trim|xss_clean');
+        $this->form_validation->set_rules('total_price', 'Total Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('item_price', 'Item Price', 'trim|xss_clean');
         $this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
         $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
         $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
@@ -64,19 +66,21 @@ class Products extends CI_Controller {
             $this->load->view('footer');
         } else {
             $data = array(
-                'name'                  => $this->input->post('name'),
-                'status'                => $this->input->post('status'),
-                'qty_per_package'       => $this->input->post('qty_per_package'),
-                'graphics'              => $this->input->post('graphics'),
-                'packaging'             => $this->input->post('packaging'),
-                'confidence_level'      => $this->input->post('confidence_level'),
-                'best_bsr'              => $this->input->post('best_bsr'),
-                'top_3_avg_bsr'         => $this->input->post('top_3_avg_bsr'),
-                'top_10_avg_bsr'        => $this->input->post('top_10_avg_bsr'),
-                'target_price'          => $this->input->post('target_price'),
-                'fba_fee_est'           => $this->input->post('fba_fee_est'),
-                'margin_per_sale'       => $this->input->post('margin_per_sale'),
-                'estimated_sales_per_day'   => $this->input->post('estimated_sales_per_day'),
+                'name'                          => $this->input->post('name'),
+                'status'                        => $this->input->post('status'),
+                'quantity_per_package'          => $this->input->post('quantity_per_package'),
+                'total_price'                   => $this->input->post('total_price'),
+                'item_price'                    => $this->input->post('item_price'),
+                'graphics'                      => $this->input->post('graphics'),
+                'packaging'                     => $this->input->post('packaging'),
+                'confidence_level'              => $this->input->post('confidence_level'),
+                'best_bsr'                      => $this->input->post('best_bsr'),
+                'top_3_avg_bsr'                 => $this->input->post('top_3_avg_bsr'),
+                'top_10_avg_bsr'                => $this->input->post('top_10_avg_bsr'),
+                'target_price'                  => $this->input->post('target_price'),
+                'fba_fee_est'                   => $this->input->post('fba_fee_est'),
+                'margin_per_sale'               => $this->input->post('margin_per_sale'),
+                'estimated_sales_per_day'       => $this->input->post('estimated_sales_per_day'),
                 'estimated_margin_per_month'    => $this->input->post('estimated_margin_per_month'),
                 'date_of_deposit'               => $this->input->post('date_of_deposit'),
                 'qty_ordered'                   => $this->input->post('qty_ordered'),
@@ -87,7 +91,7 @@ class Products extends CI_Controller {
                 'estimated_launch_date'         => $this->input->post('estimated_launch_date'),
                 'competitor_price_example'      => $this->input->post('competitor_price_example'),
                 'competitor_qty_example'        => $this->input->post('competitor_qty_example'),
-                'marketing_hook'                => $this->input->post('marketing_hook')
+                'mktg_hook'                => $this->input->post('marketing_hook')
             );
             
             //add product
@@ -109,7 +113,9 @@ class Products extends CI_Controller {
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('status', 'Status', 'trim|xss_clean');
-        $this->form_validation->set_rules('qty_per_package', 'Qty Per Package', 'trim|xss_clean');
+        $this->form_validation->set_rules('quantity_per_package', 'Quantity Per Package', 'trim|xss_clean');
+        $this->form_validation->set_rules('total_price', 'Total Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('item_price', 'Item Price', 'trim|xss_clean');
         $this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
         $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
         $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
@@ -135,6 +141,7 @@ class Products extends CI_Controller {
         $data['product'] = $this->Products_model->get_product($id);
         $data['graphics'] = $this->Products_model->get_graphics();
         $data['confidence'] = $this->Products_model->get_confidence();
+        $data['product_status'] = $this->Products_model->get_products_status();
         
         if($this->form_validation->run() == FALSE) {
             //load view
@@ -143,30 +150,32 @@ class Products extends CI_Controller {
             $this->load->view('footer');
         } else {
             $data = array(
-                'name'                          => $this->input->post('name'),
-                'status'                        => $this->input->post('status'),
-                'qty_per_package'               => $this->input->post('qty_per_package'),
-                'graphics'                      => $this->input->post('graphics'),
-                'packaging'                     => $this->input->post('packaging'),
-                'confidence_level'              => $this->input->post('confidence_level'),
-                'best_bsr'                      => $this->input->post('best_bsr'),
-                'top_3_avg_bsr'                 => $this->input->post('top_3_avg_bsr'),
-                'top_10_avg_bsr'                => $this->input->post('top_10_avg_bsr'),
-                'target_price'                  => $this->input->post('target_price'),
-                'fba_fee_est'                   => $this->input->post('fba_fee_est'),
-                'margin_per_sale'               => $this->input->post('margin_per_sale'),
-                'estimated_sales_per_day'       => $this->input->post('estimated_sales_per_day'),
-                'estimated_margin_per_month'    => $this->input->post('estimated_margin_per_month'),
-                'date_of_deposit'               => $this->input->post('date_of_deposit'),
-                'qty_ordered'                   => $this->input->post('qty_ordered'),
-                'expected_ship_date'            => $this->input->post('expected_ship_date'),
-                'ship_method'                   => $this->input->post('ship_method'),
-                'estimated_arrival_date'        => $this->input->post('estimated_arrival_date'),
-                'estimated_date_at_fba'         => $this->input->post('estimated_date_at_fba'),
-                'estimated_launch_date'         => $this->input->post('estimated_launch_date'),
-                'competitor_price_example'      => $this->input->post('competitor_price_example'),
-                'competitor_qty_example'        => $this->input->post('competitor_qty_example'),
-                'marketing_hook'                => $this->input->post('marketing_hook')
+                'name'                              => $this->input->post('name'),
+                'status'                            => $this->input->post('status'),
+                'quantity_per_package'              => $this->input->post('quantity_per_package'),
+                'total_price'                       => $this->input->post('total_price'),
+                'item_price'                        => $this->input->post('item_price'),
+                'graphics'                          => $this->input->post('graphics'),
+                'packaging'                         => $this->input->post('packaging'),
+                'confidence_level'                  => $this->input->post('confidence_level'),
+                'best_bsr'                          => $this->input->post('best_bsr'),
+                'top_3_avg_bsr'                     => $this->input->post('top_3_avg_bsr'),
+                'top_10_avg_bsr'                    => $this->input->post('top_10_avg_bsr'),
+                'target_price'                      => $this->input->post('target_price'),
+                'fba_fee_est'                       => $this->input->post('fba_fee_est'),
+                'margin_per_sale'                   => $this->input->post('margin_per_sale'),
+                'estimated_sales_per_day'           => $this->input->post('estimated_sales_per_day'),
+                'estimated_margin_per_month'        => $this->input->post('estimated_margin_per_month'),
+                'date_of_deposit'                   => $this->input->post('date_of_deposit'),
+                'qty_ordered'                       => $this->input->post('qty_ordered'),
+                'expected_ship_date'                => $this->input->post('expected_ship_date'),
+                'ship_method'                       => $this->input->post('ship_method'),
+                'estimated_arrival_date'            => $this->input->post('estimated_arrival_date'),
+                'estimated_date_at_fba'             => $this->input->post('estimated_date_at_fba'),
+                'estimated_launch_date'             => $this->input->post('estimated_launch_date'),
+                'competitor_price_example'          => $this->input->post('competitor_price_example'),
+                'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
+                'mktg_hook'                         => $this->input->post('marketing_hook')
             );
             
             //update product

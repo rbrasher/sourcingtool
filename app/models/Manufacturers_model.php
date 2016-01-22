@@ -16,8 +16,12 @@ class Manufacturers_model extends CI_Model {
      * @return array of objects
      */
     public function get_manufacturers($order_by = null, $sort = 'DESC', $limit = null, $offset = 0) {
-        $this->db->select('*');
-        $this->db->from('st_manufacturers');
+//        $this->db->select('*');
+//        $this->db->from('st_manufacturers');
+        
+        $this->db->select('a.*, b.name AS product_name');
+        $this->db->from('st_manufacturers AS a');
+        $this->db->join('st_products AS b', 'b.id = a.product_id', 'left');
         
         if($limit != null) {
             $this->db->limit($limit, $offset);

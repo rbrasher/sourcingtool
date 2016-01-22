@@ -27,6 +27,20 @@
         <div class="row" style="border-bottom: 1px solid green; margin-bottom: 20px;">
             <div class="col-md-3">
                 <div class="form-group">
+                    <label>Product</label>
+                    <select name="product_id" id="product_id" class="form-control">
+                        <option value="">Select a product</option>
+                        <?php foreach($products as $product) : ?>
+                        <option value="<?php echo $product->id;?>" <?php if($manufacturer->product_id == $product->id) {echo 'selected';};?>><?php echo $product->name;?></option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" style="border-bottom: 1px solid green; margin-bottom: 20px;">
+            <div class="col-md-3">
+                <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" id="name" class="form-control" value="<?php echo $manufacturer->name;?>" placeholder="Enter Manufacturer Name" />
                 </div>

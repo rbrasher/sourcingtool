@@ -5,18 +5,19 @@ class Manufacturers extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Manufacturers_model');
+        $this->load->model('Products_model');
         
-        if(!$this->session->userdata('logged_in')) {
-            redirect('authenticate/login');
-        }
+//        if(!$this->session->userdata('logged_in')) {
+//            redirect('authenticate/login');
+//        }
     }
     
     /**
      * All Manufacturers
      */
     public function index() {
-        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers('id', 'DESC');
-        
+        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers('id', 'ASC');
+        $data['products'] = $this->Products_model->get_products('id', 'ASC');
         //
         //Load view
         $this->load->view('header', $data);
@@ -30,6 +31,7 @@ class Manufacturers extends CI_Controller {
     public function add() {
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required|xss_clean');
         $this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email|xss_clean');
         $this->form_validation->set_rules('contact_info', 'Contact Info', 'trim|xss_clean');
         $this->form_validation->set_rules('owner', 'Owner', 'trim|xss_clean');
@@ -43,6 +45,7 @@ class Manufacturers extends CI_Controller {
         
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
         $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
+        $data['products'] = $this->Products_model->get_products('id', 'ASC');
         
         if($this->form_validation->run() == FALSE) {
             //load view
@@ -52,6 +55,7 @@ class Manufacturers extends CI_Controller {
         } else {
             $data = array(
                 'name'              => $this->input->post('name'),
+                'product_id'        => $this->input->post('product_id'),
                 'email_address'     => $this->input->post('email_address'),
                 'contact_info'      => $this->input->post('contact_info'),
                 'owner'             => $this->input->post('owner'),
@@ -82,6 +86,7 @@ class Manufacturers extends CI_Controller {
     public function edit($id) {
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required|xss_clean');
         $this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email|xss_clean');
         $this->form_validation->set_rules('contact_info', 'Contact Info', 'trim|xss_clean');
         $this->form_validation->set_rules('owner', 'Owner', 'trim|xss_clean');
@@ -96,8 +101,8 @@ class Manufacturers extends CI_Controller {
         $data['manufacturer'] = $this->Manufacturers_model->get_manufacturer($id);
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
         $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
+        $data['products'] = $this->Products_model->get_products('id', 'ASC');
         
-        //print_r($data['samples_status']);die();
         
         if($this->form_validation->run() == FALSE) {
             //load view
@@ -107,6 +112,7 @@ class Manufacturers extends CI_Controller {
         } else {
             $data = array(
                 'name'              => $this->input->post('name'),
+                'product_id'        => $this->input->post('product_id'),
                 'email_address'     => $this->input->post('email_address'),
                 'contact_info'      => $this->input->post('contact_info'),
                 'owner'             => $this->input->post('owner'),

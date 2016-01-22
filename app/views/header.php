@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/styles.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery-ui.css" />
+<script src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
+<script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url();?>bootstrap/js/jquery-ui.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -107,10 +111,11 @@
                 </ul>
             </li>
             -->
+            <!--
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('email');?> <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php //echo $this->session->userdata('email');?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <!--
+                    
                     <li>
                         <a href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span> Profile</a>
                     </li>
@@ -122,12 +127,13 @@
                     </li>
                     
                     <li class="divider"></li>
-                    -->
+                    
                     <li>
-                        <a href="<?php echo base_url();?>authenticate/logout"><span class="glyphicon glyphicon-off"></span> Log Out</a>
+                        <a href="<?php //echo base_url();?>authenticate/logout"><span class="glyphicon glyphicon-off"></span> Log Out</a>
                     </li>
                 </ul>
             </li>
+            -->
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -144,9 +150,19 @@
                     <a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> Products</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'users') {echo 'active';};?>">
-                    <a href="<?php echo base_url();?>users"><span class="glyphicon glyphicon-user"></span> Users</a>
+                <li class="<?php if($this->uri->segment(1) == 'tasks') {echo 'active';};?>">
+                    <a href="<?php echo base_url();?>tasks"><span class="glyphicon glyphicon-ok"></span> Tasks</a>
                 </li>
+                
+                <li class="<?php if($this->uri->segment(1) == 'report') {echo 'active';};?>">
+                    <a href="<?php echo base_url();?>report"><span class="glyphicon glyphicon-open-file"></span> Report</a>
+                </li>
+                
+                <!--
+                <li class="<?php //if($this->uri->segment(1) == 'users') {echo 'active';};?>">
+                    <a href="<?php //echo base_url();?>users"><span class="glyphicon glyphicon-user"></span> Users</a>
+                </li>
+                -->
             </ul>
         </div>
         <!-- /.navbar-collapse -->

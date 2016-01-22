@@ -1,3 +1,4 @@
+
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('manufacturer_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -22,6 +23,7 @@
                 <tr>
                     <th width="70">#</th>
                     <th>Name</th>
+                    <th>Product</th>
                     <th>Email</th>
                     <th>Contact Info</th>
                     <th>Owner</th>
@@ -34,6 +36,7 @@
                 <tr>
                     <td><?php echo $manufacturer->id;?></td>
                     <td><?php echo $manufacturer->name;?></td>
+                    <td><?php echo $manufacturer->product_name;?></td>
                     <td><?php echo $manufacturer->email_address;?></td>
                     <td><?php echo $manufacturer->contact_info;?></td>
                     <td><?php echo $manufacturer->owner;?></td>

@@ -24,25 +24,6 @@
             </div>
         </div>
         
-        <!--
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" id="name" class="form-control" value="<?php //echo $product->name;?>" placeholder="Enter Product Name" />
-                </div>
-                
-                <div class="form-group">
-                    <label>Status</label>
-                    <select name="status" id="status" class="form-control">
-                        <option value="0">Inactive</option>
-                        <option value="1">Active</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        -->
-        
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -64,14 +45,28 @@
         </div>
         
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Qty Per Package</label>
                     <input type="text" name="quantity_per_package" id="quantity_per_package" class="form-control" value="<?php echo $product->quantity_per_package;?>" placeholder="Enter Qty Per Package" />
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Total Price</label>
+                    <input type="text" name="total_price" id="total_price" class="form-control" value="<?php echo number_format($product->total_price, 2, '.', ',');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Item Price</label>
+                    <input type="text" name="item_price" id="item_price" class="form-control" value="<?php echo number_format($product->item_price, 2, '.', ',');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Graphics</label>
                     <select name="graphics" id="graphics" class="form-control">
@@ -83,14 +78,14 @@
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Packaging</label>
                     <input type="text" name="packaging" id="packaging" class="form-control" value="<?php echo $product->packaging;?>" placeholder="Enter Packaging" />
                 </div>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Confidence Level</label>
                     <select name="confidence_level" id="confidence_level" class="form-control">
@@ -165,7 +160,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Date of Deposit</label>
-                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control" value="<?php echo $product->date_of_deposit;?>" />
+                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control datep" value="<?php echo $product->date_of_deposit;?>" />
                 </div>
             </div>
             
@@ -179,7 +174,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Expected Ship Date</label>
-                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control" value="<?php echo $product->expected_ship_date;?>" />
+                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php echo $product->expected_ship_date;?>" />
                 </div>
             </div>
             
@@ -199,21 +194,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Arrival Date</label>
-                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control" value="<?php echo $product->estimated_arrival_date;?>" />
+                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control datep" value="<?php echo $product->estimated_arrival_date;?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Date at FBA</label>
-                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control" value="<?php echo $product->estimated_date_as_fba;?>" />
+                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php echo $product->estimated_date_at_fba;?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Launch Date</label>
-                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control" value="<?php echo $product->estimated_launch_date;?>" />
+                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php echo $product->estimated_launch_date;?>" />
                 </div>
             </div>
             
@@ -234,7 +229,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Marketing Hook</label>
-                    <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php echo $product->marketing_hook;?>" />
+                    <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php echo $product->mktg_hook;?>" />
                 </div>
             </div>
         </div>
