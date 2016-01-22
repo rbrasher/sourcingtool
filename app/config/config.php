@@ -17,8 +17,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://sourcingtool.local/';
+//dev
+//$config['base_url'] = 'http://sourcingtool.local/';
 
+//prod
+$config['base_url'] = 'http://healing-reviews.org/sourcingtool/';
 //current example
 //http://healing-reviews.org/adm/tools/sourcingtool.php
 
