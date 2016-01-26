@@ -61,7 +61,32 @@ class Po extends CI_Controller {
             $this->load->view('footer');
         } else {
             $data = array(
-                
+                'product_id'                => $this->input->post('product_id'),
+                'product'                   => $this->input->post('product'),
+                'po_status_id'              => $this->input->post('po_status_id'),
+                'po'                        => $this->input->post('po'),
+                'po_amount'                 => $this->input->post('po_amount'),
+                'price_unit_sea'            => $this->input->post('price_unit_sea'),
+                'price_unit_air'            => $this->input->post('price_unit_air'),
+                'pi'                        => $this->input->post('pi'),
+                'po_date'                   => $this->input->post('po_date'),
+                'po_qty'                    => $this->input->post('po_qty'),
+                'deposit_date_30'           => $this->input->post('deposit_date_30'),
+                'ship1_qty'                 => $this->input->post('ship1_qty'),
+                'ship1_method_id'           => $this->input->post('ship1_method_id'),
+                'ship1_plan_ship_date'      => $this->input->post('ship1_plan_ship_date'),
+                'ship1_actual_ship_date'    => $this->input->post('ship1_actual_ship_date'),
+                'ship2_qty'                 => $this->input->post('ship2_qty'),
+                'ship2_method_id'           => $this->input->post('ship2_method_id'),
+                'ship2_plan_ship_date'      => $this->input->post('ship2_plan_ship_date'),
+                'ship2_actual_ship_date'    => $this->input->post('ship2_actual_ship_date'),
+                'ship3_qty'                 => $this->input->post('ship3_qty'),
+                'ship3_method_id'           => $this->input->post('ship3_method_id'),
+                'ship3_plan_ship_date'      => $this->input->post('ship3_plan_ship_date'),
+                'ship3_actual_ship_date'    => $this->input->post('ship3_actual_ship_date'),
+                'non_holiday_lead_time'     => $this->input->post('non_holiday_lead_time'),
+                'notes'                     => $this->input->post('notes'),
+                'create_time'               => date('Y-m-d H:i:s', time())
             );
             
             //Insert new Purchase Order
@@ -120,7 +145,31 @@ class Po extends CI_Controller {
             $this->load->view('footer');
         } else {
             $data = array(
-                
+                'product_id'                => $this->input->post('product_id'),
+                'product'                   => $this->input->post('product'),
+                'po_status_id'              => $this->input->post('po_status_id'),
+                'po'                        => $this->input->post('po'),
+                'po_amount'                 => $this->input->post('po_amount'),
+                'price_unit_sea'            => $this->input->post('price_unit_sea'),
+                'price_unit_air'            => $this->input->post('price_unit_air'),
+                'pi'                        => $this->input->post('pi'),
+                'po_date'                   => $this->input->post('po_date'),
+                'po_qty'                    => $this->input->post('po_qty'),
+                'deposit_date_30'           => $this->input->post('deposit_date_30'),
+                'ship1_qty'                 => $this->input->post('ship1_qty'),
+                'ship1_method_id'           => $this->input->post('ship1_method_id'),
+                'ship1_plan_ship_date'      => $this->input->post('ship1_plan_ship_date'),
+                'ship1_actual_ship_date'    => $this->input->post('ship1_actual_ship_date'),
+                'ship2_qty'                 => $this->input->post('ship2_qty'),
+                'ship2_method_id'           => $this->input->post('ship2_method_id'),
+                'ship2_plan_ship_date'      => $this->input->post('ship2_plan_ship_date'),
+                'ship2_actual_ship_date'    => $this->input->post('ship2_actual_ship_date'),
+                'ship3_qty'                 => $this->input->post('ship3_qty'),
+                'ship3_method_id'           => $this->input->post('ship3_method_id'),
+                'ship3_plan_ship_date'      => $this->input->post('ship3_plan_ship_date'),
+                'ship3_actual_ship_date'    => $this->input->post('ship3_actual_ship_date'),
+                'non_holiday_lead_time'     => $this->input->post('non_holiday_lead_time'),
+                'notes'                     => $this->input->post('notes')
             );
             
             //Update Purchase Order
