@@ -16,8 +16,13 @@ class Products_model extends CI_Model {
      * @return object
      */
     public function get_products($order_by = null, $sort = 'DESC', $limit = null, $offset = 0) {
-        $this->db->select('*');
-        $this->db->from('st_products');
+        //$this->db->select('*');
+        //$this->db->from('st_products');
+        
+        $this->db->select('a.*, b.product_status AS product_status, c.confidence_level AS confidence_level');
+        $this->db->from('st_products AS a');
+        $this->db->join('product_status AS b', 'b.id = a.status', 'left');
+        $this->db->join('confidence AS c', 'c.id = a.confidence_level', 'left');
         
         if($limit != null) {
             $this->db->limit($limit, $offset);
@@ -41,6 +46,16 @@ class Products_model extends CI_Model {
     public function get_product($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('st_products');
+        
+        return $query->row();
+    }
+    
+    public function get_product_name($id) {
+        $this->db->select('name');
+        $this->db->from('st_products');
+        $this->db->where('id', $id);
+        
+        $query = $this->db->get();
         
         return $query->row();
     }

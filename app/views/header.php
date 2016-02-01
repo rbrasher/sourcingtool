@@ -150,6 +150,10 @@
                     <a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> Products</a>
                 </li>
                 
+                <li class="<?php if($this->uri->segment(1) == 'concepts') {echo 'active';};?>">
+                    <a href="<?php echo base_url();?>concepts"><span class="glyphicon glyphicon-road"></span> Concepts</a>
+                </li>
+                
                 <li class="<?php if($this->uri->segment(1) == 'po') {echo 'active';};?>">
                     <a href="<?php echo base_url();?>po"><span class="glyphicon glyphicon-list-alt"></span> Purchase Orders</a>
                 </li>

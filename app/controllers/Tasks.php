@@ -7,6 +7,10 @@ class Tasks extends CI_Controller {
         
         $this->load->helper('string');
         $this->load->model('Tasks_model');
+        
+//        if(!$this->session->userdata('logged_in')) {
+//            redirect('authentication/login');
+//        }
     }
     
     public function index() {

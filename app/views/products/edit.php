@@ -87,7 +87,7 @@
             
             <div class="col-md-2">
                 <div class="form-group">
-                    <label>Confidence Level</label>
+                    <label>Urgency</label>
                     <select name="confidence_level" id="confidence_level" class="form-control">
                         <option value="">Select</option>
                         <?php foreach($confidence as $c) : ?>
@@ -230,6 +230,22 @@
                 <div class="form-group">
                     <label>Marketing Hook</label>
                     <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php echo $product->mktg_hook;?>" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Competitor Link <span style="color: gray; font-style:italic;">(e.g. Amazon Link)</span></label>
+                    <input type="text" name="competitor_link" id="competitor_link" class="form-control" value="<?php echo $product->competitor_link;?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Assigned To</label>
+                    <input type="text" name="assigned_to" id="assigned_to" class="form-control" value="<?php echo $product->assigned_to;?>" />
                 </div>
             </div>
         </div>

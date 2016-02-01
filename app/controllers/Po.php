@@ -6,6 +6,10 @@ class Po extends CI_Controller {
         parent::__construct();
         $this->load->model('Po_model');
         $this->load->model('Products_model');
+        
+//        if(!$this->session->userdata('logged_in')) {
+//            redirect('authentication/login');
+//        }
     }
     
     public function index() {

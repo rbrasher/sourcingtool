@@ -1,7 +1,14 @@
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
     
-    <form method="post" action="<?php echo base_url();?>manufacturers/add">
+    <?php if($this->session->flashdata('upload_error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('upload_error');?></p>
+    </div>
+    <?php endif; ?>
+    
+    <form method="post" action="<?php echo base_url();?>manufacturers/add" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <h1>Add Manufacturer</h1>
@@ -127,6 +134,13 @@
                         <option value="<?php echo $t->id;?>"><?php echo $t->shipping_terms;?></option>
                         <?php endforeach;?>
                     </select>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Brochure</label>
+                    <input type="file" name="userfile" size="20" />
                 </div>
             </div>
             

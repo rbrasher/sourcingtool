@@ -54,6 +54,8 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
+        $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
+        $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
         
         $data['graphics'] = $this->Products_model->get_graphics();
         $data['confidence'] = $this->Products_model->get_confidence();
@@ -91,7 +93,9 @@ class Products extends CI_Controller {
                 'estimated_launch_date'         => $this->input->post('estimated_launch_date'),
                 'competitor_price_example'      => $this->input->post('competitor_price_example'),
                 'competitor_qty_example'        => $this->input->post('competitor_qty_example'),
-                'mktg_hook'                => $this->input->post('marketing_hook')
+                'mktg_hook'                     => $this->input->post('marketing_hook'),
+                'competitor_link'               => $this->input->post('competitor_link'),
+                'assigned_to'                   => $this->input->post('assigned_to')
             );
             
             //add product
@@ -137,6 +141,8 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
+        $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
+        $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
         
         $data['product'] = $this->Products_model->get_product($id);
         $data['graphics'] = $this->Products_model->get_graphics();
@@ -175,7 +181,9 @@ class Products extends CI_Controller {
                 'estimated_launch_date'             => $this->input->post('estimated_launch_date'),
                 'competitor_price_example'          => $this->input->post('competitor_price_example'),
                 'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
-                'mktg_hook'                         => $this->input->post('marketing_hook')
+                'mktg_hook'                         => $this->input->post('marketing_hook'),
+                'competitor_link'                   => $this->input->post('competitor_link'),
+                'assigned_to'                       => $this->input->post('assigned_to')
             );
             
             //update product

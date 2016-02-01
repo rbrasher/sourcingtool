@@ -4,6 +4,9 @@ class Manufacturers extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        
+        $this->load->helper('string');
+        
         $this->load->model('Manufacturers_model');
         $this->load->model('Products_model');
         
@@ -29,6 +32,10 @@ class Manufacturers extends CI_Controller {
      * Add a manufacturer.
      */
     public function add() {
+        $config['upload_path'] = './documents/brochures/';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $this->load->library('upload', $config);
+        
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required|xss_clean');
@@ -42,6 +49,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('lead_time_in_days', 'Lead Time In Days', 'trim|xss_clean');
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
+        $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
         
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
         $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
@@ -53,6 +61,16 @@ class Manufacturers extends CI_Controller {
             $this->load->view('manufacturers/add');
             $this->load->view('footer');
         } else {
+            if(!$this->upload->do_upload('userfile')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+                
+                redirect('manufacturers/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $brochure = $file_data['file_name'];
+            }
+            
             $data = array(
                 'name'              => $this->input->post('name'),
                 'product_id'        => $this->input->post('product_id'),
@@ -65,7 +83,8 @@ class Manufacturers extends CI_Controller {
                 'moq'               => $this->input->post('moq'),
                 'lead_time_in_days' => $this->input->post('lead_time_in_days'),
                 'samples_status'    => $this->input->post('samples_status'),
-                'shipping_terms'    => $this->input->post('shipping_terms')
+                'shipping_terms'    => $this->input->post('shipping_terms'),
+                'brochure'          => $brochure
             );
             
             //Insert new manufacturer
@@ -84,6 +103,10 @@ class Manufacturers extends CI_Controller {
      * @param int $id
      */
     public function edit($id) {
+        $config['upload_path'] = './documents/brochures/';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $this->load->library('upload', $config);
+        
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required|xss_clean');
@@ -97,6 +120,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('lead_time_in_days', 'Lead Time In Days', 'trim|xss_clean');
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
+        $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
         
         $data['manufacturer'] = $this->Manufacturers_model->get_manufacturer($id);
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
@@ -110,6 +134,17 @@ class Manufacturers extends CI_Controller {
             $this->load->view('manufacturers/edit');
             $this->load->view('footer');
         } else {
+            //process upload first
+            if(!$this->upload->do_upload('userfile')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+                
+                redirect('manufacturers/edit/' . $id);
+            } else {
+                $file_data = $this->upload->data();
+                
+                $brochure = $file_data['file_name'];
+            }
+            
             $data = array(
                 'name'              => $this->input->post('name'),
                 'product_id'        => $this->input->post('product_id'),
@@ -122,7 +157,8 @@ class Manufacturers extends CI_Controller {
                 'moq'               => $this->input->post('moq'),
                 'lead_time_in_days' => $this->input->post('lead_time_in_days'),
                 'samples_status'    => $this->input->post('samples_status'),
-                'shipping_terms'    => $this->input->post('shipping_terms')
+                'shipping_terms'    => $this->input->post('shipping_terms'),
+                'brochure'          => $brochure
             );
             
             //Update manufacturer

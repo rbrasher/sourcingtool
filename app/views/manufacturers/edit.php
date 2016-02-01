@@ -1,7 +1,14 @@
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
     
-    <form method="post" action="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>">
+    <?php if($this->session->flashdata('upload_error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('upload_error');?></p>
+    </div>
+    <?php endif;?>
+    
+    <form method="post" action="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <h1>Edit Manufacturer</h1>
@@ -129,6 +136,35 @@
                     </select>
                 </div>
             </div>
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Brochure</label>
+                    <input type="text" name="brochure" id="brochure" class="form-control" value="<?php echo $manufacturer->brochure;?>" />
+                </div>
+            </div>
+            
         </div>
+        
+        <?php if($manufacturer->brochure && $manufacturer->brochure != '') : ?>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <div class="form-group">
+                    <a target="_blank" href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" class="btn btn-primary">View Brochure</a>
+                </div>
+            </div>
+        </div>
+        
+        <?php else : ?>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <div class="form-group">
+                    <label>Upload Brochure</label>
+                    <input type="file" name="userfile" size="20" />
+                </div>
+            </div>
+        </div>
+        <?php endif;?>
+        
     </form>
 </div>
