@@ -139,7 +139,7 @@
             
             <div class="col-md-3">
                 <div class="form-group">
-                    <label>Brochure</label>
+                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc)</span>
                     <input type="file" name="userfile" size="20" />
                 </div>
             </div>

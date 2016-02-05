@@ -21,34 +21,34 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th width="70">#</th>
                     <th>Name</th>
                     <th>Product</th>
                     <th>Email</th>
                     <th>Contact Info</th>
                     <th>Owner</th>
-                    <th>Actions</th>
+                    <!--<th>Actions</th>-->
                 </tr>
             </thead>
             <tbody>
                 <?php if($manufacturers) : ?>
                 <?php foreach($manufacturers as $manufacturer) : ?>
                 <tr>
-                    <td><?php echo $manufacturer->id;?></td>
-                    <td><?php echo $manufacturer->name;?></td>
+                    <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a></td>
                     <td><?php echo $manufacturer->product_name;?></td>
                     <td><?php echo $manufacturer->email_address;?></td>
                     <td><?php echo $manufacturer->contact_info;?></td>
                     <td><?php echo $manufacturer->owner;?></td>
+                    <!--
                     <td>
-                        <a class="btn btn-primary" href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                        <a class="btn btn-danger" href="<?php echo base_url();?>manufacturers/delete/<?php echo $manufacturer->id;?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        <a class="btn btn-primary" href="<?php //echo base_url();?>manufacturers/edit/<?php //echo $manufacturer->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-danger" href="<?php //echo base_url();?>manufacturers/delete/<?php //echo $manufacturer->id;?>" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
+                    -->
                 </tr>
                 <?php endforeach;?>
                 <?php else : ?>
                 <tr>
-                    <td colspan="4">No Manufacturers have been set up.</td>
+                    <td colspan="5">No Manufacturers have been set up.</td>
                 </tr>
                 <?php endif;?>
             </tbody>

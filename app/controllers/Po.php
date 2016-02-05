@@ -192,12 +192,38 @@ class Po extends CI_Controller {
      * 
      * @param int $id
      */
-    public function delete($id) {
-        $this->Po_model->delete($id);
-        
-        //set message
-        $this->session->set_flashdata('po_deleted', 'Purchase Order has been deleted successfully.');
-        
-        redirect('po');
-    }
+//    public function delete($id) {
+//        $this->Po_model->delete($id);
+//        
+//        //set message
+//        $this->session->set_flashdata('po_deleted', 'Purchase Order has been deleted successfully.');
+//        
+//        redirect('po');
+//    }
+    
+//    public function approve($id) {
+//        $data = array(
+//            'approval_status' => 3
+//        );
+//        
+//        $this->Po_model->update($data, $id);
+//        
+//        //set message
+//        $this->session->set_flashdata('po_approved', 'Purchase Order has been approved.');
+//        
+//        redirect('po');
+//    }
+//    
+//    public function unapprove($id) {
+//        $data = array(
+//            'approval_status' => 1
+//        );
+//        
+//        $this->Po_model->update($data, $id);
+//        
+//        //set message
+//        $this->session->set_flashdata('po_rejected', 'Purchase Order has been rejected.');
+//        
+//        redirect('po');
+//    }
 }

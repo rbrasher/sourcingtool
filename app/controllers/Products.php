@@ -15,11 +15,22 @@ class Products extends CI_Controller {
      * All products.
      */
     public function index() {
-        $data['products'] = $this->Products_model->get_products('id', 'ASC');
+        //$data['products'] = $this->Products_model->get_products('id', 'ASC');
+        $data['products'] = $this->Products_model->get_not_approved_products('id', 'ASC');
+        $data['pending_products'] = $this->Products_model->get_pending_products('id', 'ASC');
         
         //load view
         $this->load->view('header', $data);
         $this->load->view('products/index');
+        $this->load->view('footer');
+    }
+    
+    public function production() {
+        $data['approved_products'] = $this->Products_model->get_approved_products('id', 'ASC');
+        
+        //load view
+        $this->load->view('header', $data);
+        $this->load->view('products/production');
         $this->load->view('footer');
     }
     
@@ -201,11 +212,53 @@ class Products extends CI_Controller {
      * 
      * @param int $id
      */
-    public function delete($id) {
-        $this->Products_model->delete($id);
+//    public function delete($id) {
+//        $this->Products_model->delete($id);
+//        
+//        //set message
+//        $this->session->set_flashdata('product_deleted', 'Product deleted successfully.');
+//        
+//        redirect('products');
+//    }
+    
+    public function review($id) {
+        $data = array(
+            'approval_status' => 2
+        );
+        
+        $this->Products_model->update($data, $id);
+        
+        $data['product'] = $this->Products_model->get_product_for_review($id);
+        $data['manufacturers'] = $this->Products_model->get_manufacturers_for_product($id);
+                
+        //load view
+        $this->load->view('review/header', $data);
+        $this->load->view('review/product');
+        $this->load->view('review/footer');
+    }
+    
+    public function approve($id) {
+        $data = array(
+            'approval_status' => 3
+        );
+        
+        $this->Products_model->update($data, $id);
         
         //set message
-        $this->session->set_flashdata('product_deleted', 'Product deleted successfully.');
+        $this->session->set_flashdata('product_approved', 'Product is Approved');
+        
+        redirect('products');
+    }
+    
+    public function unapprove($id) {
+        $data = array(
+            'approval_status' => 1
+        );
+        
+        $this->Products_model->update($data, $id);
+        
+        //set message
+        $this->session->set_flashdata('product_rejected', 'Product is Unapproved');
         
         redirect('products');
     }

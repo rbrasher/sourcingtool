@@ -10,9 +10,13 @@
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/styles.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery-ui.css" />
+
 <script src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
 <script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>bootstrap/js/jquery-ui.min.js"></script>
+<?php if($this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'edit') :?>
+<script src="<?php echo base_url();?>bootstrap/js/jquery.cleditor.js"></script>
+<?php endif;?>
 </head>
 <body>
 <div id="wrapper">
@@ -138,31 +142,53 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="<?php if($this->uri->segment(1) == ''){echo 'active';};?>">
+                <li class="<?php if($this->uri->segment(1) == ''){echo 'active';}?>">
                     <a href="<?php echo base_url();?>"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'manufacturers') {echo 'active';};?>">
+                <li class="<?php if($this->uri->segment(1) == 'products' && !$this->uri->segment(2)) {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> R&D Products</a>
+                </li>
+                
+                <li class="<?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'production') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>products/production"><span class="glyphicon glyphicon-lock"></span> Production Products</a>
+                </li>
+                
+                <li class="<?php if($this->uri->segment(1) == 'manufacturers') {echo 'active';}?>">
                     <a href="<?php echo base_url();?>manufacturers"><span class="glyphicon glyphicon-globe"></span> Manufacturers</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'products') {echo 'active';};?>">
-                    <a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> Products</a>
-                </li>
-                
-                <li class="<?php if($this->uri->segment(1) == 'concepts') {echo 'active';};?>">
+                <li class="<?php if($this->uri->segment(1) == 'concepts') {echo 'active';}?>">
                     <a href="<?php echo base_url();?>concepts"><span class="glyphicon glyphicon-road"></span> Concepts</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'po') {echo 'active';};?>">
+                <li class="<?php if($this->uri->segment(1) == 'po') {echo 'active';}?>">
                     <a href="<?php echo base_url();?>po"><span class="glyphicon glyphicon-list-alt"></span> Purchase Orders</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'tasks') {echo 'active';};?>">
-                    <a href="<?php echo base_url();?>tasks"><span class="glyphicon glyphicon-ok"></span> Tasks</a>
+                <li class="<?php if($this->uri->segment(1) == 'shipping') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>shipping"><span class="glyphicon glyphicon-plane"></span> Shipping</a>
                 </li>
                 
-                <li class="<?php if($this->uri->segment(1) == 'report') {echo 'active';};?>">
+                <li class="<?php if($this->uri->segment(1) == 'legal') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>legal"><span class="glyphicon glyphicon-briefcase"></span> Legal</a>
+                </li>
+                
+                <li class="<?php if($this->uri->segment(1) == 'marketing') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>marketing"><span class="glyphicon glyphicon-blackboard"></span> Marketing</a>
+                </li>
+                
+                <li class="<?php if($this->uri->segment(1) == 'listings') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>listings"><span class="glyphicon glyphicon-list"></span> Listings</a>
+                </li>
+                
+                <!--
+                <li class="<?php //if($this->uri->segment(1) == 'tasks') {echo 'active';}?>">
+                    <a href="<?php //echo base_url();?>tasks"><span class="glyphicon glyphicon-ok"></span> Tasks</a>
+                </li>
+                -->
+                
+                <li class="<?php if($this->uri->segment(1) == 'report') {echo 'active';}?>">
                     <a href="<?php echo base_url();?>report"><span class="glyphicon glyphicon-open-file"></span> Report</a>
                 </li>
                 

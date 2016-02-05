@@ -34,6 +34,7 @@ class Manufacturers extends CI_Controller {
     public function add() {
         $config['upload_path'] = './documents/brochures/';
         $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
         //validation rules
@@ -105,6 +106,7 @@ class Manufacturers extends CI_Controller {
     public function edit($id) {
         $config['upload_path'] = './documents/brochures/';
         $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
         //validation rules
@@ -176,12 +178,12 @@ class Manufacturers extends CI_Controller {
      * 
      * @param int $id
      */
-    public function delete($id) {
-        $this->Manufacturers_model->delete($id);
-        
-        //set message
-        $this->session->set_flashdata('manufacturer_deleted', 'Manufacturer deleted successfully.');
-        
-        redirect('manufacturers');
-    }
+//    public function delete($id) {
+//        $this->Manufacturers_model->delete($id);
+//        
+//        //set message
+//        $this->session->set_flashdata('manufacturer_deleted', 'Manufacturer deleted successfully.');
+//        
+//        redirect('manufacturers');
+//    }
 }

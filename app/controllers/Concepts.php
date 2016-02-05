@@ -29,6 +29,7 @@ class Concepts extends CI_Controller {
     public function add() {
         $config['upload_path'] = './documents/concepts/';
         $config['allowed_types'] = 'jpg|png';
+        $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
         //validation rules
@@ -89,8 +90,6 @@ class Concepts extends CI_Controller {
                 'notes'                 => $this->input->post('notes')
             );
             
-            //var_dump($data);die();
-            
             //Insert new concept
             $this->Concepts_model->insert($data);
             
@@ -104,6 +103,7 @@ class Concepts extends CI_Controller {
     public function edit($id) {
         $config['upload_path'] = './documents/concepts/';
         $config['allowed_types'] = 'jpg|png';
+        $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
         //validation rules
@@ -197,4 +197,34 @@ class Concepts extends CI_Controller {
         redirect('concepts');
     }
     
+    
+    public function approve($id) {
+        $data = array(
+            'listing_mock'      => 3,
+            'box_art_work'      => 3,
+            'approval_status'   => 3
+        );
+        
+        $this->Concepts_model->update($data, $id);
+        
+        //set message
+        $this->session->set_flashdata('concept_approved', 'Concept is Approved');
+        
+        redirect('concepts');
+    }
+    
+    public function unapprove($id) {
+        $data = array(
+            'listing_mock'      => 1,
+            'box_art_work'      => 1,
+            'approval_status'   => 1
+        );
+        
+        $this->Concepts_model->update($data, $id);
+        
+        //set message
+        $this->session->set_flashdata('concept_rejected', 'Concept is Unapproved');
+        
+        redirect('concepts');
+    }
 }
