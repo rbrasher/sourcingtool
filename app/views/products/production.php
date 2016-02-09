@@ -46,7 +46,7 @@
                 <?php if($approved_products) : ?>
                 <?php foreach($approved_products as $approved_product) : ?>
                 <tr>
-                    <td><a href="<?php echo base_url();?>products/edit/<?php echo $approved_product->id;?>"><?php echo $approved_product->name;?></a></td>
+                    <td><a href="<?php echo base_url();?>products/edit_production/<?php echo $approved_product->id;?>"><?php echo $approved_product->name;?></a></td>
                     <td class="centered"><?php echo $approved_product->product_status;?></td>
                     <td class="centered"><?php echo $approved_product->assigned_to;?></td>
                     <td class="centered"><?php echo $approved_product->confidence_level;?></td>

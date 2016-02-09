@@ -217,6 +217,107 @@ class Products extends CI_Controller {
     }
     
     /**
+     * Edit a production product
+     * 
+     * @param int $id
+     */
+    public function edit_production($id) {
+        //validation rules
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('status', 'Status', 'trim|xss_clean');
+        $this->form_validation->set_rules('quantity_per_package', 'Quantity Per Package', 'trim|xss_clean');
+        $this->form_validation->set_rules('total_price', 'Total Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('item_price', 'Item Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
+        $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
+        $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
+        $this->form_validation->set_rules('best_bsr', 'Best BSR', 'trim|xss_clean');
+        $this->form_validation->set_rules('top_3_avg_bsr', 'Top 3 Avg BSR', 'trim|xss_clean');
+        $this->form_validation->set_rules('top_10_avg_bsr', 'Top 10 Avg BSR', 'trim|xss_clean');
+        $this->form_validation->set_rules('target_price', 'Target Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('fba_fee_est', 'FBA Fee Est', 'trim|xss_clean');
+        $this->form_validation->set_rules('margin_per_sale', 'Margin Per Sale', 'trim|xss_clean');
+        $this->form_validation->set_rules('estimated_sales_per_day', 'Estimated Sales Per Day', 'trim|xss_clean');
+        $this->form_validation->set_rules('estimated_margin_per_month', 'Estimated Margin Per Month', 'trim|xss_clean');
+        $this->form_validation->set_rules('date_of_deposit', 'Date of Deposit', 'trim|xss_clean');
+        $this->form_validation->set_rules('qty_ordered', 'Qty Ordered', 'trim|xss_clean');
+        $this->form_validation->set_rules('expected_ship_date', 'Expected Ship Date', 'trim|xss_clean');
+        $this->form_validation->set_rules('ship_method', 'Ship Method', 'trim|xss_clean');
+        $this->form_validation->set_rules('estimated_arrival_date', 'Estimated Arrival Date', 'trim|xss_clean');
+        $this->form_validation->set_rules('estimated_date_at_fba', 'Estimated Date at FBA', 'trim|xss_clean');
+        $this->form_validation->set_rules('estimated_launch_date', 'Estimated Launch Date', 'trim|xss_clean');
+        $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
+        $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
+        $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
+        $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
+        $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
+        $this->form_validation->set_rules('sourcing_due_date', 'Sourcing Due Date', 'trim|xss_clean');
+        
+        $data['product'] = $this->Products_model->get_product($id);
+        $data['graphics'] = $this->Products_model->get_graphics();
+        $data['confidence'] = $this->Products_model->get_confidence();
+        $data['product_status'] = $this->Products_model->get_products_status();
+        
+        $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
+        $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
+        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers_for_product($id);
+        
+        $data['concepts'] = $this->Products_model->get_concepts_for_product($id);
+        $data['purchase_orders'] = $this->Products_model->get_purchase_orders_for_product($id);
+        $data['shipping'] = $this->Products_model->get_shipping_for_product($id);
+        $data['legal'] = $this->Products_model->get_legal_for_product($id);
+        $data['marketing'] = $this->Products_model->get_marketing_for_product($id);
+        $data['listings'] = $this->Products_model->get_listings_for_product($id);
+        
+        if($this->form_validation->run() == FALSE) {
+            //load view
+            $this->load->view('header', $data);
+            $this->load->view('products/edit_production');
+            $this->load->view('footer');
+        } else {
+            $data = array(
+                'name'                              => $this->input->post('name'),
+                'status'                            => $this->input->post('status'),
+                'quantity_per_package'              => $this->input->post('quantity_per_package'),
+                'total_price'                       => $this->input->post('total_price'),
+                'item_price'                        => $this->input->post('item_price'),
+                'graphics'                          => $this->input->post('graphics'),
+                'packaging'                         => $this->input->post('packaging'),
+                'confidence_level'                  => $this->input->post('confidence_level'),
+                'best_bsr'                          => $this->input->post('best_bsr'),
+                'top_3_avg_bsr'                     => $this->input->post('top_3_avg_bsr'),
+                'top_10_avg_bsr'                    => $this->input->post('top_10_avg_bsr'),
+                'target_price'                      => $this->input->post('target_price'),
+                'fba_fee_est'                       => $this->input->post('fba_fee_est'),
+                'margin_per_sale'                   => $this->input->post('margin_per_sale'),
+                'estimated_sales_per_day'           => $this->input->post('estimated_sales_per_day'),
+                'estimated_margin_per_month'        => $this->input->post('estimated_margin_per_month'),
+                'date_of_deposit'                   => $this->input->post('date_of_deposit'),
+                'qty_ordered'                       => $this->input->post('qty_ordered'),
+                'expected_ship_date'                => $this->input->post('expected_ship_date'),
+                'ship_method'                       => $this->input->post('ship_method'),
+                'estimated_arrival_date'            => $this->input->post('estimated_arrival_date'),
+                'estimated_date_at_fba'             => $this->input->post('estimated_date_at_fba'),
+                'estimated_launch_date'             => $this->input->post('estimated_launch_date'),
+                'competitor_price_example'          => $this->input->post('competitor_price_example'),
+                'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
+                'mktg_hook'                         => $this->input->post('marketing_hook'),
+                'competitor_link'                   => $this->input->post('competitor_link'),
+                'assigned_to'                       => $this->input->post('assigned_to'),
+                'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
+            );
+            
+            //update product
+            $this->Products_model->update($data, $id);
+            
+            //set message
+            $this->session->set_flashdata('product_saved', 'Product updated successfully');
+            
+            redirect('products');
+        }
+    }
+    
+    /**
      * Delete a product.
      * 
      * @param int $id
@@ -273,20 +374,21 @@ class Products extends CI_Controller {
     }
     
     public function add_manufacturer_from_product($id) {
-        $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
-        $config['overwrite'] = TRUE;
-        $this->load->library('upload', $config);
-        
-        if(!$this->upload->do_upload('userfile')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
-
-            redirect('products/edit/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $brochure = $file_data['file_name'];
-        }
+//        $config['upload_path'] = './documents/brochures/';
+//        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+//        $config['overwrite'] = TRUE;
+//        $this->load->library('upload', $config);
+//        
+//        if(!$this->upload->do_upload('userfile')) {
+//            $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+//
+//            redirect('products/edit/' . $id);
+//        } else {
+//            $file_data = $this->upload->data();
+//
+//            $brochure = $file_data['file_name'];
+//        }
+        $brochure = '';
 
         $data = array(
             'name'              => $this->input->post('manufacturer_name'),
@@ -295,6 +397,7 @@ class Products extends CI_Controller {
             'contact_info'      => $this->input->post('contact_info'),
             'owner'             => $this->input->post('owner'),
             'total_price'       => $this->input->post('total_price'),
+            'price_per_item'    => $this->input->post('price_per_item'),
             'qty_per_package'   => $this->input->post('qty_per_package'),
             'moq'               => $this->input->post('moq'),
             'lead_time_in_days' => $this->input->post('lead_time_in_days'),

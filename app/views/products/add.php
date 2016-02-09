@@ -247,9 +247,12 @@
                     <label>Assigned To</label>
                     <select name="assigned_to" id="assigned_to" class="form-control">
                         <option value="">Select</option>
-                        <option value="quinn">Quinn</option>
-                        <option value="fredy">Fredy</option>
+                        <option value="bobby">Bobby</option>
+                        <option value="eamon">Eamon</option>
                         <option value="eric">Eric</option>
+                        <option value="fredy">Fredy</option>
+                        <option value="quinn">Quinn</option>
+                        <option value="yang">Yang</option>
                         <option value="ron">Ron - Do not use!</option>
                     </select>
                 </div>

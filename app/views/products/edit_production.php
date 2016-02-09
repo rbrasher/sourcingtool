@@ -338,6 +338,407 @@
         </div>
     </div>
     
+    <!-- Tabbed Content -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#concepts" aria-controls="concepts" role="tab" data-toggle="tab">Concepts</a></li>
+                <li role="presentation"><a href="#purchase_orders" aria-controls="purchase_orders" role="tab" data-toggle="tab">Purchase Orders</a></li>
+                <li role="presentation"><a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">Shipping</a></li>
+                <li role="presentation"><a href="#legal" aria-controls="legal" role="tab" data-toggle="tab">Legal</a></li>
+                <li role="presentation"><a href="#marketing" aria-controls="marketing" role="tab" data-toggle="tab">Marketing</a></li>
+                <li role="presentation"><a href="#listings" aria-controls="listings" role="tab" data-toggle="tab">Listings</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- Concepts -->
+                <div role="tabpanel" class="tab-pane fade in active" id="concepts">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">Listing Mock</th>
+                                    <th class="centered">Box Art Work</th>
+                                    <th class="centered">Instruction Manual</th>
+                                    <th class="centered">Product Design</th>
+                                    <th class="centered">Brand</th>
+                                    <th class="centered">UPC</th>
+                                    <th class="centered">Domain</th>
+                                    <th class="centered">Notes</th>
+                                    <th class="centered">Approval Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($concepts) : ?>
+                                <?php foreach($concepts as $concept) : ?>
+                                <tr>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($concept->listing_mock) {
+                                                case 1:
+                                                    echo 'Not Approved';
+                                                    break;
+                                                case 2:
+                                                    echo 'Pending Approval';
+                                                    break;
+                                                case 3:
+                                                    echo 'Approved';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($concept->box_art_work) {
+                                                case 1:
+                                                    echo 'Not Approved';
+                                                    break;
+                                                case 2:
+                                                    echo 'Pending Approval';
+                                                    break;
+                                                case 3:
+                                                    echo 'Approved';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><a href="<?php echo base_url();?>documents/concepts/<?php echo $concept->instruction_manual;?>" target="_blank"><?php echo $concept->instruction_manual;?></a></td>
+                                    <td><a href="<?php echo base_url();?>documents/concepts/<?php echo $concept->product_design;?>" target="_blank"><?php echo $concept->product_design;?></a></td>
+                                    <td><?php echo $concept->brand;?></td>
+                                    <td><?php echo $concept->upc;?></td>
+                                    <td><a href="<?php echo $concept->domain;?>" target="_blank"><?php echo $concept->domain;?></a></td>
+                                    <td><?php echo $concept->notes;?></td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($concept->approval_status) {
+                                                case 1:
+                                                    echo 'Not Approved';
+                                                    break;
+                                                case 2:
+                                                    echo 'Pending Approval';
+                                                    break;
+                                                case 3:
+                                                    echo 'Approved';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="9" class="centered">There are no Concepts for this Product</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Purchase Orders -->
+                <div role="tabpanel" class="tab-pane fade" id="purchase_orders">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">PO Status</th>
+                                    <th class="centered">PO #</th>
+                                    <th class="centered">PO Amount</th>
+                                    <th class="centered">Price Unit Sea</th>
+                                    <th class="centered">Price Unit Air</th>
+                                    <th class="centered">PI</th>
+                                    <th class="centered">PO Date</th>
+                                    <th class="centered">PO Qty</th>
+                                    <th class="centered">Deposit Date 30</th>
+                                    <th class="centered">Ship 1 Qty</th>
+                                    <th class="centered">Ship 1 Method</th>
+                                    <th class="centered">Ship 1 Plan Ship Date</th>
+                                    <th class="centered">Ship 1 Actual Ship Date</th>
+                                    <th class="centered">Ship 2 Qty</th>
+                                    <th class="centered">Ship 2 Method</th>
+                                    <th class="centered">Ship 2 Plan Ship Date</th>
+                                    <th class="centered">Ship 2 Actual Ship Date</th>
+                                    <th class="centered">Ship 3 Qty</th>
+                                    <th class="centered">Ship 3 Method</th>
+                                    <th class="centered">Ship 3 Plan Ship Date</th>
+                                    <th class="centered">Ship 3 Actual Ship Date</th>
+                                    <th class="centered">Lead Time</th>
+                                    <th class="centered">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($purchase_orders) : ?>
+                                <?php foreach($purchase_orders as $po) : ?>
+                                <tr>
+                                    <td>
+                                        <?php 
+                                            switch($po->po_status_id) {
+                                                case 1:
+                                                    echo 'approved';
+                                                    break;
+                                                case 2:
+                                                    echo 'Deposit Made';
+                                                    break;
+                                                case 3:
+                                                    echo 'Partial Shipped';
+                                                    break;
+                                                case 4:
+                                                    echo 'All Shipped';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $po->po;?></td>
+                                    <td><?php echo number_format($po->po_amount, 2, '.', ',');?></td>
+                                    <td><?php echo number_format($po->price_unit_sea, 2, '.', ',');?></td>
+                                    <td><?php echo number_format($po->price_unit_air, 2, '.', ',');?></td>
+                                    <td><?php echo $po->pi;?></td>
+                                    <td><?php echo $po->po_date;?></td>
+                                    <td><?php echo number_format($po->po_qty, 0, '.', ',');?></td>
+                                    <td><?php echo $po->deposit_date_30;?></td>
+                                    <td><?php echo number_format($po->ship1_qty, 0, '.', ',');?></td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($po->ship1_method_id) {
+                                                case 1:
+                                                    echo 'Air';
+                                                    break;
+                                                case 2:
+                                                    echo 'Sea';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $po->ship1_plan_ship_date;?></td>
+                                    <td><?php echo $po->ship1_actual_ship_date;?></td>
+                                    <td><?php echo number_format($po->ship2_qty, 0, '.', ',');?></td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($po->ship2_method_id) {
+                                                case 1:
+                                                    echo 'Air';
+                                                    break;
+                                                case 2:
+                                                    echo 'Sea';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $po->ship2_plan_ship_date;?></td>
+                                    <td><?php echo $po->ship2_actual_ship_date;?></td>
+                                    <td><?php echo number_format($po->ship3_qty, 0, '.', ',');?></td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($po->ship3_method_id) {
+                                                case 1:
+                                                    echo 'Air';
+                                                    break;
+                                                case 2:
+                                                    echo 'Sea';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $po->ship3_plan_ship_date;?></td>
+                                    <td><?php echo $po->ship3_actual_ship_date;?></td>
+                                    <td class="centered"><?php echo $po->non_holiday_lead_time;?></td>
+                                    <td><?php echo $po->notes;?></td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="23" class="centered">There are no Purchase Orders for this Product.</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Shipping -->
+                <div role="tabpanel" class="tab-pane fade" id="shipping">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">Ship Method</th>
+                                    <th class="centered">Company</th>
+                                    <th class="centered">Shipping Company</th>
+                                    <th class="centered">Tracking #</th>
+                                    <th class="centered">Est. Arrival Date</th>
+                                    <th class="centered">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($shipping) : ?>
+                                <?php foreach($shipping as $s) : ?>
+                                <tr>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($s->ship_method) {
+                                                case 1:
+                                                    echo 'Air';
+                                                    break;
+                                                case 2:
+                                                    echo 'Sea';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td class="centered"><?php echo $s->company;?></td>
+                                    <td class="centered"><?php echo $s->shipping_company;?></td>
+                                    <td class="centered"><?php echo $s->tracking_number;?></td>
+                                    <td class="centered"><?php echo $s->estimated_arrival_date;?></td>
+                                    <td class="centered"><?php echo $s->notes;?></td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="6" class="centered">There is no Shipping for this Product.</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Legal -->
+                <div role="tabpanel" class="tab-pane fade" id="legal">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">Box PC</th>
+                                    <th class="centered">LLC</th>
+                                    <th class="centered">Credit Card</th>
+                                    <th class="centered">Bank Account</th>
+                                    <th class="centered">Amazon Account</th>
+                                    <th class="centered">Special Conditions</th>
+                                    <th class="centered">Phone #</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($legal) : ?>
+                                <?php foreach($legal as $l) : ?>
+                                <tr>
+                                    <td class="centered"><?php echo $l->box_pc;?></td>
+                                    <td class="centered"><?php echo $l->llc;?></td>
+                                    <td class="centered"><?php echo $l->credit_card;?></td>
+                                    <td class="centered"><?php echo $l->bank_account;?></td>
+                                    <td class="centered"><?php echo $l->amazon_account;?></td>
+                                    <td><?php echo $l->special_conditions;?></td>
+                                    <td class="centered"><?php echo $l->phone_number;?></td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="7" class="centered">There is no Legal for this Product.</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Marketing -->
+                <div role="tabpanel" class="tab-pane fade" id="marketing">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">Seller Central Ad</th>
+                                    <th class="centered">AMS Ad</th>
+                                    <th class="centered">Mktg Lander</th>
+                                    <th class="centered">Keywords</th>
+                                    <th class="centered">Adwords</th>
+                                    <th class="centered">Notes</th>
+                                    <th class="centered">Promo Codes</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($marketing) : ?>
+                                <?php foreach($marketing as $m) : ?>
+                                <tr>
+                                    <td class="centered"><?php echo $m->seller_central_ad;?></td>
+                                    <td class="centered"><?php echo $m->ams_ad;?></td>
+                                    <td class="centered"><?php echo $m->marketing_lander;?></td>
+                                    <td><?php echo $m->keywords;?></td>
+                                    <td><?php echo $m->adwords;?></td>
+                                    <td><?php echo $m->notes;?></td>
+                                    <td class="centered"><?php echo $m->promo_codes;?></td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="7" class="centered">There is no Marketing for this Product.</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Listings -->
+                <div role="tabpanel" class="tab-pane fade" id="listings">
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="centered">Title</th>
+                                    <th class="centered">Description</th>
+                                    <th class="centered">Bullets</th>
+                                    <th class="centered">Listing Image</th>
+                                    <th class="centered">Secondary Images</th>
+                                    <th class="centered">Cred Site</th>
+                                    <th class="centered">Notes</th>
+                                    <th class="centered">Approval Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($listings) : ?>
+                                <?php foreach($listings as $listing) : ?>
+                                <tr>
+                                    <td><?php echo $listing->title;?></td>
+                                    <td><?php echo $listing->product_description;?></td>
+                                    <td><?php echo $listing->bullets;?></td>
+                                    <td class="centered"><?php echo $listing->listing_image;?></td>
+                                    <td class="centered"><?php echo str_replace('|', '<br />', $listing->secondary_images);?></td>
+                                    <td><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
+                                    <td><?php echo $listing->notes;?></td>
+                                    <td class="centered">
+                                        <?php 
+                                            switch($listing->approval_status) {
+                                                case 1:
+                                                    echo 'Not Approved';
+                                                    break;
+                                                case 2:
+                                                    echo 'Pending Approval';
+                                                    break;
+                                                case 3:
+                                                    echo 'Approved';
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="8" class="centered">There are no Listings for this Product.</td>
+                                </tr>
+                                <?php endif;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Tabbed Content -->
+    
+    
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -446,7 +847,6 @@
                                     </select>
                                 </div>
                             </div>
-                            
                             <!--
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -455,7 +855,6 @@
                                 </div>
                             </div>
                             -->
-                            
                             <div class="col-md-12">
                                 <div class="btn-group pull-right">
                                     <input type="submit" name="submit" id="page_submit" class="btn btn-primary" value="Save" />

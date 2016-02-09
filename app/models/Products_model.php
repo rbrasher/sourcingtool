@@ -202,4 +202,64 @@ class Products_model extends CI_Model {
         
         return $query->result();
     }
+    
+    public function get_concepts_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('concepts');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_purchase_orders_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('po_tracking');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_shipping_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('shipping');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_legal_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('legal');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_marketing_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('marketing');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_listings_for_product($id) {
+        $this->db->select('*');
+        $this->db->from('listings');
+        $this->db->where('product_id', $id);
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
 }

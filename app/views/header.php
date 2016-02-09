@@ -195,6 +195,10 @@
                     <a href="<?php echo base_url();?>report"><span class="glyphicon glyphicon-open-file"></span> Report</a>
                 </li>
                 
+                <li class="<?php if($this->uri->segment(1) == 'launchcalendar') {echo 'active';}?>">
+                    <a href="<?php echo base_url();?>launchcalendar"><span class="glyphicon glyphicon-calendar"></span> Launch Calendar</a>
+                </li>
+                
                 <!--
                 <li class="<?php //if($this->uri->segment(1) == 'users') {echo 'active';};?>">
                     <a href="<?php //echo base_url();?>users"><span class="glyphicon glyphicon-user"></span> Users</a>
