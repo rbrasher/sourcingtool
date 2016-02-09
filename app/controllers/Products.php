@@ -5,6 +5,7 @@ class Products extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Products_model');
+        $this->load->model('Manufacturers_model');
         
 //        if(!$this->session->userdata('logged_in')) {
 //            redirect('authenticate/login');
@@ -67,6 +68,7 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
         $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
+        $this->form_validation->set_rules('sourcing_due_date', 'Sourcing Due Date', 'trim|xss_clean');
         
         $data['graphics'] = $this->Products_model->get_graphics();
         $data['confidence'] = $this->Products_model->get_confidence();
@@ -106,7 +108,8 @@ class Products extends CI_Controller {
                 'competitor_qty_example'        => $this->input->post('competitor_qty_example'),
                 'mktg_hook'                     => $this->input->post('marketing_hook'),
                 'competitor_link'               => $this->input->post('competitor_link'),
-                'assigned_to'                   => $this->input->post('assigned_to')
+                'assigned_to'                   => $this->input->post('assigned_to'),
+                'sourcing_due_date'             => $this->input->post('sourcing_due_date')
             );
             
             //add product
@@ -154,11 +157,16 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
         $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
+        $this->form_validation->set_rules('sourcing_due_date', 'Sourcing Due Date', 'trim|xss_clean');
         
         $data['product'] = $this->Products_model->get_product($id);
         $data['graphics'] = $this->Products_model->get_graphics();
         $data['confidence'] = $this->Products_model->get_confidence();
         $data['product_status'] = $this->Products_model->get_products_status();
+        
+        $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
+        $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
+        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers_for_product($id);
         
         if($this->form_validation->run() == FALSE) {
             //load view
@@ -194,7 +202,8 @@ class Products extends CI_Controller {
                 'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
                 'mktg_hook'                         => $this->input->post('marketing_hook'),
                 'competitor_link'                   => $this->input->post('competitor_link'),
-                'assigned_to'                       => $this->input->post('assigned_to')
+                'assigned_to'                       => $this->input->post('assigned_to'),
+                'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
             );
             
             //update product
@@ -261,5 +270,65 @@ class Products extends CI_Controller {
         $this->session->set_flashdata('product_rejected', 'Product is Unapproved');
         
         redirect('products');
+    }
+    
+    public function add_manufacturer_from_product($id) {
+        $config['upload_path'] = './documents/brochures/';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['overwrite'] = TRUE;
+        $this->load->library('upload', $config);
+        
+        if(!$this->upload->do_upload('userfile')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+
+            redirect('products/edit/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $brochure = $file_data['file_name'];
+        }
+
+        $data = array(
+            'name'              => $this->input->post('manufacturer_name'),
+            'product_id'        => $this->input->post('product_id'),
+            'email_address'     => $this->input->post('email_address'),
+            'contact_info'      => $this->input->post('contact_info'),
+            'owner'             => $this->input->post('owner'),
+            'total_price'       => $this->input->post('total_price'),
+            'qty_per_package'   => $this->input->post('qty_per_package'),
+            'moq'               => $this->input->post('moq'),
+            'lead_time_in_days' => $this->input->post('lead_time_in_days'),
+            'samples_status'    => $this->input->post('samples_status'),
+            'shipping_terms'    => $this->input->post('shipping_terms'),
+            'brochure'          => $brochure
+        );
+
+        //Insert new manufacturer
+        $this->Manufacturers_model->insert($data);
+
+        //set message
+        $this->session->set_flashdata('manufacturer_saved', 'Manufacturer added successfully.');
+
+        redirect('products/edit/'. $id);
+    }
+    
+    public function set_as_primary_manufacturer($product_id, $manufacturer_id) {
+        $data = array(
+            'is_primary' => 1
+        );
+        
+        $this->Manufacturers_model->update($data, $manufacturer_id);
+        
+        redirect('products/edit/' . $product_id);
+    }
+    
+    public function remove_as_primary_manufacturer($product_id, $manufacturer_id) {
+        $data = array(
+            'is_primary' => 0
+        );
+        
+        $this->Manufacturers_model->update($data, $manufacturer_id);
+        
+        redirect('products/edit/' . $product_id);
     }
 }

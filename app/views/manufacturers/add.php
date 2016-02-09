@@ -145,6 +145,16 @@
             </div>
             
         </div>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Primary Manufacturer?</label><br />
+                    <input type="radio" name="is_primary" value="1" /> Yes
+                    <input style="margin-left: 20px;" type="radio" name="is_primary" value="0" checked /> No
+                </div>
+            </div>
+        </div>
 
     </form>
 </div>

@@ -57,7 +57,7 @@
                             <tr>
                                 <td><a href="<?php echo base_url();?>products/edit/<?php echo $product->id;?>"><?php echo $product->name;?></a></td>
                                 <td class="centered"><?php echo $product->product_status;?></td>
-                                <td class="centered"><?php echo $product->assigned_to;?></td>
+                                <td class="centered"><?php echo ucfirst($product->assigned_to);?></td>
                                 <td class="centered"><?php echo $product->confidence_level;?></td>
                                 <td class="centered">
                                     <!--

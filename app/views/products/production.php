@@ -32,7 +32,7 @@
     
     <!-- Approved Products -->
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table id="MyDT" class="table table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -76,3 +76,14 @@
         </table>
     </div>
 </div>
+
+<?php if($approved_products) : ?>
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+        });
+    });
+</script>
+<?php endif;?>

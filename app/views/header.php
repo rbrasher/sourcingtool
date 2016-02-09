@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/styles.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery-ui.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery.dataTables.css" />
 
 <script src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
 <script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
@@ -17,6 +18,8 @@
 <?php if($this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'edit') :?>
 <script src="<?php echo base_url();?>bootstrap/js/jquery.cleditor.js"></script>
 <?php endif;?>
+<script type="text/javascript" language="javascript" src="<?php echo base_url();?>bootstrap/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body>
 <div id="wrapper">

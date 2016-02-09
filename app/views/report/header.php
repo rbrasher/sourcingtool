@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap-theme.min.css" />
 <!--<link rel="stylesheet" href="<?php //echo base_url();?>bootstrap/css/styles.css" />-->
-<!--<link rel="stylesheet" href="<?php //echo base_url();?>bootstrap/css/jquery.dataTables.css" />-->
+<!--<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery.dataTables.css" />-->
 
 <script type="text/javascript" language="javascript" src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
 <!--<script type="text/javascript" language="javascript" src="<?php //echo base_url();?>bootstrap/js/jquery.dataTables.min.js"></script>-->

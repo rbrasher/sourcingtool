@@ -1,4 +1,3 @@
-
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('manufacturer_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -18,7 +17,8 @@
     <a href="<?php echo base_url();?>manufacturers/add" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Manufacturer</a>
     
     <div class="table-responsive">
-        <table class="table table-striped">
+        <!--<table class="table table-striped">-->
+        <table id="MyDT" class="display table table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -55,3 +55,12 @@
         </table>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+            //"ordering": false
+        });
+    });
+</script>

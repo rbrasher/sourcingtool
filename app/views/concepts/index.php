@@ -31,10 +31,10 @@
     <a href="<?php echo base_url();?>concepts/add" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Concept</a>
     
     <div class="table-responsive">
-        <table class="table table-striped">
+        <!--<table class="table table-striped">-->
+        <table id="MyDT" class="display table table-striped">
             <thead>
                 <tr>
-                    <!--<th width="70">#</th>-->
                     <th class="centered">Product</th>
                     <th class="centered">Listing Mock</th>
                     <th class="centered">Box Art Work</th>
@@ -51,7 +51,6 @@
                 <?php if($concepts) : ?>
                 <?php foreach($concepts as $concept) : ?>
                 <tr>
-                    <!--<td><?php //echo $concept->id;?></td>-->
                     <td><a href="<?php echo base_url();?>concepts/edit/<?php echo $concept->id;?>">
                         <?php 
                             foreach($products as $product) :
@@ -89,9 +88,8 @@
                     <td>
                         <!--
                         <a class="btn btn-primary" href="<?php //echo base_url();?>concepts/edit/<?php //echo $concept->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-danger" href="<?php //echo base_url();?>concepts/delete/<?php //echo $concept->id;?>" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
                         -->
-                        <a class="btn btn-danger" href="<?php echo base_url();?>concepts/delete/<?php echo $concept->id;?>" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
-                        
                         <?php if($concept->approval_status == '1') : ?>
                         <a class="btn btn-success" href="<?php echo base_url();?>concepts/approve/<?php echo $concept->id;?>" title="Approve"><span class="glyphicon glyphicon-ok-circle"></span></a>
                         <?php elseif($concept->approval_status == '3') : ?>
@@ -102,7 +100,7 @@
                 <?php endforeach;?>
                 <?php else : ?>
                 <tr>
-                    <td colspan="11" class="centered">No Concepts have been set up yet.</td>
+                    <td colspan="10" class="centered">No Concepts have been set up yet.</td>
                 </tr>
                 <?php endif; ?>
             </tbody>
@@ -110,3 +108,14 @@
     </div>
     
 </div>
+<?php if($concepts) : ?>
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+            //"ordering": false
+        });
+    });
+</script>
+<?php endif;?>

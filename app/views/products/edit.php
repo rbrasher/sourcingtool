@@ -1,6 +1,20 @@
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
     
+    <?php if($this->session->flashdata('maunfacturer_saved')) : ?>
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('manufacturer_saved');?></p>
+    </div>
+    <?php endif;?>
+    
+    <?php if($this->session->flashdata('upload_error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('upload_error');?></p>
+    </div>
+    <?php endif;?>
+    
     <form method="post" action="<?php echo base_url();?>products/edit/<?php echo $product->id;?>">
         <div class="row">
             <div class="col-md-6">
@@ -18,7 +32,7 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-                    <li><a href="<?php echo base_url();?>"><span class="glyphicon glyphicon-blackboard"></span> Products</a></li>
+                    <li><a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> Products</a></li>
                     <li class="active"><span class="glyphicon glyphicon-pencil"></span> Edit Product</li>
                 </ol>
             </div>
@@ -242,13 +256,217 @@
                 </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label>Assigned To</label>
-                    <input type="text" name="assigned_to" id="assigned_to" class="form-control" value="<?php echo $product->assigned_to;?>" />
+                    <select name="assigned_to" id="assigned_to" class="form-control">
+                        <option value="">Select</option>
+                        <option value="quinn" <?php if($product->assigned_to == 'quinn') {echo 'selected';};?>>Quinn</option>
+                        <option value="fredy" <?php if($product->assigned_to == 'fredy') {echo 'selected';};?>>Fredy</option>
+                        <option value="eric" <?php if($product->assigned_to == 'eric') {echo 'selected';};?>>Eric</option>
+                        <option value="ron" <?php if($product->assigned_to == 'ron') {echo 'selected';};?>>Ron - Do not use!</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Sourcing Due Date</label>
+                    <input type="text" name="sourcing_due_date" id="sourcing_due_date" class="form-control datep" value="<?php echo $product->sourcing_due_date;?>" />
                 </div>
             </div>
         </div>
         
     </form>
+    
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Owner</th>
+                        <th>Total Price</th>
+                        <th>Price Per Item</th>
+                        <th>Qty Per Pkg</th>
+                        <th>MOQ</th>
+                        <th>Lead Time</th>
+                        <th>Samples Status</th>
+                        <th>Brochure</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if($manufacturers) : ?>
+                    <?php foreach($manufacturers as $manufacturer) : ?>
+                    <tr>
+                        <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a> <?php if($manufacturer->is_primary == 1) {echo '<strong>(PRIMARY)</strong>';}?></td>
+
+                        <td><?php echo $manufacturer->owner;?></td>
+                        <td><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
+                        <td><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
+                        <td><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
+                        <td><?php echo $manufacturer->moq;?></td>
+                        <td><?php echo $manufacturer->lead_time_in_days;?></td>
+                        <td><?php echo $manufacturer->samples_status;?></td>
+                        <td><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
+                        <td>
+                            <?php if($manufacturer->is_primary == 0) : ?>
+                            <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                            <?php elseif($manufacturer->is_primary == 1) : ?>
+                            <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                    <?php else : ?>
+                    <tr>
+                        <td colspan="10" class="centered">No Manufacturers have been set up.</td>
+                    </tr>
+                    <?php endif;?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Add Manufacturer
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Manufacturer</h4>
+                </div>
+                <div class="modal-body">
+                    <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
+                    
+                    <?php if($this->session->flashdata('upload_error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><?php echo $this->session->flashdata('upload_error');?></p>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <form method="post" action="<?php echo base_url();?>products/add_manufacturer_from_product/<?php echo $product->id;?>" enctype="multipart/form-data">
+                        <div class="row">
+                            <input type="hidden" id="product_id" name="product_id" class="form-control" value="<?php echo $product->id;?>" />
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="manufacturer_name" id="manufacturer_name" class="form-control" value="<?php echo set_value('manufacturer_name');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="text" name="email_address" id="email_address" class="form-control" value="<?php echo set_value('email_address');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contact Info</label>
+                                    <input type="text" name="contact_info" id="contact_info" class="form-control" value="<?php echo set_value('contact_info');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Owner</label>
+                                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo set_value('owner');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Total Price</label>
+                                    <input type="text" name="total_price" id="total_price" class="form-control" value="<?php echo set_value('total_price');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Price Per Item</label>
+                                    <input type="text" name="price_per_item" id="price_per_item" class="form-control" value="<?php echo set_value('price_per_item');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Qty per Package</label>
+                                    <input type="text" name="qty_per_package" id="qty_per_package" class="form-control" value="<?php echo set_value('qty_per_package');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>MOQ</label>
+                                    <input type="text" name="moq" id="moq" class="form-control" value="<?php echo set_value('moq');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Lead Time in Days</label>
+                                    <input type="text" name="lead_time_in_days" id="lead_time_in_days" class="form-control" value="<?php echo set_value('lead_time_in_days');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Samples Status</label>
+                                    <select name="samples_status" id="samples_status" class="form-control">
+                                        <option value="">Select a status</option>
+                                        <?php foreach($samples_status as $status) : ?>
+                                        <option value="<?php echo $status->id;?>"><?php echo $status->samples_status;?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Shipping Terms</label>
+                                    <select name="shipping_terms" id="shipping_terms" class="form-control">
+                                        <option value="">Select Shipping Terms</option>
+                                        <?php foreach($shipping_terms as $t) : ?>
+                                        <option value="<?php echo $t->id;?>"><?php echo $t->shipping_terms;?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc)</span>
+                                    <input type="file" name="userfile" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="btn-group pull-right">
+                                    <input type="submit" name="submit" id="page_submit" class="btn btn-primary" value="Save" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                    
+                </div>
+                <!--
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    
 </div>

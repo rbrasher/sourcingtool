@@ -17,7 +17,7 @@
     <a href="<?php echo base_url();?>marketing/add" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Marketing</a>
     
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table id="MyDT" class="table table-striped">
             <thead>
                 <tr>
                     <th>Product</th>
@@ -60,3 +60,13 @@
         </table>
     </div>
 </div>
+<?php if($marketing) : ?>
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+        });
+    });
+</script>
+<?php endif;?>

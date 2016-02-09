@@ -49,6 +49,18 @@ class Manufacturers_model extends CI_Model {
         return $query->row();
     }
     
+    public function get_manufacturers_for_product($product_id) {
+        $this->db->select('a.*, b.samples_status AS samples_status, c.shipping_terms AS shipping_terms');
+        $this->db->where('product_id', $product_id);
+        $this->db->from('st_manufacturers AS a');
+        $this->db->join('samples_status AS b', 'b.id = a.samples_status', 'left');
+        $this->db->join('shipping_terms AS c', 'c.id = a.shipping_terms', 'left');
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
     /**
      * Insert a new manufacturer.
      * 

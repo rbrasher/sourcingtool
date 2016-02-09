@@ -166,5 +166,15 @@
         </div>
         <?php endif;?>
         
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Primary Manufacturer?</label><br />
+                    <input type="radio" name="is_primary" value="1" <?php if($manufacturer->is_primary == 1){ echo 'checked';};?> /> Yes
+                    <input style="margin-left: 20px;" type="radio" name="is_primary" value="0" <?php if($manufacturer->is_primary == 0){ echo 'checked';};?> /> No
+                </div>
+            </div>
+        </div>
+        
     </form>
 </div>

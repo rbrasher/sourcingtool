@@ -188,14 +188,14 @@ class Concepts extends CI_Controller {
      * 
      * @param int $id
      */
-    public function delete($id) {
-        $this->Concepts_model->delete($id);
-        
-        //set message
-        $this->session->set_flashdata('concept_deleted', 'Concept deleted successfully.');
-        
-        redirect('concepts');
-    }
+//    public function delete($id) {
+//        $this->Concepts_model->delete($id);
+//        
+//        //set message
+//        $this->session->set_flashdata('concept_deleted', 'Concept deleted successfully.');
+//        
+//        redirect('concepts');
+//    }
     
     
     public function approve($id) {

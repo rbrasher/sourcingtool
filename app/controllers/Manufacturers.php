@@ -51,6 +51,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
         $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
+        $this->form_validation->set_rules('is_primary', 'Is Primary', 'trim|xss_clean');
         
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
         $data['shipping_terms'] = $this->Manufacturers_model->get_shipping_terms('id', 'ASC');
@@ -85,9 +86,11 @@ class Manufacturers extends CI_Controller {
                 'lead_time_in_days' => $this->input->post('lead_time_in_days'),
                 'samples_status'    => $this->input->post('samples_status'),
                 'shipping_terms'    => $this->input->post('shipping_terms'),
-                'brochure'          => $brochure
+                'brochure'          => $brochure,
+                'is_primary'        => $this->input->post('is_primary')
             );
             
+            //var_dump($data);die();
             //Insert new manufacturer
             $this->Manufacturers_model->insert($data);
             
@@ -123,6 +126,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
         $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
+        $this->form_validation->set_rules('is_primary', 'Primary Manufacturer', 'trim|xss_clean');
         
         $data['manufacturer'] = $this->Manufacturers_model->get_manufacturer($id);
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
@@ -160,8 +164,11 @@ class Manufacturers extends CI_Controller {
                 'lead_time_in_days' => $this->input->post('lead_time_in_days'),
                 'samples_status'    => $this->input->post('samples_status'),
                 'shipping_terms'    => $this->input->post('shipping_terms'),
-                'brochure'          => $brochure
+                'brochure'          => $brochure,
+                'is_primary'        => $this->input->post('is_primary')
             );
+            
+            //var_dump($data);die();
             
             //Update manufacturer
             $this->Manufacturers_model->update($data, $id);

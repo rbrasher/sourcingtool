@@ -31,7 +31,8 @@
     <a href="<?php echo base_url();?>po/add" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add PO</a>
     
     <div class="table-responsive">
-        <table class="table table-striped">
+        <!--<table class="table table-striped">-->
+        <table id="MyDT" class="display table table-striped">
             <thead>
                 <tr>
                     <th>Product</th>
@@ -97,3 +98,13 @@
         </table>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+            //"ordering": false
+        });
+    });
+</script>

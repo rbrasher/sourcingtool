@@ -242,12 +242,25 @@
                 </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label>Assigned To</label>
-                    <input type="text" name="assigned_to" id="assigned_to" class="form-control" value="<?php echo set_value('assigned_to');?>" />
+                    <select name="assigned_to" id="assigned_to" class="form-control">
+                        <option value="">Select</option>
+                        <option value="quinn">Quinn</option>
+                        <option value="fredy">Fredy</option>
+                        <option value="eric">Eric</option>
+                        <option value="ron">Ron - Do not use!</option>
+                    </select>
                 </div>
             </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Sourcing Due Date</label>
+                    <input type="text" name="sourcing_due_date" id="sourcing_due_date" class="form-control datep" value="<?php echo set_value('sourcing_due_date');?>" />
+                </div>
+            </div> 
         </div>
         
     </form>
