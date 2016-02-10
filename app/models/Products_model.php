@@ -121,6 +121,16 @@ class Products_model extends CI_Model {
         return $query->row();
     }
     
+    public function get_product_id($name) {
+        $this->db->select('id');
+        $this->db->from('st_products');
+        $this->db->where('name', $name);
+        
+        $query = $this->db->get();
+        
+        return $query->row();
+    }
+    
     /**
      * Insert a new product.
      * 

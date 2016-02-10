@@ -140,7 +140,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Brochure</label>
-                    <input type="text" name="brochure" id="brochure" class="form-control" value="<?php echo $manufacturer->brochure;?>" />
+                    <input type="text" name="brochure" id="brochure" class="form-control" value="<?php echo $manufacturer->brochure;?>" readonly />
                 </div>
             </div>
             

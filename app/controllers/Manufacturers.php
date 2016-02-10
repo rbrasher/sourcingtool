@@ -33,10 +33,10 @@ class Manufacturers extends CI_Controller {
      */
     public function add() {
         $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['allowed_types'] = 'jpg|jpeg|png|ai|pdf|xls|doc';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
-        
+
         //validation rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required|xss_clean');
@@ -50,7 +50,6 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('lead_time_in_days', 'Lead Time In Days', 'trim|xss_clean');
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
-        $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
         $this->form_validation->set_rules('is_primary', 'Is Primary', 'trim|xss_clean');
         
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
@@ -63,14 +62,18 @@ class Manufacturers extends CI_Controller {
             $this->load->view('manufacturers/add');
             $this->load->view('footer');
         } else {
-            if(!$this->upload->do_upload('userfile')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
-                
-                redirect('manufacturers/add');
+            if(strlen($_FILES['userfile']['name']) > 0) {
+                //upload brochure
+                if(!$this->upload->do_upload('userfile')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+
+                    redirect('manufacturers/add');
+                } else {
+                    $file_data = $this->upload->data();
+                    $brochure = $file_data['file_name'];
+                }
             } else {
-                $file_data = $this->upload->data();
-                
-                $brochure = $file_data['file_name'];
+                $brochure = '';
             }
             
             $data = array(
@@ -90,7 +93,6 @@ class Manufacturers extends CI_Controller {
                 'is_primary'        => $this->input->post('is_primary')
             );
             
-            //var_dump($data);die();
             //Insert new manufacturer
             $this->Manufacturers_model->insert($data);
             
@@ -141,14 +143,18 @@ class Manufacturers extends CI_Controller {
             $this->load->view('footer');
         } else {
             //process upload first
-            if(!$this->upload->do_upload('userfile')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
-                
-                redirect('manufacturers/edit/' . $id);
+            if(strlen($_FILES['userfile']['name']) > 0) {
+                //upload brochure
+                if(!$this->upload->do_upload('userfile')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading your document.');
+
+                    redirect('manufacturers/edit/' . $id);
+                } else {
+                    $file_data = $this->upload->data();
+                    $brochure = $file_data['file_name'];
+                }
             } else {
-                $file_data = $this->upload->data();
-                
-                $brochure = $file_data['file_name'];
+                $brochure = '';
             }
             
             $data = array(
@@ -167,8 +173,6 @@ class Manufacturers extends CI_Controller {
                 'brochure'          => $brochure,
                 'is_primary'        => $this->input->post('is_primary')
             );
-            
-            //var_dump($data);die();
             
             //Update manufacturer
             $this->Manufacturers_model->update($data, $id);

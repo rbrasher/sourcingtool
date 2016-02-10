@@ -66,17 +66,19 @@
                 </div>
             </div>
             
+            <!--
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Graphics</label>
                     <select name="graphics" id="graphics" class="form-control">
                         <option value="">Select</option>
-                        <?php foreach($graphics as $g) : ?>
-                        <option value="<?php echo $g->id;?>"><?php echo $g->graphics;?></option>
-                        <?php endforeach;?>
+                        <?php //foreach($graphics as $g) : ?>
+                        <option value="<?php //echo $g->id;?>"><?php //echo $g->graphics;?></option>
+                        <?php //endforeach;?>
                     </select>
                 </div>
             </div>
+            -->
             
             <div class="col-md-2">
                 <div class="form-group">
@@ -157,60 +159,14 @@
                 </div>
             </div>
             
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Date of Deposit</label>
-                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control datep" value="<?php echo set_value('date_of_deposit');?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Qty Ordered</label>
-                    <input type="text" name="qty_ordered" id="qty_ordered" class="form-control" value="<?php echo set_value('qty_ordered');?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Expected Ship Date</label>
-                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php echo set_value('expected_ship_date');?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Ship Method</label>
-                    <select name="ship_method" id="ship_method" class="form-control">
-                        <option value="">Select</option>
-                        <option value="Air">Air</option>
-                        <option value="Sea">Sea</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Estimated Arrival Date</label>
-                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control datep" value="<?php echo set_value('estimated_arrival_date');?>" />
-                </div>
-            </div>
-            
+            <!--
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Date at FBA</label>
-                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php echo set_value('estimated_date_as_fba');?>" />
+                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php //echo set_value('estimated_date_as_fba');?>" />
                 </div>
             </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Estimated Launch Date</label>
-                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php echo set_value('estimated_launch_date');?>" />
-                </div>
-            </div>
+            -->
             
             <div class="col-md-2">
                 <div class="form-group">
@@ -232,7 +188,95 @@
                     <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php echo set_value('marketing_hook');?>" />
                 </div>
             </div>
+            
+            <!--
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Date of Deposit</label>
+                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control datep" value="<?php //echo set_value('date_of_deposit');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Qty Ordered</label>
+                    <input type="text" name="qty_ordered" id="qty_ordered" class="form-control" value="<?php //echo set_value('qty_ordered');?>" />
+                </div>
+            </div>
+            -->
+            
+            <!--
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Expected Ship Date</label>
+                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php //echo set_value('expected_ship_date');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Ship Method</label>
+                    <select name="ship_method" id="ship_method" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Air">Air</option>
+                        <option value="Sea">Sea</option>
+                    </select>
+                </div>
+            </div>
+            -->
         </div>
+        
+        <!--
+        <div class="row">
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Estimated Arrival Date</label>
+                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control datep" value="<?php //echo set_value('estimated_arrival_date');?>" />
+                </div>
+            </div>
+            
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Estimated Date at FBA</label>
+                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php //echo set_value('estimated_date_as_fba');?>" />
+                </div>
+            </div>
+            
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Estimated Launch Date</label>
+                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php //echo set_value('estimated_launch_date');?>" />
+                </div>
+            </div>
+            
+            
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Competitor Price Example</label>
+                    <input type="text" name="competitor_price_example" id="competitor_price_example" class="form-control" value="<?php //echo set_value('competitor_price_example');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Competitor Qty Example</label>
+                    <input type="text" name="competitor_qty_example" id="competitor_qty_example" class="form-control" value="<?php //echo set_value('competitor_qty_example');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Marketing Hook</label>
+                    <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php //echo set_value('marketing_hook');?>" />
+                </div>
+            </div>
+            
+        </div>
+        -->
         
         <div class="row">
             <div class="col-md-6">

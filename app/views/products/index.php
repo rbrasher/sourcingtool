@@ -48,6 +48,7 @@
                                 <th class="centered">Status</th>
                                 <th class="centered">Assigned To</th>
                                 <th class="centered">Urgency</th>
+                                <th class="centered">Sourcing Due Date</th>
                                 <th class="centered">Actions</th>
                             </tr>
                         </thead>
@@ -59,6 +60,7 @@
                                 <td class="centered"><?php echo $product->product_status;?></td>
                                 <td class="centered"><?php echo ucfirst($product->assigned_to);?></td>
                                 <td class="centered"><?php echo $product->confidence_level;?></td>
+                                <td class="centered"><?php echo $product->sourcing_due_date;?></td>
                                 <td class="centered">
                                     <!--
                                     <a class="btn btn-primary" href="<?php //echo base_url();?>products/edit/<?php //echo $product->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -96,6 +98,7 @@
                                 <th class="centered">Status</th>
                                 <th class="centered">Assigned To</th>
                                 <th class="centered">Urgency</th>
+                                <th class="centered">Sourcing Due Date</th>
                                 <th class="centered">Actions</th>
                             </tr>
                         </thead>
@@ -107,6 +110,7 @@
                                 <td class="centered"><?php echo $pending_product->product_status;?></td>
                                 <td class="centered"><?php echo $pending_product->assigned_to;?></td>
                                 <td class="centered"><?php echo $pending_product->confidence_level;?></td>
+                                <td class="centered"><?php echo $product->sourcing_due_date;?></td>
                                 <td class="centered">
                                     <!--
                                     <a class="btn btn-primary" href="<?php //echo base_url();?>products/edit/<?php //echo $pending_product->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>

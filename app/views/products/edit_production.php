@@ -1,7 +1,7 @@
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
     
-    <?php if($this->session->flashdata('maunfacturer_saved')) : ?>
+    <?php if($this->session->flashdata('manufacturer_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <p><?php echo $this->session->flashdata('manufacturer_saved');?></p>
@@ -15,7 +15,7 @@
     </div>
     <?php endif;?>
     
-    <form method="post" action="<?php echo base_url();?>products/edit/<?php echo $product->id;?>">
+    <form method="post" action="<?php echo base_url();?>products/edit_production/<?php echo $product->id;?>">
         <div class="row">
             <div class="col-md-6">
                 <h1>Edit Product</h1>
@@ -288,15 +288,15 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Owner</th>
-                        <th>Total Price</th>
-                        <th>Price Per Item</th>
-                        <th>Qty Per Pkg</th>
-                        <th>MOQ</th>
-                        <th>Lead Time</th>
-                        <th>Samples Status</th>
-                        <th>Brochure</th>
-                        <th>Actions</th>
+                        <th class="centered">Owner</th>
+                        <th class="centered">Total Price</th>
+                        <th class="centered">Price Per Item</th>
+                        <th class="centered">Qty Per Pkg</th>
+                        <th class="centered">MOQ</th>
+                        <th class="centered">Lead Time</th>
+                        <th class="centered">Samples Status</th>
+                        <th class="centered">Brochure</th>
+                        <th class="centered">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -305,19 +305,19 @@
                     <tr>
                         <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a> <?php if($manufacturer->is_primary == 1) {echo '<strong>(PRIMARY)</strong>';}?></td>
 
-                        <td><?php echo $manufacturer->owner;?></td>
-                        <td><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
-                        <td><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
-                        <td><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
-                        <td><?php echo $manufacturer->moq;?></td>
-                        <td><?php echo $manufacturer->lead_time_in_days;?></td>
-                        <td><?php echo $manufacturer->samples_status;?></td>
-                        <td><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
-                        <td>
+                        <td class="centered"><?php echo $manufacturer->owner;?></td>
+                        <td class="centered"><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
+                        <td class="centered"><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
+                        <td class="centered"><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
+                        <td class="centered"><?php echo number_format($manufacturer->moq, 0, '.', ',');?></td>
+                        <td class="centered"><?php echo $manufacturer->lead_time_in_days;?></td>
+                        <td class="centered"><?php echo $manufacturer->samples_status;?></td>
+                        <td class="centered"><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
+                        <td class="centered">
                             <?php if($manufacturer->is_primary == 0) : ?>
-                            <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                            <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
                             <?php elseif($manufacturer->is_primary == 1) : ?>
-                            <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
+                            <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
                             <?php endif;?>
                         </td>
                     </tr>
@@ -334,7 +334,7 @@
     
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-12">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Manufacturer</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manufacturer</button>
         </div>
     </div>
     
@@ -757,7 +757,7 @@
                     </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?php echo base_url();?>products/add_manufacturer_from_product/<?php echo $product->id;?>" enctype="multipart/form-data">
+                    <form method="post" action="<?php echo base_url();?>products/add_manufacturer_from_production_product/<?php echo $product->id;?>" enctype="multipart/form-data">
                         <div class="row">
                             <input type="hidden" id="product_id" name="product_id" class="form-control" value="<?php echo $product->id;?>" />
                             
@@ -847,14 +847,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--
+                            
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc)</span>
                                     <input type="file" name="userfile" size="20" />
                                 </div>
                             </div>
-                            -->
+                            
                             <div class="col-md-12">
                                 <div class="btn-group pull-right">
                                     <input type="submit" name="submit" id="page_submit" class="btn btn-primary" value="Save" />
