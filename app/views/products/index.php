@@ -1,3 +1,14 @@
+<script>
+    function confirmDelete(id) {
+        if(confirm("Are you sure you want to delete this product?") === true) {
+            var loc = "<?php echo base_url();?>products/delete/" + id;
+            
+            window.location = loc;
+        } else {
+            console.log('Do not delete.');
+        }
+    }
+</script>
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('product_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -10,6 +21,13 @@
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <p><?php echo $this->session->flashdata('product_deleted');?></p>
+    </div>
+    <?php endif;?>
+    
+    <?php if($this->session->flashdata('product_delete_error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('product_delete_error');?></p>
     </div>
     <?php endif;?>
     
@@ -40,8 +58,8 @@
         <div class="tab-content">
             <!-- Not Approved -->
             <div role="tabpanel" class="tab-pane fade in active" id="not_approved">
-                <div class="table-responsive">
-                    <table class="table table-striped">
+                <div class="table-responsive" style="margin-top: 20px;">
+                    <table id="MyDT" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -62,10 +80,6 @@
                                 <td class="centered"><?php echo $product->confidence_level;?></td>
                                 <td class="centered"><?php echo $product->sourcing_due_date;?></td>
                                 <td class="centered">
-                                    <!--
-                                    <a class="btn btn-primary" href="<?php //echo base_url();?>products/edit/<?php //echo $product->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-danger" href="<?php //echo base_url();?>products/delete/<?php //echo $product->id;?>" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
-                                    -->
                                     <?php if($product->approval_status == '1') : ?>
                                     <a class="btn btn-info" href="<?php echo base_url();?>products/review/<?php echo $product->id;?>" title="Review" target="_blank"><span class="glyphicon glyphicon-share"></span></a>
                                     <?php endif;?>
@@ -75,6 +89,7 @@
                                     <?php if($product->approval_status == '3') : ?>
                                     <a class="btn btn-warning" href="<?php echo base_url();?>products/unapprove/<?php echo $product->id;?>" title="Reject"><span class="glyphicon glyphicon-remove-circle"></span></a>
                                     <?php endif;?>
+                                    <a class="btn btn-danger" onclick="confirmDelete(<?php echo $product->id;?>);" href="javascript:void(0);" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                             <?php endforeach;?>
@@ -90,8 +105,8 @@
             
             <!-- Products Pending Approval -->
             <div role="tabpanel" class="tab-pane fade" id="pending_approval">
-                <div class="table-responsive">
-                    <table class="table table-striped">
+                <div class="table-responsive" style="margin-top: 20px;">
+                    <table id="pendingDT" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -140,3 +155,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#MyDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+        });
+        
+        <?php if($pending_products) : ?>
+        $('#pendingDT').DataTable({
+            "autoWidth": false,
+            "paging": false,
+        });
+        <?php endif;?>
+    });
+</script>

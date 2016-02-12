@@ -8,7 +8,7 @@
     </div>
     <?php endif;?>
     
-    <form method="post" action="<?php echo base_url();?>marketing/edit/<?php echo $marketing->id;?>">
+    <form method="post" action="<?php echo base_url();?>marketing/edit/<?php echo $marketing->id;?>" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <h1>Edit Marketing Info</h1>
@@ -96,11 +96,16 @@
         
         <div class="row">
             <div class="col-md-4">
+                
                 <div class="form-group">
-                    <label>Promo Codes</label>
+                    <label>Promo Codes</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: csv, xls, doc)</span>
+                    <?php if($marketing->promo_codes && $marketing->promo_codes != '') : ?>
                     <input type="text" name="promo_codes" id="promo_codes" class="form-control" value="<?php echo $marketing->promo_codes;?>" readonly />
                     <br />
-                    <a href="<?php echo base_url();?>documents/promo_codes/<?php echo $marketing->promo_codes;?>">View / Download</a>
+                    <a class="btn btn-default" href="<?php echo base_url();?>documents/promo_codes/<?php echo $marketing->promo_codes;?>"><span class="glyphicon glyphicon-download"></span> Download</a>
+                    <?php else : ?>
+                    <input type="file" name="userfile1" id="userfile1" />
+                    <?php endif;?>
                 </div>
             </div>
         </div>

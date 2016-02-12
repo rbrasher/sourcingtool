@@ -118,7 +118,7 @@ class Products extends CI_Controller {
             
             $p = $this->Products_model->get_product_id($data['name']);
             
-            $to = 'quinn@innitech.com;ron@innitech.com';
+            $to = 'quinn@innitech.com';
             $subject = 'New Product Added';
             $message = ucwords($data['name']) . ' was added into the Sourcing Tool. <a href="http://healing-reviews.org/sourcingtool/products/edit/' . $p->id . '" target="_blank">View Product</a>';
             $additional_headers = "From: Sourcing Tool\r\n";
@@ -333,14 +333,24 @@ class Products extends CI_Controller {
      * 
      * @param int $id
      */
-//    public function delete($id) {
-//        $this->Products_model->delete($id);
-//        
-//        //set message
-//        $this->session->set_flashdata('product_deleted', 'Product deleted successfully.');
-//        
-//        redirect('products');
-//    }
+    public function delete($id) {
+        $product = $this->Products_model->get_product($id);
+        
+        if($product->approval_status != 3 && $product->approval_status != 2) {
+            $this->Products_model->delete($id);
+            
+            //set message
+            $this->session->set_flashdata('product_deleted', 'Product deleted successfully.');
+
+            redirect('products');
+            
+        } else {
+            //set message
+            $this->session->set_flashdata('product_delete_error', 'Products in Production cannot be deleted. Please see Ron to delete this Product.');
+
+            redirect('products');
+        }
+    }
     
     public function review($id) {
         $data = array(

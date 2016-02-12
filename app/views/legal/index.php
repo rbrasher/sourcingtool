@@ -43,12 +43,13 @@
                     <td class="centered"><?php echo $l->amazon_account;?></td>
                     <td class="centered"><?php echo $l->special_conditions;?></td>
                     <td class="centered"><?php echo $l->phone_number;?></td>
-                    <!--
+                    
                     <td class="centered">
-                        <a class="btn btn-primary" href="<?php //echo base_url();?>legal/edit/<?php //echo $l->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <!--
                         <a class="btn btn-danger" href="<?php //echo base_url();?>legal/delete/<?php //echo $l->id;?>"><span class="glyphicon glyphicon-trash"></span></a>
+                        -->
                     </td>
-                    -->
+                    
                 </tr>
                 <?php endforeach;?>
                 <?php else : ?>

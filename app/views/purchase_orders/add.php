@@ -25,7 +25,7 @@
         </div>
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label>Select Product</label>
                     <select name="product_id" id="product_id" class="form-control">
