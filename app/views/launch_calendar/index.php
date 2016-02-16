@@ -12,7 +12,7 @@
 
 <script src="<?php echo base_url();?>bootstrap/full_calendar/moment.min.js"></script>
 <script src="<?php echo base_url();?>bootstrap/full_calendar/jquery.min.js"></script>
-<script src="<?php echo base_url();?>bootstrap/full_calendar/fullcalendar.min.js"></script>
+<script src="<?php echo base_url();?>bootstrap/full_calendar/fullcalendar.js"></script>
 <script src="<?php echo base_url();?>bootstrap/full_calendar/jquery-ui.custom.min.js"></script>
 
 <script>
@@ -29,10 +29,12 @@
 				//center: 'title',
 				//right: 'month,basicWeek,basicDay'
 			},
-			defaultDate: defaultDate,
+            //use this to set default date to nearest launch date <?php //echo json_encode($next_launch_product->start);?>,
+			defaultDate: defaultDate,  
             editable: false,
 			eventLimit: true, // allow "more" link when too many events
-            events: <?php echo json_encode($events, true);?>
+            events: <?php echo json_encode($events, true);?>,
+            eventColor: 'green'
 		});
 		
 	});
@@ -55,6 +57,45 @@
 
 </head>
 <body>
+    
+    <div style="float: left;width: 100%; height: 40px;">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Legend</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sourcing Due Date</td>
+                    <td style="background: #000; width: 50px;"></td>
+                </tr>
+                
+                <tr>
+                    <td>Expected Ship Date</td>
+                    <td style="background: #c36a0a; width: 50px;"></td>
+                </tr>
+                
+                <tr>
+                    <td>Estimated Arrival Date</td>
+                    <td style="background: #8d0ac3; width: 50px;"></td>
+                </tr>
+                
+                <tr>
+                    <td>Estimated Date at FBA</td>
+                    <td style="background: blue; width: 50px;"></td>
+                </tr>
+                
+                <tr>
+                    <td>Estimated Launch Date</td>
+                    <td style="background: green; width: 50px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br /><br />
+        Next Launch Date: <?php echo $next_launch_product->start;?><br />Product: <?php echo $next_launch_product->title;?>
+    </div>
+    
     <div id="calendar"></div>
 </body>
 </html>
