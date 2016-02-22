@@ -16,29 +16,84 @@
 <script src="<?php echo base_url();?>bootstrap/full_calendar/jquery-ui.custom.min.js"></script>
 
 <script>
+$(document).ready(function() {
+    var defaultDate = new Date();
 
-	$(document).ready(function() {
-		var defaultDate = new Date();
-        
-        $('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next',
-				center: 'title',
-				right: ''
-                //left: 'prev,next today',
-				//center: 'title',
-				//right: 'month,basicWeek,basicDay'
-			},
-            //use this to set default date to nearest launch date <?php //echo json_encode($next_launch_product->start);?>,
-			defaultDate: defaultDate,  
-            editable: false,
-			eventLimit: true, // allow "more" link when too many events
-            events: <?php echo json_encode($events, true);?>,
-            eventColor: 'green'
-		});
-		
-	});
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        //use this to set default date to nearest launch date <?php //echo json_encode($next_launch_product->start);?>,
+        defaultDate: defaultDate,  
+        theme: true,
+        editable: false,
+        eventLimit: true, // allow "more" link when too many events
+        events: <?php echo json_encode($events, true);?>,
+        eventColor: 'green'
+    });
 
+    addClassesToTable();
+
+    $('.fc-prev-button').click(function() {
+        addClassesToTable();
+    });
+
+    $('.fc-next-button').click(function() {
+        addClassesToTable();
+    });
+
+    function addClassesToTable() {
+        $('.fc-event-container a').each(function(index, value) {
+            var color = $(this).css('background-color');
+            switch(color) {
+                case 'rgb(195, 106, 10)':   //expected ship date
+                    $(this).addClass('brown');
+                    break;
+
+                case 'rgb(141, 10, 195)':   //estimated arrival date
+                    $(this).addClass('purple');
+                    break;
+
+                case 'rgb(0, 0, 255)':      //estimated date at fba
+                    $(this).addClass('blue');
+                    break;
+
+                case 'rgb(0, 128, 0)':      //estimated launch date
+                    $(this).addClass('green');
+                    break;
+
+                case 'rgb(0, 0, 0)':        //sourcing due date
+                    $(this).addClass('black');
+                    break;
+            }
+        });
+    }
+
+
+
+});
+
+function toggleBlack() {
+    $('.black').toggle('fast');
+}
+
+function toggleBrown() {
+    $('.brown').toggle('fast');
+}
+
+function toggleBlue() {
+    $('.blue').toggle('fast');
+}
+
+function toggleGreen() {
+    $('.green').toggle('fast');
+}
+
+function togglePurple() {
+    $('.purple').toggle('fast');
+}
 </script>
 
 <style>
@@ -57,6 +112,13 @@
 
 </head>
 <body>
+    <div style="float: left; width: 100%; text-align: center;">
+        <button onclick="toggleBlack();">Toggle Sourcing Due Date</button>
+        <button onclick="toggleBrown();">Toggle Expected Ship Date</button>
+        <button onclick="togglePurple();">Toggle Estimated Arrival Date</button>
+        <button onclick="toggleBlue();">Toggle Estimated Date at FBA</button>
+        <button onclick="toggleGreen();">Toggle Estimated Launch Date</button>
+    </div>
     
     <div style="float: left;width: 100%; height: 40px;">
         <table>
