@@ -98,7 +98,7 @@ function togglePurple() {
 
 <style>
 	body {
-		margin: 40px 10px;
+		margin: 10px 10px;
 		padding: 0;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		font-size: 14px;
@@ -112,6 +112,9 @@ function togglePurple() {
 
 </head>
 <body>
+    <div style="float: left; width: 100%;">
+        <a style="text-decoration: none;" href="<?php echo base_url();?>">&laquo; Dashboard</a>
+    </div>
     <div style="float: left; width: 100%; text-align: center;">
         <button onclick="toggleBlack();">Toggle Sourcing Due Date</button>
         <button onclick="toggleBrown();">Toggle Expected Ship Date</button>
