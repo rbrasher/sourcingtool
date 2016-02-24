@@ -46,7 +46,5 @@ class Launchcalendar extends CI_Controller {
         $this->load->view('launch_calendar/index', $data);
     }
     
-    
-    
 }
 

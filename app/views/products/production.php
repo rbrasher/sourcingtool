@@ -1,3 +1,14 @@
+<script>
+    function confirmReject(id) {
+        if(confirm("Are you sure you want to remove this product from Production Products?") === true) {
+            var loc = "<?php echo base_url();?>products/unapprove/" + id;
+            
+            window.location = loc;
+        } else {
+            console.log('Do not remove from production products.');
+        }
+    }
+</script>
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('product_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -28,7 +39,6 @@
     <?php endif;?>
     
     <h1 class="page-header">Production Products</h1>
-    <!--<a href="<?php //echo base_url();?>products/add" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Product</a>-->
     
     <!-- Approved Products -->
     <div class="table-responsive">
@@ -51,10 +61,6 @@
                     <td class="centered"><?php echo $approved_product->assigned_to;?></td>
                     <td class="centered"><?php echo $approved_product->confidence_level;?></td>
                     <td class="centered">
-                        <!--
-                        <a class="btn btn-primary" href="<?php //echo base_url();?>products/edit/<?php //echo $approved_product->id;?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a class="btn btn-danger" href="<?php //echo base_url();?>products/delete/<?php //echo $approved_product->id;?>" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
-                        -->
                         <?php if($approved_product->approval_status == '1') : ?>
                         <a class="btn btn-info" href="<?php echo base_url();?>products/review/<?php echo $approved_product->id;?>" title="Review" target="_blank"><span class="glyphicon glyphicon-share"></span></a>
                         <?php endif;?>
@@ -62,7 +68,7 @@
                         <a class="btn btn-success" href="<?php echo base_url();?>products/approve/<?php echo $approved_product->id;?>" title="Approve"><span class="glyphicon glyphicon-ok-circle"></span></a>
                         <?php endif;?>
                         <?php if($approved_product->approval_status == '3') : ?>
-                        <a class="btn btn-warning" href="<?php echo base_url();?>products/unapprove/<?php echo $approved_product->id;?>" title="Reject"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                        <a class="btn btn-warning" href="javascript:void(0);" onclick="confirmReject(<?php echo $approved_product->id;?>);" title="Reject"><span class="glyphicon glyphicon-remove-circle"></span></a>
                         <?php endif;?>
                     </td>
                 </tr>

@@ -115,12 +115,12 @@ function togglePurple() {
     <div style="float: left; width: 100%;">
         <a style="text-decoration: none;" href="<?php echo base_url();?>">&laquo; Dashboard</a>
     </div>
-    <div style="float: left; width: 100%; text-align: center;">
-        <button onclick="toggleBlack();">Toggle Sourcing Due Date</button>
-        <button onclick="toggleBrown();">Toggle Expected Ship Date</button>
-        <button onclick="togglePurple();">Toggle Estimated Arrival Date</button>
-        <button onclick="toggleBlue();">Toggle Estimated Date at FBA</button>
-        <button onclick="toggleGreen();">Toggle Estimated Launch Date</button>
+    <div style="float: left; width: 100%; text-align: center;" class="fc-button-group">
+        <button style="padding: 5px; margin: 0;" type="button" class="ui-button ui-corner-left ui-state-default" onclick="toggleBlack();">Toggle Sourcing Due Date</button>
+        <button style="padding: 5px; margin: 0 -5px;" type="button" class="ui-button ui-state-default" onclick="toggleBrown();">Toggle Expected Ship Date</button>
+        <button style="padding: 5px; margin: 0;" type="button" class="ui-button ui-state-default" onclick="togglePurple();">Toggle Estimated Arrival Date</button>
+        <button style="padding: 5px; margin: 0 -5px;" type="button" class="ui-button ui-state-default" onclick="toggleBlue();">Toggle Estimated Date at FBA</button>
+        <button style="padding: 5px; margin: 0;" type="button" class="ui-button ui-corner-right ui-state-default" onclick="toggleGreen();">Toggle Estimated Launch Date</button>
     </div>
     
     <div style="float: left;width: 100%; height: 40px;">
@@ -158,7 +158,7 @@ function togglePurple() {
             </tbody>
         </table>
         <br /><br />
-        Next Launch Date: <?php echo $next_launch_product->start;?><br />Product: <?php echo $next_launch_product->title;?>
+        <strong>Next Launch Date:</strong> <?php echo $next_launch_product->start;?><br /><strong>Product:</strong> <?php echo $next_launch_product->title;?>
     </div>
     
     <div id="calendar"></div>
