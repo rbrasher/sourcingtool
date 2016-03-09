@@ -83,13 +83,15 @@ class Products_model extends CI_Model {
         $this->db->where('a.approval_status = 1');
         $this->db->join('product_status AS b', 'b.id = a.status', 'left');
         $this->db->join('confidence AS c', 'c.id = a.confidence_level', 'left');
+        //, m.* AS manufacturer
+        //$this->db->join('st_manufacturers AS m', 'm.product_id = a.id', 'left');
         
         if($limit != null) {
             $this->db->limit($limit, $offset);
         }
         
         if($order_by != null) {
-            $this->db->order_by($order_by, $sort);
+            $this->db->order_by('a.id', $sort);
         }
         
         $query = $this->db->get();

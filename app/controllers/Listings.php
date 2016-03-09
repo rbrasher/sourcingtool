@@ -186,4 +186,10 @@ class Listings extends CI_Controller {
         
         redirect('listings');
     }
+    
+    public function amazonPreview($id) {
+        $data['listing'] = $this->Listings_model->get_listing_for_review($id);
+        
+        $this->load->view('listings/amazon_preview', $data);
+    }
 }

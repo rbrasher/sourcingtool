@@ -174,7 +174,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Margin Per Sale</label>
-                    <input type="text" name="margin_per_sale" id="margin_per_sale" class="form-control" value="<?php echo $product->margin_per_sale;?>" placeholder="Enter Margin Per Sale" />
+                    <input type="text" name="margin_per_sale" id="margin_per_sale" class="form-control" value="<?php echo $product->margin_per_sale;?>" readonly />
                 </div>
             </div>
         </div>
@@ -190,7 +190,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Margin Per Month</label>
-                    <input type="text" name="estimated_margin_per_month" id="estimated_margin_per_month" class="form-control" value="<?php echo $product->estimated_margin_per_month;?>" />
+                    <input type="text" name="estimated_margin_per_month" id="estimated_margin_per_month" class="form-control" value="<?php echo number_format($product->estimated_margin_per_month, 2, '.', ',');?>" readonly />
                 </div>
             </div>
             

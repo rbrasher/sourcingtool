@@ -177,6 +177,12 @@ class Manufacturers extends CI_Controller {
             //Update manufacturer
             $this->Manufacturers_model->update($data, $id);
             
+            $product = array(
+                'status' => 2
+            );
+            
+            $this->Products_model->update($product, $data['product_id']);
+            
             //Set message
             $this->session->set_flashdata('manufacturer_saved', 'Manufacturer has been updated.');
             

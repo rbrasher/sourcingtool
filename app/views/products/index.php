@@ -30,6 +30,7 @@
         }
     }
 </script>
+
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('product_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -86,20 +87,31 @@
                                 <th>Name</th>
                                 <th class="centered">Status</th>
                                 <th class="centered">Assigned To</th>
-                                <th class="centered">Urgency</th>
                                 <th class="centered">Sourcing Due Date</th>
+                                <th class="centered"># Manufacturers</th>
+                                <th class="centered">Est. Monthly Margin</th>
                                 <th class="centered">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if($products) : ?>
                             <?php foreach($products as $product) : ?>
+                                <?php $count = 0; ?>
+                                <?php foreach($manufacturers as $manufacturer) : ?>
+                                    <?php 
+                                        if($manufacturer->product_id == $product->id) : 
+                                            $count++;
+                                        endif;
+                                    ?>
+                                <?php endforeach;?>
                             <tr>
                                 <td><a href="<?php echo base_url();?>products/edit/<?php echo $product->id;?>"><?php echo $product->name;?></a></td>
                                 <td class="centered"><?php echo $product->product_status;?></td>
                                 <td class="centered"><?php echo ucfirst($product->assigned_to);?></td>
-                                <td class="centered"><?php echo $product->confidence_level;?></td>
                                 <td class="centered"><?php echo $product->sourcing_due_date;?></td>
+                                <td class="centered"><?php echo $count;?></td>
+                                <td class="centered">$<?php echo number_format($product->estimated_margin_per_month, 2, '.', ',');?></td>
+                                
                                 <td class="centered">
                                     <?php if($product->approval_status == '1') : ?>
                                     <a class="btn btn-info" href="javascript:void(0);" onclick="sendForReview(<?php echo $product->id;?>);" title="Send for Review"><span class="glyphicon glyphicon-share"></span></a>

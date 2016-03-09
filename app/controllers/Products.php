@@ -20,7 +20,7 @@ class Products extends CI_Controller {
         //$data['products'] = $this->Products_model->get_products('id', 'ASC');
         $data['products'] = $this->Products_model->get_not_approved_products('id', 'ASC');
         $data['pending_products'] = $this->Products_model->get_pending_products('id', 'ASC');
-        
+        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers('product_id', 'ASC');
         //load view
         $this->load->view('header', $data);
         $this->load->view('products/index');
@@ -201,7 +201,7 @@ class Products extends CI_Controller {
                 'fba_fee_est'                       => $this->input->post('fba_fee_est'),
                 'margin_per_sale'                   => $this->input->post('margin_per_sale'),
                 'estimated_sales_per_day'           => $this->input->post('estimated_sales_per_day'),
-                'estimated_margin_per_month'        => $this->input->post('estimated_margin_per_month'),
+                'estimated_margin_per_month'        => str_replace(',', '', $this->input->post('estimated_margin_per_month')),
                 //'date_of_deposit'                   => $this->input->post('date_of_deposit'),
                 //'qty_ordered'                       => $this->input->post('qty_ordered'),
                 //'expected_ship_date'                => $this->input->post('expected_ship_date'),
@@ -317,6 +317,7 @@ class Products extends CI_Controller {
                 'assigned_to'                       => $this->input->post('assigned_to'),
                 'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
             );
+            
             
             //update product
             $this->Products_model->update($data, $id);
@@ -434,6 +435,12 @@ class Products extends CI_Controller {
 
         //Insert new manufacturer
         $this->Manufacturers_model->insert($data);
+        
+        $product = array(
+            'status' => 2
+        );
+        //update product status to "Getting Quotes" (status => 2)
+        $this->Products_model->update($product, $data['product_id']);
 
         //set message
         $this->session->set_flashdata('manufacturer_saved', 'Manufacturer added successfully.');

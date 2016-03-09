@@ -50,6 +50,7 @@
                     <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
                     <td class="centered"><?php echo $listing->approval;?></td>
                     <td class="centered">
+                        <a class="btn btn-default" href="<?php echo base_url();?>listings/amazonPreview/<?php echo $listing->id;?>" title="Amazon Preview" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
                         <?php if($listing->approval_status == '1') : ?>
                         <a class="btn btn-info" href="<?php echo base_url();?>listings/review/<?php echo $listing->id;?>" title="Review" target="_blank"><span class="glyphicon glyphicon-share"></span></a>
                         <?php endif;?>
