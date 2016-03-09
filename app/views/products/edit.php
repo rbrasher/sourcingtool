@@ -194,40 +194,6 @@
                 </div>
             </div>
             
-            <!--
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Date of Deposit</label>
-                    <input type="text" name="date_of_deposit" id="date_of_deposit" class="form-control datep" value="<?php //echo $product->date_of_deposit;?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Qty Ordered</label>
-                    <input type="text" name="qty_ordered" id="qty_ordered" class="form-control" value="<?php //echo $product->qty_ordered;?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Expected Ship Date</label>
-                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php //echo $product->expected_ship_date;?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Ship Method</label>
-                    <select name="ship_method" id="ship_method" class="form-control">
-                        <option value="">Select</option>
-                        <option value="Air" <?php //if($product->ship_method == 'Air') {echo 'selected';};?>>Air</option>
-                        <option value="Sea" <?php //if($product->ship_method == 'Sea') {echo 'selected';};?>>Sea</option>
-                    </select>
-                </div>
-            </div>
-            -->
-            
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Competitor Price Example</label>
@@ -249,31 +215,6 @@
                 </div>
             </div>
         </div>
-        
-        <!--
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Estimated Arrival Date</label>
-                    <input type="text" name="estimated_arrival_date" id="estimated_arrival_date" class="form-control datep" value="<?php //echo $product->estimated_arrival_date;?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Estimated Date at FBA</label>
-                    <input type="text" name="estimated_date_at_fba" id="estimated_date_at_fba" class="form-control datep" value="<?php //echo $product->estimated_date_at_fba;?>" />
-                </div>
-            </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Estimated Launch Date</label>
-                    <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php //echo $product->estimated_launch_date;?>" />
-                </div>
-            </div>
-        </div>
-        -->
         
         <div class="row">
             <div class="col-md-6">
@@ -317,15 +258,15 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Owner</th>
-                            <th>Total Price</th>
-                            <th>Price Per Item</th>
-                            <th>Qty Per Pkg</th>
-                            <th>MOQ</th>
-                            <th>Lead Time</th>
-                            <th>Samples Status</th>
-                            <th>Brochure</th>
-                            <th>Actions</th>
+                            <th class="centered">Owner</th>
+                            <th class="centered">Total Price</th>
+                            <th class="centered">Price Per Item</th>
+                            <th class="centered">Qty Per Pkg</th>
+                            <th class="centered">MOQ</th>
+                            <th class="centered">Lead Time</th>
+                            <th class="centered">Samples Status</th>
+                            <th class="centered">Brochure</th>
+                            <th class="centered">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -334,15 +275,15 @@
                         <tr>
                             <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a> <?php if($manufacturer->is_primary == 1) {echo '<strong>(PRIMARY)</strong>';}?></td>
 
-                            <td><?php echo $manufacturer->owner;?></td>
-                            <td><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
-                            <td><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
-                            <td><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
-                            <td><?php echo $manufacturer->moq;?></td>
-                            <td><?php echo $manufacturer->lead_time_in_days;?></td>
-                            <td><?php echo $manufacturer->samples_status;?></td>
-                            <td><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
-                            <td>
+                            <td class="centered"><?php echo $manufacturer->owner;?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
+                            <td class="centered"><?php echo $manufacturer->moq;?></td>
+                            <td class="centered"><?php echo $manufacturer->lead_time_in_days;?></td>
+                            <td class="centered"><?php echo $manufacturer->samples_status;?></td>
+                            <td class="centered"><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
+                            <td class="centered">
                                 <?php if($manufacturer->is_primary == 0) : ?>
                                 <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
                                 <?php elseif($manufacturer->is_primary == 1) : ?>

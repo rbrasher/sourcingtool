@@ -11,7 +11,7 @@
             $(".wizzy").cleditor();
         <?php endif;?>
             
-        <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit') :?>
+        <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit_production') :?>
             
             var total_price = 0, 
                 target_price = 0, 
@@ -21,22 +21,22 @@
                 margin_per_sale = 0,
                 estimated_margin_per_month = 0;
 
-            $('#total_price').on('change', function() {
+            $('#total_price').on('blur', function() {
                 total_price = this.value;
                 calculate_margin();
             });
 
-            $('#target_price').on('change', function() {
+            $('#target_price').on('blur', function() {
                 target_price = this.value;
                 calculate_margin();
             });
 
-            $('#fba_fee_est').on('change', function() {
+            $('#fba_fee_est').on('blur', function() {
                 fba_fee_est = this.value;
                 calculate_margin();
             });
             
-            $('#estimated_sales_per_day').on('change', function() {
+            $('#estimated_sales_per_day').on('blur', function() {
                 estimated_sales_per_day = this.value;
                 calculateMonthlyMargin();
             });

@@ -48,18 +48,31 @@
                     <th>Name</th>
                     <th class="centered">Status</th>
                     <th class="centered">Assigned To</th>
-                    <th class="centered">Urgency</th>
+                    <th class="centered"># Manufacturers</th>
+                    <th class="centered">Est. Monthly Margin</th>
                     <th class="centered">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if($approved_products) : ?>
                 <?php foreach($approved_products as $approved_product) : ?>
+                    <?php 
+                        $count = 0;
+                        
+                        foreach($manufacturers as $manufacturer) :
+                            if($manufacturer->product_id == $approved_product->id) :
+                                $count++;
+                            endif;
+                        endforeach;
+                    ?>
                 <tr>
                     <td><a href="<?php echo base_url();?>products/edit_production/<?php echo $approved_product->id;?>"><?php echo $approved_product->name;?></a></td>
                     <td class="centered"><?php echo $approved_product->product_status;?></td>
                     <td class="centered"><?php echo $approved_product->assigned_to;?></td>
-                    <td class="centered"><?php echo $approved_product->confidence_level;?></td>
+                    
+                    <td class="centered"><?php echo $count;?></td>
+                    <td class="centered"><?php echo number_format($approved_product->estimated_margin_per_month, 2, '.', ',');?></td>
+                    
                     <td class="centered">
                         <?php if($approved_product->approval_status == '1') : ?>
                         <a class="btn btn-info" href="<?php echo base_url();?>products/review/<?php echo $approved_product->id;?>" title="Review" target="_blank"><span class="glyphicon glyphicon-share"></span></a>

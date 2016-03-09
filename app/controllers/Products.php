@@ -29,6 +29,7 @@ class Products extends CI_Controller {
     
     public function production() {
         $data['approved_products'] = $this->Products_model->get_approved_products('id', 'ASC');
+        $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers('product_id', 'ASC');
         
         //load view
         $this->load->view('header', $data);
@@ -302,7 +303,7 @@ class Products extends CI_Controller {
                 'fba_fee_est'                       => $this->input->post('fba_fee_est'),
                 'margin_per_sale'                   => $this->input->post('margin_per_sale'),
                 'estimated_sales_per_day'           => $this->input->post('estimated_sales_per_day'),
-                'estimated_margin_per_month'        => $this->input->post('estimated_margin_per_month'),
+                'estimated_margin_per_month'        => str_replace(',', '', $this->input->post('estimated_margin_per_month')),
                 'date_of_deposit'                   => $this->input->post('date_of_deposit'),
                 'qty_ordered'                       => $this->input->post('qty_ordered'),
                 'expected_ship_date'                => $this->input->post('expected_ship_date'),
@@ -318,7 +319,7 @@ class Products extends CI_Controller {
                 'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
             );
             
-            
+            //var_dump($data);die();
             //update product
             $this->Products_model->update($data, $id);
             
