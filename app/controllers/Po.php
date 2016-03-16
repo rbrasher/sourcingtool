@@ -155,22 +155,22 @@ class Po extends CI_Controller {
                 'product'                   => $this->input->post('product'),
                 'po_status_id'              => $this->input->post('po_status_id'),
                 'po'                        => $this->input->post('po'),
-                'po_amount'                 => $this->input->post('po_amount'),
+                'po_amount'                 => str_replace(',', '', $this->input->post('po_amount')),
                 'price_unit_sea'            => $this->input->post('price_unit_sea'),
                 'price_unit_air'            => $this->input->post('price_unit_air'),
                 'pi'                        => $this->input->post('pi'),
                 'po_date'                   => $this->input->post('po_date'),
-                'po_qty'                    => $this->input->post('po_qty'),
+                'po_qty'                    => str_replace(',', '', $this->input->post('po_qty')),
                 'deposit_date_30'           => $this->input->post('deposit_date_30'),
-                'ship1_qty'                 => $this->input->post('ship1_qty'),
+                'ship1_qty'                 => str_replace(',', '', $this->input->post('ship1_qty')),
                 'ship1_method_id'           => $this->input->post('ship1_method_id'),
                 'ship1_plan_ship_date'      => $this->input->post('ship1_plan_ship_date'),
                 'ship1_actual_ship_date'    => $this->input->post('ship1_actual_ship_date'),
-                'ship2_qty'                 => $this->input->post('ship2_qty'),
+                'ship2_qty'                 => str_replace(',', '', $this->input->post('ship2_qty')),
                 'ship2_method_id'           => $this->input->post('ship2_method_id'),
                 'ship2_plan_ship_date'      => $this->input->post('ship2_plan_ship_date'),
                 'ship2_actual_ship_date'    => $this->input->post('ship2_actual_ship_date'),
-                'ship3_qty'                 => $this->input->post('ship3_qty'),
+                'ship3_qty'                 => str_replace(',', '', $this->input->post('ship3_qty')),
                 'ship3_method_id'           => $this->input->post('ship3_method_id'),
                 'ship3_plan_ship_date'      => $this->input->post('ship3_plan_ship_date'),
                 'ship3_actual_ship_date'    => $this->input->post('ship3_actual_ship_date'),
@@ -178,7 +178,7 @@ class Po extends CI_Controller {
                 'notes'                     => $this->input->post('notes'),
                 'created_modified_by'       => $this->session->userdata('name')
             );
-            
+            var_dump($data);die();
             //Update Purchase Order
             $this->Po_model->update($data, $id);
             
