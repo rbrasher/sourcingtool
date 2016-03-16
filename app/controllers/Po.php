@@ -178,7 +178,7 @@ class Po extends CI_Controller {
                 'notes'                     => $this->input->post('notes'),
                 'created_modified_by'       => $this->session->userdata('name')
             );
-            var_dump($data);die();
+
             //Update Purchase Order
             $this->Po_model->update($data, $id);
             
