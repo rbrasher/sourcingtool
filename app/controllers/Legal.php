@@ -5,9 +5,9 @@ class Legal extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
         
         $this->load->model('Legal_model');
         $this->load->model('Products_model');
@@ -49,9 +49,10 @@ class Legal extends CI_Controller {
                 'bank_account'          => $this->input->post('bank_account'),
                 'amazon_account'        => $this->input->post('amazon_account'),
                 'special_conditions'    => $this->input->post('special_conditions'),
-                'phone_number'          => $this->input->post('phone_number')
+                'phone_number'          => $this->input->post('phone_number'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
-            
+
             //Insert Legal Info
             $this->Legal_model->insert($data);
             
@@ -90,9 +91,10 @@ class Legal extends CI_Controller {
                 'bank_account'          => $this->input->post('bank_account'),
                 'amazon_account'        => $this->input->post('amazon_account'),
                 'special_conditions'    => $this->input->post('special_conditions'),
-                'phone_number'          => $this->input->post('phone_number')
+                'phone_number'          => $this->input->post('phone_number'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
-            
+
             //Update Legal Info
             $this->Legal_model->update($data, $id);
             

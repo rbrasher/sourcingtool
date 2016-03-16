@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sourcing Tool</title>
 
-<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/styles.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/jquery-ui.css" />
@@ -118,11 +118,11 @@
                 </ul>
             </li>
             -->
-            <!--
+            
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php //echo $this->session->userdata('email');?> <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('name');?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    
+                    <!--
                     <li>
                         <a href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span> Profile</a>
                     </li>
@@ -132,15 +132,15 @@
                     <li>
                         <a href="javascript:void(0);"><span class="glyphicon glyphicon-cog"></span> Settings</a>
                     </li>
-                    
+                    -->
                     <li class="divider"></li>
                     
                     <li>
-                        <a href="<?php //echo base_url();?>authenticate/logout"><span class="glyphicon glyphicon-off"></span> Log Out</a>
+                        <a href="<?php echo base_url();?>authenticate/logout"><span class="glyphicon glyphicon-off"></span> Log Out</a>
                     </li>
                 </ul>
             </li>
-            -->
+            
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -199,11 +199,11 @@
                     <a href="<?php echo base_url();?>launchcalendar"><span class="glyphicon glyphicon-calendar"></span> Launch Calendar</a>
                 </li>
                 
-                <!--
-                <li class="<?php //if($this->uri->segment(1) == 'users') {echo 'active';};?>">
-                    <a href="<?php //echo base_url();?>users"><span class="glyphicon glyphicon-user"></span> Users</a>
+                <?php if($this->session->userdata('user_id') == 1) : ?>
+                <li class="<?php if($this->uri->segment(1) == 'users') {echo 'active';};?>">
+                    <a href="<?php echo base_url();?>users"><span class="glyphicon glyphicon-user"></span> Users</a>
                 </li>
-                -->
+                <?php endif;?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

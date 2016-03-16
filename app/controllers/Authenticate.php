@@ -23,7 +23,8 @@ class Authenticate extends CI_Controller {
             
             if($user_id) {
                 $user_data = array(
-                    'user_id'   => $user_id,
+                    'user_id'   => $user_id->id,
+                    'name'      => $user_id->first_name,
                     'email'     => $email,
                     'logged_in' => true
                 );

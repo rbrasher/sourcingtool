@@ -101,20 +101,6 @@
                 </div>
             </div>
             
-            <!--
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Graphics</label>
-                    <select name="graphics" id="graphics" class="form-control">
-                        <option value="">Select</option>
-                        <?php //foreach($graphics as $g) : ?>
-                        <option value="<?php //echo $g->id;?>" <?php //if($product->graphics == $g->id) {echo 'selected';};?>><?php //echo $g->graphics;?></option>
-                        <?php //endforeach;?>
-                    </select>
-                </div>
-            </div>
-            -->
-            
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Packaging</label>
@@ -303,6 +289,17 @@
         </div>
     </div>
     
+    <div class="row manu">
+        <div class="col-md-12">
+            <div class="pad">
+                <div id="example1"></div>
+            </div>
+            <p style="margin-top: 10px;">
+                <button class="btn btn-default" name="save" id="save">Save</button>
+            </p>
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-md-12">
             <h4 class="page-header">Concepts</h4>
@@ -384,6 +381,7 @@
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-12">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manufacturer</button>
+            <button id="toggle" type="button" class="btn btn-default">Add Bulk Manufacturer(s)</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#conceptModal">Add Concept</button>
         </div>
     </div>
@@ -541,7 +539,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Owner</label>
-                                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo set_value('owner');?>" />
+                                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $this->session->userdata('name');//set_value('owner');?>" readonly />
                                 </div>
                             </div>
                             
@@ -604,10 +602,17 @@
                                 </div>
                             </div>
                             
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Notes</label>
+                                    <textarea class="form-control" name="notes" id="notes"><?php echo set_value('notes');?></textarea>
+                                </div>
+                            </div>
+                            
                             
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc)</span>
+                                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc, xlsx, docx)</span>
                                     <input type="file" name="userfile" size="20" />
                                 </div>
                             </div>
@@ -629,3 +634,15 @@
     </div>
     
 </div>
+
+
+<link rel="stylesheet" media="screen" href="<?php echo base_url();?>dist/handsontable.css">
+<link rel="stylesheet" media="screen" href="<?php echo base_url();?>dist/pikaday/pikaday.css">
+<script src="<?php echo base_url();?>dist/pikaday/pikaday.js"></script>
+<script src="<?php echo base_url();?>dist/moment/moment.js"></script>
+<script src="<?php echo base_url();?>dist/zeroclipboard/ZeroClipboard.js"></script>
+<script src="<?php echo base_url();?>dist/handsontable.js"></script>
+<!--
+<script src="<?php //echo base_url();?>dist/samples.js"></script>
+<script src="<?php //echo base_url();?>dist/highlight/highlight.pack.js"></script>
+-->

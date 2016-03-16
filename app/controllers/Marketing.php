@@ -5,9 +5,9 @@ class Marketing extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
         
         $this->load->model('Marketing_model');
         $this->load->model('Products_model');
@@ -69,7 +69,8 @@ class Marketing extends CI_Controller {
                 'marketing_lander'      => $this->input->post('marketing_lander'),
                 'adwords'               => $this->input->post('adwords'),
                 'promo_codes'           => $promo_codes,
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
             
             //Insert Marketing Info
@@ -130,8 +131,10 @@ class Marketing extends CI_Controller {
                 'marketing_lander'      => $this->input->post('marketing_lander'),
                 'adwords'               => $this->input->post('adwords'),
                 'promo_codes'           => $promo_codes, //$this->input->post('promo_codes'),
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
+            var_dump($data);die();
             
             //Insert Marketing Info
             $this->Marketing_model->update($data, $id);

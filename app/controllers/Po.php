@@ -4,12 +4,13 @@ class Po extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
+        
         $this->load->model('Po_model');
         $this->load->model('Products_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
     }
     
     public function index() {
@@ -90,6 +91,7 @@ class Po extends CI_Controller {
                 'ship3_actual_ship_date'    => $this->input->post('ship3_actual_ship_date'),
                 'non_holiday_lead_time'     => $this->input->post('non_holiday_lead_time'),
                 'notes'                     => $this->input->post('notes'),
+                'created_modified_by'       => $this->session->userdata('name'),
                 'create_time'               => date('Y-m-d H:i:s', time())
             );
             
@@ -173,7 +175,8 @@ class Po extends CI_Controller {
                 'ship3_plan_ship_date'      => $this->input->post('ship3_plan_ship_date'),
                 'ship3_actual_ship_date'    => $this->input->post('ship3_actual_ship_date'),
                 'non_holiday_lead_time'     => $this->input->post('non_holiday_lead_time'),
-                'notes'                     => $this->input->post('notes')
+                'notes'                     => $this->input->post('notes'),
+                'created_modified_by'       => $this->session->userdata('name')
             );
             
             //Update Purchase Order

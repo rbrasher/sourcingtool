@@ -70,7 +70,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Owner</label>
-                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo set_value('owner');?>" placeholder="Enter Owner" />
+                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $this->session->userdata('name');//echo set_value('owner');?>" readonly />
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
             
             <div class="col-md-3">
                 <div class="form-group">
-                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc)</span>
+                    <label>Brochure</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png, ai, pdf, xls, doc, xlsx, docx)</span>
                     <input type="file" name="userfile" size="20" />
                 </div>
             </div>
@@ -147,6 +147,13 @@
         </div>
         
         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea class="form-control" name="notes" id="notes"><?php echo set_value('notes');?></textarea>
+                </div>
+            </div>
+            
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Primary Manufacturer?</label><br />

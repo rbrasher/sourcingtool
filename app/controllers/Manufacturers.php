@@ -4,15 +4,14 @@ class Manufacturers extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
         
         $this->load->helper('string');
         
         $this->load->model('Manufacturers_model');
         $this->load->model('Products_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authenticate/login');
-//        }
     }
     
     /**
@@ -33,7 +32,7 @@ class Manufacturers extends CI_Controller {
      */
     public function add() {
         $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|jpeg|png|ai|pdf|xls|doc';
+        $config['allowed_types'] = 'jpg|jpeg|png|ai|pdf|xls|doc|xlsx|docx';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
 
@@ -50,6 +49,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('lead_time_in_days', 'Lead Time In Days', 'trim|xss_clean');
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
+        $this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
         $this->form_validation->set_rules('is_primary', 'Is Primary', 'trim|xss_clean');
         
         $data['samples_status'] = $this->Manufacturers_model->get_samples_status('id', 'ASC');
@@ -77,20 +77,22 @@ class Manufacturers extends CI_Controller {
             }
             
             $data = array(
-                'name'              => $this->input->post('name'),
-                'product_id'        => $this->input->post('product_id'),
-                'email_address'     => $this->input->post('email_address'),
-                'contact_info'      => $this->input->post('contact_info'),
-                'owner'             => $this->input->post('owner'),
-                'total_price'       => $this->input->post('total_price'),
-                'price_per_item'    => $this->input->post('price_per_item'),
-                'qty_per_package'   => $this->input->post('qty_per_package'),
-                'moq'               => $this->input->post('moq'),
-                'lead_time_in_days' => $this->input->post('lead_time_in_days'),
-                'samples_status'    => $this->input->post('samples_status'),
-                'shipping_terms'    => $this->input->post('shipping_terms'),
-                'brochure'          => $brochure,
-                'is_primary'        => $this->input->post('is_primary')
+                'name'                  => $this->input->post('name'),
+                'product_id'            => $this->input->post('product_id'),
+                'email_address'         => $this->input->post('email_address'),
+                'contact_info'          => $this->input->post('contact_info'),
+                'owner'                 => $this->input->post('owner'),
+                'total_price'           => $this->input->post('total_price'),
+                'price_per_item'        => $this->input->post('price_per_item'),
+                'qty_per_package'       => $this->input->post('qty_per_package'),
+                'moq'                   => $this->input->post('moq'),
+                'lead_time_in_days'     => $this->input->post('lead_time_in_days'),
+                'samples_status'        => $this->input->post('samples_status'),
+                'shipping_terms'        => $this->input->post('shipping_terms'),
+                'notes'                 => $this->input->post('notes'),
+                'brochure'              => $brochure,
+                'is_primary'            => $this->input->post('is_primary'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
             
             //Insert new manufacturer
@@ -110,7 +112,7 @@ class Manufacturers extends CI_Controller {
      */
     public function edit($id) {
         $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc|xlsx|docx';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
@@ -127,6 +129,7 @@ class Manufacturers extends CI_Controller {
         $this->form_validation->set_rules('lead_time_in_days', 'Lead Time In Days', 'trim|xss_clean');
         $this->form_validation->set_rules('samples_status', 'Samples Status', 'trim|xss_clean');
         $this->form_validation->set_rules('shipping_terms', 'Shipping Terms', 'trim|xss_clean');
+        $this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
         $this->form_validation->set_rules('brochure', 'Brochure', 'trim|xss_clean');
         $this->form_validation->set_rules('is_primary', 'Primary Manufacturer', 'trim|xss_clean');
         
@@ -170,10 +173,12 @@ class Manufacturers extends CI_Controller {
                 'lead_time_in_days' => $this->input->post('lead_time_in_days'),
                 'samples_status'    => $this->input->post('samples_status'),
                 'shipping_terms'    => $this->input->post('shipping_terms'),
+                'notes'             => $this->input->post('notes'),
                 'brochure'          => $brochure,
-                'is_primary'        => $this->input->post('is_primary')
+                'is_primary'        => $this->input->post('is_primary'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
-            
+
             //Update manufacturer
             $this->Manufacturers_model->update($data, $id);
             

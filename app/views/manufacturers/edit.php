@@ -70,7 +70,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Owner</label>
-                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $manufacturer->owner;?>" placeholder="Enter Owner" />
+                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $manufacturer->owner;?>" readonly />
                 </div>
             </div>
         </div>
@@ -146,27 +146,14 @@
             
         </div>
         
-        <?php if($manufacturer->brochure && $manufacturer->brochure != '') : ?>
-        <div class="row">
-            <div class="col-md-3 pull-right">
-                <div class="form-group">
-                    <a target="_blank" href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" class="btn btn-primary">View Brochure</a>
-                </div>
-            </div>
-        </div>
-        
-        <?php else : ?>
-        <div class="row">
-            <div class="col-md-3 pull-right">
-                <div class="form-group">
-                    <label>Upload Brochure</label>
-                    <input type="file" name="userfile" size="20" />
-                </div>
-            </div>
-        </div>
-        <?php endif;?>
         
         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea class="form-control" name="notes" id="notes"><?php echo $manufacturer->notes;?></textarea>
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Primary Manufacturer?</label><br />
@@ -174,6 +161,20 @@
                     <input style="margin-left: 20px;" type="radio" name="is_primary" value="0" <?php if($manufacturer->is_primary == 0){ echo 'checked';};?> /> No
                 </div>
             </div>
+            <?php if($manufacturer->brochure && $manufacturer->brochure != '') : ?>
+            <div class="col-md-3 pull-right">
+                <div class="form-group">
+                    <a target="_blank" href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" class="btn btn-primary">View Brochure</a>
+                </div>
+            </div>
+            <?php else : ?>
+            <div class="col-md-3 pull-right">
+                <div class="form-group">
+                    <label>Upload Brochure</label>
+                    <input type="file" name="userfile" size="20" />
+                </div>
+            </div>
+            <?php endif;?>
         </div>
         
     </form>

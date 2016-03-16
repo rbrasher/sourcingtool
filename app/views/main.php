@@ -17,17 +17,18 @@
 
         <div class="row">
             <div class="col-lg-12">
+                
                 <!--
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-time"></span> Tasks Panel</h3>
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-time"></span> Production Products</h3>
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
                             <?php //if($tasks) : ?>
                             <?php //foreach($tasks as $task) : ?>
-                            <a href="<?php echo base_url();?>tasks/edit/<?php //echo $task->id;?>" class="list-group-item">
-                                <span class="label label-success pull-right" style="font-size: 14px; font-weight: normal;"><span class="glyphicon glyphicon-user"></span> <?php echo $task->task_owner;?><?php //echo $task->task_due_date;?></span>
+                            <a href="<?php //echo base_url();?>tasks/edit/<?php //echo $task->id;?>" class="list-group-item">
+                                <span class="label label-success pull-right" style="font-size: 14px; font-weight: normal;"><span class="glyphicon glyphicon-user"></span> <?php //echo $task->task_owner;?><?php //echo $task->task_due_date;?></span>
                                 <span class="glyphicon glyphicon-ok"></span> <?php //echo $task->task_desc;?>
                                 
                             </a>

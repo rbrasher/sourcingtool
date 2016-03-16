@@ -5,12 +5,12 @@ class Tasks extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
+        
         $this->load->helper('string');
         $this->load->model('Tasks_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
     }
     
     public function index() {

@@ -24,7 +24,7 @@
                     <th width="70">#</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Actions</th>
+                    <!--<th>Actions</th>-->
                 </tr>
             </thead>
             <tbody>
@@ -33,10 +33,12 @@
                         <td><?php echo $user->id;?></td>
                         <td><?php echo $user->first_name . ' ' . $user->last_name;?></td>
                         <td><?php echo $user->email;?></td>
+                        <!--
                         <td>
-                            <a href="<?php echo base_url(); ?>users/edit/<?php echo $user->id; ?>" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</a> 
-                            <a href="<?php echo base_url(); ?>users/delete/<?php echo $user->id; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                            <a href="<?php //echo base_url(); ?>users/edit/<?php //echo $user->id; ?>" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</a> 
+                            <a href="<?php //echo base_url(); ?>users/delete/<?php //echo $user->id; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                         </td>
+                        -->
                     </tr>
                     <?php endforeach;?>
             </tbody>

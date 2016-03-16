@@ -4,13 +4,13 @@ class Products extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         $this->load->model('Products_model');
         $this->load->model('Manufacturers_model');
         $this->load->model('Concepts_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authenticate/login');
-//        }
     }
     
     /**
@@ -47,7 +47,6 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('quantity_per_package', 'Quantity Per Package', 'trim|xss_clean');
         $this->form_validation->set_rules('total_price', 'Total Price', 'trim|xss_clean');
         $this->form_validation->set_rules('item_price', 'Item Price', 'trim|xss_clean');
-        //$this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
         $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
         $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
         $this->form_validation->set_rules('best_bsr', 'Best BSR', 'trim|xss_clean');
@@ -58,13 +57,6 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('margin_per_sale', 'Margin Per Sale', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_sales_per_day', 'Estimated Sales Per Day', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_margin_per_month', 'Estimated Margin Per Month', 'trim|xss_clean');
-        //$this->form_validation->set_rules('date_of_deposit', 'Date of Deposit', 'trim|xss_clean');
-        //$this->form_validation->set_rules('qty_ordered', 'Qty Ordered', 'trim|xss_clean');
-        //$this->form_validation->set_rules('expected_ship_date', 'Expected Ship Date', 'trim|xss_clean');
-        //$this->form_validation->set_rules('ship_method', 'Ship Method', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_arrival_date', 'Estimated Arrival Date', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_date_at_fba', 'Estimated Date at FBA', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_launch_date', 'Estimated Launch Date', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
@@ -88,7 +80,6 @@ class Products extends CI_Controller {
                 'quantity_per_package'          => $this->input->post('quantity_per_package'),
                 'total_price'                   => $this->input->post('total_price'),
                 'item_price'                    => $this->input->post('item_price'),
-                //'graphics'                      => $this->input->post('graphics'),
                 'packaging'                     => $this->input->post('packaging'),
                 'confidence_level'              => $this->input->post('confidence_level'),
                 'best_bsr'                      => $this->input->post('best_bsr'),
@@ -99,19 +90,13 @@ class Products extends CI_Controller {
                 'margin_per_sale'               => $this->input->post('margin_per_sale'),
                 'estimated_sales_per_day'       => $this->input->post('estimated_sales_per_day'),
                 'estimated_margin_per_month'    => $this->input->post('estimated_margin_per_month'),
-                //'date_of_deposit'               => $this->input->post('date_of_deposit'),
-                //'qty_ordered'                   => $this->input->post('qty_ordered'),
-                //'expected_ship_date'            => $this->input->post('expected_ship_date'),
-                //'ship_method'                   => $this->input->post('ship_method'),
-                //'estimated_arrival_date'        => $this->input->post('estimated_arrival_date'),
-                //'estimated_date_at_fba'         => $this->input->post('estimated_date_at_fba'),
-                //'estimated_launch_date'         => $this->input->post('estimated_launch_date'),
                 'competitor_price_example'      => $this->input->post('competitor_price_example'),
                 'competitor_qty_example'        => $this->input->post('competitor_qty_example'),
                 'mktg_hook'                     => $this->input->post('marketing_hook'),
                 'competitor_link'               => $this->input->post('competitor_link'),
                 'assigned_to'                   => $this->input->post('assigned_to'),
-                'sourcing_due_date'             => $this->input->post('sourcing_due_date')
+                'sourcing_due_date'             => $this->input->post('sourcing_due_date'),
+                'created_modified_by'           => $this->session->userdata('name')
             );
             
             //add product
@@ -145,7 +130,6 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('quantity_per_package', 'Quantity Per Package', 'trim|xss_clean');
         $this->form_validation->set_rules('total_price', 'Total Price', 'trim|xss_clean');
         $this->form_validation->set_rules('item_price', 'Item Price', 'trim|xss_clean');
-        //$this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
         $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
         $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
         $this->form_validation->set_rules('best_bsr', 'Best BSR', 'trim|xss_clean');
@@ -156,13 +140,6 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('margin_per_sale', 'Margin Per Sale', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_sales_per_day', 'Estimated Sales Per Day', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_margin_per_month', 'Estimated Margin Per Month', 'trim|xss_clean');
-        //$this->form_validation->set_rules('date_of_deposit', 'Date of Deposit', 'trim|xss_clean');
-        //$this->form_validation->set_rules('qty_ordered', 'Qty Ordered', 'trim|xss_clean');
-        //$this->form_validation->set_rules('expected_ship_date', 'Expected Ship Date', 'trim|xss_clean');
-        //$this->form_validation->set_rules('ship_method', 'Ship Method', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_arrival_date', 'Estimated Arrival Date', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_date_at_fba', 'Estimated Date at FBA', 'trim|xss_clean');
-        //$this->form_validation->set_rules('estimated_launch_date', 'Estimated Launch Date', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
         $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
         $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
@@ -192,7 +169,6 @@ class Products extends CI_Controller {
                 'quantity_per_package'              => $this->input->post('quantity_per_package'),
                 'total_price'                       => $this->input->post('total_price'),
                 'item_price'                        => $this->input->post('item_price'),
-                //'graphics'                          => $this->input->post('graphics'),
                 'packaging'                         => $this->input->post('packaging'),
                 'confidence_level'                  => $this->input->post('confidence_level'),
                 'best_bsr'                          => $this->input->post('best_bsr'),
@@ -203,19 +179,13 @@ class Products extends CI_Controller {
                 'margin_per_sale'                   => $this->input->post('margin_per_sale'),
                 'estimated_sales_per_day'           => $this->input->post('estimated_sales_per_day'),
                 'estimated_margin_per_month'        => str_replace(',', '', $this->input->post('estimated_margin_per_month')),
-                //'date_of_deposit'                   => $this->input->post('date_of_deposit'),
-                //'qty_ordered'                       => $this->input->post('qty_ordered'),
-                //'expected_ship_date'                => $this->input->post('expected_ship_date'),
-                //'ship_method'                       => $this->input->post('ship_method'),
-                //'estimated_arrival_date'            => $this->input->post('estimated_arrival_date'),
-                //'estimated_date_at_fba'             => $this->input->post('estimated_date_at_fba'),
-                //'estimated_launch_date'             => $this->input->post('estimated_launch_date'),
                 'competitor_price_example'          => $this->input->post('competitor_price_example'),
                 'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
                 'mktg_hook'                         => $this->input->post('marketing_hook'),
                 'competitor_link'                   => $this->input->post('competitor_link'),
                 'assigned_to'                       => $this->input->post('assigned_to'),
-                'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
+                'sourcing_due_date'                 => $this->input->post('sourcing_due_date'),
+                'created_modified_by'               => $this->session->userdata('name')
             );
             
             //update product
@@ -316,10 +286,10 @@ class Products extends CI_Controller {
                 'mktg_hook'                         => $this->input->post('marketing_hook'),
                 'competitor_link'                   => $this->input->post('competitor_link'),
                 'assigned_to'                       => $this->input->post('assigned_to'),
-                'sourcing_due_date'                 => $this->input->post('sourcing_due_date')
+                'sourcing_due_date'                 => $this->input->post('sourcing_due_date'),
+                'created_modified_by'               => $this->session->userdata('name')
             );
             
-            //var_dump($data);die();
             //update product
             $this->Products_model->update($data, $id);
             
@@ -398,7 +368,7 @@ class Products extends CI_Controller {
     
     public function add_manufacturer_from_product($id) {
         $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc|xlsx|docx';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
@@ -419,19 +389,21 @@ class Products extends CI_Controller {
         
 
         $data = array(
-            'name'              => $this->input->post('manufacturer_name'),
-            'product_id'        => $this->input->post('product_id'),
-            'email_address'     => $this->input->post('email_address'),
-            'contact_info'      => $this->input->post('contact_info'),
-            'owner'             => $this->input->post('owner'),
-            'total_price'       => $this->input->post('total_price'),
-            'price_per_item'    => $this->input->post('price_per_item'),
-            'qty_per_package'   => $this->input->post('qty_per_package'),
-            'moq'               => $this->input->post('moq'),
-            'lead_time_in_days' => $this->input->post('lead_time_in_days'),
-            'samples_status'    => $this->input->post('samples_status'),
-            'shipping_terms'    => $this->input->post('shipping_terms'),
-            'brochure'          => $brochure
+            'name'                  => $this->input->post('manufacturer_name'),
+            'product_id'            => $this->input->post('product_id'),
+            'email_address'         => $this->input->post('email_address'),
+            'contact_info'          => $this->input->post('contact_info'),
+            'owner'                 => $this->input->post('owner'),
+            'total_price'           => $this->input->post('total_price'),
+            'price_per_item'        => $this->input->post('price_per_item'),
+            'qty_per_package'       => $this->input->post('qty_per_package'),
+            'moq'                   => $this->input->post('moq'),
+            'lead_time_in_days'     => $this->input->post('lead_time_in_days'),
+            'samples_status'        => $this->input->post('samples_status'),
+            'shipping_terms'        => $this->input->post('shipping_terms'),
+            'notes'                 => $this->input->post('notes'),
+            'brochure'              => $brochure,
+            'created_modified_by'   => $this->session->userdata('name')
         );
 
         //Insert new manufacturer
@@ -451,7 +423,7 @@ class Products extends CI_Controller {
     
     public function add_manufacturer_from_production_product($id) {
         $config['upload_path'] = './documents/brochures/';
-        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc';
+        $config['allowed_types'] = 'jpg|png|ai|pdf|xls|doc|xlsx|docx';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
@@ -472,19 +444,21 @@ class Products extends CI_Controller {
         
 
         $data = array(
-            'name'              => $this->input->post('manufacturer_name'),
-            'product_id'        => $this->input->post('product_id'),
-            'email_address'     => $this->input->post('email_address'),
-            'contact_info'      => $this->input->post('contact_info'),
-            'owner'             => $this->input->post('owner'),
-            'total_price'       => $this->input->post('total_price'),
-            'price_per_item'    => $this->input->post('price_per_item'),
-            'qty_per_package'   => $this->input->post('qty_per_package'),
-            'moq'               => $this->input->post('moq'),
-            'lead_time_in_days' => $this->input->post('lead_time_in_days'),
-            'samples_status'    => $this->input->post('samples_status'),
-            'shipping_terms'    => $this->input->post('shipping_terms'),
-            'brochure'          => $brochure
+            'name'                  => $this->input->post('manufacturer_name'),
+            'product_id'            => $this->input->post('product_id'),
+            'email_address'         => $this->input->post('email_address'),
+            'contact_info'          => $this->input->post('contact_info'),
+            'owner'                 => $this->input->post('owner'),
+            'total_price'           => $this->input->post('total_price'),
+            'price_per_item'        => $this->input->post('price_per_item'),
+            'qty_per_package'       => $this->input->post('qty_per_package'),
+            'moq'                   => $this->input->post('moq'),
+            'lead_time_in_days'     => $this->input->post('lead_time_in_days'),
+            'samples_status'        => $this->input->post('samples_status'),
+            'shipping_terms'        => $this->input->post('shipping_terms'),
+            'notes'                 => $this->input->post('notes'),
+            'brochure'              => $brochure,
+            'created_modified_by'   => $this->session->userdata('name')
         );
 
         //Insert new manufacturer
@@ -494,6 +468,43 @@ class Products extends CI_Controller {
         $this->session->set_flashdata('manufacturer_saved', 'Manufacturer added successfully.');
 
         redirect('products/edit_production/'. $id);
+    }
+    
+    public function add_bulk_manufacturer($id) {
+        
+        if(isset($_POST['changes']) && $_POST['changes']) {
+
+            //var_dump($_POST['changes']);die();
+        } elseif (isset($_POST['data']) && $_POST['data']) {
+            //when posting, we should end up here
+            $manufacturers = $_POST['data'];
+            
+            foreach($manufacturers as $manufacturer) :
+
+                if(isset($manufacturer[0]) && $manufacturer[0] !== '') {
+                    $data = array(
+                        'product_id'        => $id,
+                        'name'              => $manufacturer[0],
+                        'email_address'     => $manufacturer[1],
+                        'contact_info'      => $manufacturer[2],
+                        'owner'             => $this->session->userdata('name'),
+                        'total_price'       => $manufacturer[3],
+                        'price_per_item'    => $manufacturer[4],
+                        'qty_per_package'   => $manufacturer[5],
+                        'moq'               => $manufacturer[6],
+                        'lead_time_in_days' => $manufacturer[7],
+                        'created_modified_by'   => $this->session->userdata('name')
+                    );
+
+                    $this->Manufacturers_model->insert($data);
+                }
+            endforeach;
+
+            $out = array(
+                'result' => 'ok'
+            );
+            echo json_encode($out);
+        }
     }
     
     public function set_as_primary_manufacturer($product_id, $manufacturer_id) {
@@ -582,7 +593,8 @@ class Products extends CI_Controller {
             'brand'                 => $this->input->post('brand'),
             'upc'                   => $this->input->post('upc'),
             'domain'                => $this->input->post('domain'),
-            'notes'                 => $this->input->post('notes')
+            'notes'                 => $this->input->post('notes'),
+            'created_modified_by'   => $this->session->userdata('name')
         );
         
         //Insert new concept

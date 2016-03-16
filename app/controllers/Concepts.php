@@ -4,15 +4,14 @@ class Concepts extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
         
         $this->load->helper('string');
         
         $this->load->model('Concepts_model');
         $this->load->model('Products_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
     }
     
     public function index() {
@@ -87,7 +86,8 @@ class Concepts extends CI_Controller {
                 'brand'                 => $this->input->post('brand'),
                 'upc'                   => $this->input->post('upc'),
                 'domain'                => $this->input->post('domain'),
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
             
             //Insert new concept
@@ -168,10 +168,9 @@ class Concepts extends CI_Controller {
                 'brand'                 => $this->input->post('brand'),
                 'upc'                   => $this->input->post('upc'),
                 'domain'                => $this->input->post('domain'),
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
-            
-            //var_dump($data);die();
             
             //Update Concept
             $this->Concepts_model->update($data, $id);

@@ -5,9 +5,9 @@ class Listings extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
         
         $this->load->model('Listings_model');
         $this->load->model('Products_model');
@@ -82,10 +82,9 @@ class Listings extends CI_Controller {
                 'secondary_images'      => $filenames,
                 'product_description'   => $this->input->post('product_description'),
                 'credibility_site'      => $this->input->post('credibility_site'),
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
-            
-            //var_dump($data);die();
             
             //Insert new listing
             $this->Listings_model->insert($data);
@@ -124,7 +123,8 @@ class Listings extends CI_Controller {
                 'bullets'               => $this->input->post('bullets'),
                 'product_description'   => $this->input->post('product_description'),
                 'credibility_site'      => $this->input->post('credibility_site'),
-                'notes'                 => $this->input->post('notes')
+                'notes'                 => $this->input->post('notes'),
+                'created_modified_by'   => $this->session->userdata('name')
             );
             
             //Insert new listing

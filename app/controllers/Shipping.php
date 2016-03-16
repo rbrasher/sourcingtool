@@ -5,12 +5,12 @@ class Shipping extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authentication/login');
+        }
+        
         $this->load->model('Shipping_model');
         $this->load->model('Products_model');
-        
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
     }
     
     public function index() {
@@ -48,7 +48,8 @@ class Shipping extends CI_Controller {
                 'shipping_company'          => $this->input->post('shipping_company'),
                 'tracking_number'           => $this->input->post('tracking_number'),
                 'estimated_arrival_date'    => $this->input->post('estimated_arrival_date'),
-                'notes'                     => $this->input->post('notes')
+                'notes'                     => $this->input->post('notes'),
+                'created_modified_by'       => $this->session->userdata('name')
             );
             
             //Insert Shipping
@@ -93,7 +94,8 @@ class Shipping extends CI_Controller {
                 'shipping_company'          => $this->input->post('shipping_company'),
                 'tracking_number'           => $this->input->post('tracking_number'),
                 'estimated_arrival_date'    => $this->input->post('estimated_arrival_date'),
-                'notes'                     => $this->input->post('notes')
+                'notes'                     => $this->input->post('notes'),
+                'created_modified_by'       => $this->session->userdata('name')
             );
             
             //Update Shipping Info
