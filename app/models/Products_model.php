@@ -81,6 +81,29 @@ class Products_model extends CI_Model {
         $this->db->select('a.*, b.product_status AS product_status, c.confidence_level AS confidence_level');
         $this->db->from('st_products AS a');
         $this->db->where('a.approval_status = 1');
+        $this->db->where('a.status < 7');
+        $this->db->join('product_status AS b', 'b.id = a.status', 'left');
+        $this->db->join('confidence AS c', 'c.id = a.confidence_level', 'left');
+        //, m.* AS manufacturer
+        //$this->db->join('st_manufacturers AS m', 'm.product_id = a.id', 'left');
+        
+        if($limit != null) {
+            $this->db->limit($limit, $offset);
+        }
+        
+        if($order_by != null) {
+            $this->db->order_by('a.id', $sort);
+        }
+        
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
+    public function get_not_viable_products($order_by = null, $sort = 'DESC', $limit = null, $offset = 0) {
+        $this->db->select('a.*, b.product_status AS product_status, c.confidence_level AS confidence_level');
+        $this->db->from('st_products AS a');
+        $this->db->where('a.status >= 7');
         $this->db->join('product_status AS b', 'b.id = a.status', 'left');
         $this->db->join('confidence AS c', 'c.id = a.confidence_level', 'left');
         //, m.* AS manufacturer

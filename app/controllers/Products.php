@@ -20,6 +20,7 @@ class Products extends CI_Controller {
         //$data['products'] = $this->Products_model->get_products('id', 'ASC');
         $data['products'] = $this->Products_model->get_not_approved_products('id', 'ASC');
         $data['pending_products'] = $this->Products_model->get_pending_products('id', 'ASC');
+        $data['not_viable_products'] = $this->Products_model->get_not_viable_products('id', 'ASC');
         $data['manufacturers'] = $this->Manufacturers_model->get_manufacturers('product_id', 'ASC');
         //load view
         $this->load->view('header', $data);

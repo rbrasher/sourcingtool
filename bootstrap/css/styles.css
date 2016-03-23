@@ -34,7 +34,7 @@ body {
 
 .centered {text-align: center;}
 
-#MyDT_filter, #pendingDT_filter {float: left;}
+#MyDT_filter, #pendingDT_filter, #not_viable_DT_filter {float: left;}
 
 img.scale-with-grid {
     max-width: 100%;
