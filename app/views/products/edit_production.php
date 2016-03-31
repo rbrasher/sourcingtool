@@ -8,6 +8,13 @@
     </div>
     <?php endif;?>
     
+    <?php if($this->session->flashdata('listing_added')) : ?>
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><?php echo $this->session->flashdata('listing_added');?></p>
+    </div>
+    <?php endif;?>
+    
     <?php if($this->session->flashdata('upload_error')) : ?>
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -282,61 +289,152 @@
         
     </form>
     
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th class="centered">Owner</th>
-                        <th class="centered">Total Price</th>
-                        <th class="centered">Price Per Item</th>
-                        <th class="centered">Qty Per Pkg</th>
-                        <th class="centered">MOQ</th>
-                        <th class="centered">Lead Time</th>
-                        <th class="centered">Samples Status</th>
-                        <th class="centered">Brochure</th>
-                        <th class="centered">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if($manufacturers) : ?>
-                    <?php foreach($manufacturers as $manufacturer) : ?>
-                    <tr>
-                        <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a> <?php if($manufacturer->is_primary == 1) {echo '<strong>(PRIMARY)</strong>';}?></td>
-
-                        <td class="centered"><?php echo $manufacturer->owner;?></td>
-                        <td class="centered"><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
-                        <td class="centered"><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
-                        <td class="centered"><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
-                        <td class="centered"><?php echo number_format($manufacturer->moq, 0, '.', ',');?></td>
-                        <td class="centered"><?php echo $manufacturer->lead_time_in_days;?></td>
-                        <td class="centered"><?php echo $manufacturer->samples_status;?></td>
-                        <td class="centered"><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
-                        <td class="centered">
-                            <?php if($manufacturer->is_primary == 0) : ?>
-                            <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
-                            <?php elseif($manufacturer->is_primary == 1) : ?>
-                            <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
-                            <?php endif;?>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
-                    <?php else : ?>
-                    <tr>
-                        <td colspan="10" class="centered">No Manufacturers have been set up.</td>
-                    </tr>
-                    <?php endif;?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-12">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manufacturer</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#listingModal">Add Listing</button>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="page-header">Manufacturers</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="centered">Owner</th>
+                            <th class="centered">Total Price</th>
+                            <th class="centered">Price Per Item</th>
+                            <th class="centered">Qty Per Pkg</th>
+                            <th class="centered">MOQ</th>
+                            <th class="centered">Lead Time</th>
+                            <th class="centered">Samples Status</th>
+                            <th class="centered">Brochure</th>
+                            <th class="centered">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($manufacturers) : ?>
+                        <?php foreach($manufacturers as $manufacturer) : ?>
+                        <tr>
+                            <td><a href="<?php echo base_url();?>manufacturers/edit/<?php echo $manufacturer->id;?>"><?php echo $manufacturer->name;?></a> <?php if($manufacturer->is_primary == 1) {echo '<strong>(PRIMARY)</strong>';}?></td>
+
+                            <td class="centered"><?php echo $manufacturer->owner;?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->total_price, 2, '.', ',');?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->price_per_item, 3, '.', ',');?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->qty_per_package, 0, '.', ',');?></td>
+                            <td class="centered"><?php echo number_format($manufacturer->moq, 0, '.', ',');?></td>
+                            <td class="centered"><?php echo $manufacturer->lead_time_in_days;?></td>
+                            <td class="centered"><?php echo $manufacturer->samples_status;?></td>
+                            <td class="centered"><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
+                            <td class="centered">
+                                <?php if($manufacturer->is_primary == 0) : ?>
+                                <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                                <?php elseif($manufacturer->is_primary == 1) : ?>
+                                <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_production_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
+                                <?php endif;?>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                        <?php else : ?>
+                        <tr>
+                            <td colspan="10" class="centered">No Manufacturers have been set up.</td>
+                        </tr>
+                        <?php endif;?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="page-header">Listings</h4>
+            <div class="table-responsive" style="margin-bottom: 30px;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="centered">Title</th>
+                            <th class="centered">Brand</th>
+                            <th class="centered">Price</th>
+                            <th class="centered">Sale Price</th>
+                            <th class="centered">Bullets</th>
+                            <th class="centered">Listing Image</th>
+                            <th class="centered">Secondary Images</th>
+                            <th class="centered">Cred Site</th>
+                            <th class="centered">Approval Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($listings) : ?>
+                        <?php foreach($listings as $listing) : ?>
+                        <tr>
+                            <td><a href=<?php echo base_url();?>listings/edit/<?php echo $listing->id;?>><?php echo $listing->title;?></a></td>
+                            <td class="centered"><?php echo $listing->brand;?></td>
+                            <td class="centered"><?php echo $listing->price;?></td>
+                            <td class="centered"><?php echo $listing->sale_price;?></td>
+                            <td class="centered">
+                                <?php 
+                                    $listing_count = 0;
+                                    if($listing->bullet_1) {
+                                        $listing_count++;
+                                    }
+
+                                    if($listing->bullet_2) {
+                                        $listing_count++;
+                                    }
+
+                                    if($listing->bullet_3) {
+                                        $listing_count++;
+                                    }
+
+                                    if($listing->bullet_4) {
+                                        $listing_count++;
+                                    }
+
+                                    if($listing->bullet_5) {
+                                        $listing_count++;
+                                    }
+
+                                    if($listing_count > 0) {
+                                        echo 'Yes (' . $listing_count . ' bullets)';
+                                    }
+                                ?>
+                            </td>
+                            <td class="centered"><?php echo $listing->listing_image ? 'Yes' : 'None';?></td>
+                            <td class="centered"><?php echo $listing->secondary_images ? 'Yes' : 'None';?></td>
+                            <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
+                            <td class="centered">
+                                <?php 
+                                    switch($listing->approval_status) {
+                                        case 1:
+                                            echo 'Not Approved';
+                                            break;
+                                        case 2:
+                                            echo 'Pending Approval';
+                                            break;
+                                        case 3:
+                                            echo 'Approved';
+                                            break;
+                                    }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                        <?php else : ?>
+                        <tr>
+                            <td colspan="9" class="centered">There are no Listings for this Product.</td>
+                        </tr>
+                        <?php endif;?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
     
     <!-- Tabbed Content -->
     <div class="row">
@@ -348,7 +446,7 @@
                 <li role="presentation"><a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">Shipping</a></li>
                 <li role="presentation"><a href="#legal" aria-controls="legal" role="tab" data-toggle="tab">Legal</a></li>
                 <li role="presentation"><a href="#marketing" aria-controls="marketing" role="tab" data-toggle="tab">Marketing</a></li>
-                <li role="presentation"><a href="#listings" aria-controls="listings" role="tab" data-toggle="tab">Listings</a></li>
+                <!--<li role="presentation"><a href="#listings" aria-controls="listings" role="tab" data-toggle="tab">Listings</a></li>-->
             </ul>
 
             <div class="tab-content">
@@ -679,60 +777,7 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- Listings -->
-                <div role="tabpanel" class="tab-pane fade" id="listings">
-                    <div class="table-responsive" style="margin-bottom: 30px;">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="centered">Title</th>
-                                    <th class="centered">Description</th>
-                                    <th class="centered">Bullets</th>
-                                    <th class="centered">Listing Image</th>
-                                    <th class="centered">Secondary Images</th>
-                                    <th class="centered">Cred Site</th>
-                                    <th class="centered">Notes</th>
-                                    <th class="centered">Approval Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if($listings) : ?>
-                                <?php foreach($listings as $listing) : ?>
-                                <tr>
-                                    <td><?php echo $listing->title;?></td>
-                                    <td><?php echo $listing->product_description;?></td>
-                                    <td><?php echo $listing->bullets;?></td>
-                                    <td class="centered"><?php echo $listing->listing_image;?></td>
-                                    <td class="centered"><?php echo str_replace('|', '<br />', $listing->secondary_images);?></td>
-                                    <td><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
-                                    <td><?php echo $listing->notes;?></td>
-                                    <td class="centered">
-                                        <?php 
-                                            switch($listing->approval_status) {
-                                                case 1:
-                                                    echo 'Not Approved';
-                                                    break;
-                                                case 2:
-                                                    echo 'Pending Approval';
-                                                    break;
-                                                case 3:
-                                                    echo 'Approved';
-                                                    break;
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
-                                <?php else : ?>
-                                <tr>
-                                    <td colspan="8" class="centered">There are no Listings for this Product.</td>
-                                </tr>
-                                <?php endif;?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -872,6 +917,116 @@
                         </div>
                     </form>
                     
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="listingModal" tabindex="-1" role="dialog" aria-labelledby="listingModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="listingModalLabel">Add Listing</h4>
+                </div>
+                <div class="modal-body">
+                    <?php if($this->session->flashdata('upload_error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><?php echo $this->session->flashdata('upload_error');?></p>
+                    </div>
+                    <?php endif;?>
+                    
+                    <form method="post" action="<?php echo base_url();?>products/add_listing_for_production_product/<?php echo $product->id;?>" enctype="multipart/form-data">
+                        <div class="row">
+                            <input type="hidden" id="product_id" name="product_id" class="form-control" value="<?php echo $product->id;?>" />
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" id="title" name="title" class="form-control" value="<?php echo set_value('title');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <input type="text" name="brand" id="brand" class="form-control" value="<?php echo set_value('brand');?>" /> 
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="text" name="price" id="price" class="form-control" value="<?php echo set_value('price');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Sale Price</label>
+                                    <input type="text" name="sale_price" id="sale_price" class="form-control" value="<?php echo set_value('sale_price');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bullet 1</label>
+                                    <input type="text" name="bullet_1" id="bullet_1" class="form-control" value="<?php echo set_value('bullet_1');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bullet 2</label>
+                                    <input type="text" name="bullet_2" id="bullet_2" class="form-control" value="<?php echo set_value('bullet_2');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bullet 3</label>
+                                    <input type="text" name="bullet_3" id="bullet_3" class="form-control" value="<?php echo set_value('bullet_3');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bullet 4</label>
+                                    <input type="text" name="bullet_4" id="bullet_4" class="form-control" value="<?php echo set_value('bullet_4');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bullet 5</label>
+                                    <input type="text" name="bullet_5" id="bullet_5" class="form-control" value="<?php echo set_value('bullet_5');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Credibility Site</label><span style="margin-left: 10px;font-style:italic;">(e.g. http://amazon.com)</span>
+                                    <input type="text" name="credibility_site" id="credibility_site" class="form-control" value="<?php echo set_value('credibility_site');?>" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Listing Image & Secondary Images</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png)</span>
+                                    <input type="file" name="myfiles[]" id="myfiles" multiple />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="btn-group pull-right">
+                                    <input type="submit" name="submit" id="listing_submit" class="btn btn-primary" value="Save" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

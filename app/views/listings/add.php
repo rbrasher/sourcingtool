@@ -39,7 +39,7 @@
         </div>
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" name="title" id="title" class="form-control" value="<?php echo set_value('title');?>" />
@@ -48,26 +48,69 @@
         </div>
         
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="product_description" id="product_description" class="form-control wizzy" rows="5"><?php echo set_value('product_description');?></textarea>
+                    <label>Brand</label>
+                    <input type="text" name="brand" id="brand" class="form-control" value="<?php echo set_value('brand');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" name="price" id="price" class="form-control" value="<?php echo set_value('price');?>" />
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Sale Price</label>
+                    <input type="text" name="sale_price" id="sale_price" class="form-control" value="<?php echo set_value('sale_price');?>" />
                 </div>
             </div>
         </div>
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label>Bullets</label>
-                    <textarea name="bullets" id="bullets" class="form-control wizzy" rows="5"><?php echo set_value('bullets');?></textarea>
+                    <label>Bullet 1</label>
+                    <input type="text" name="bullet_1" id="bullet_1" class="form-control" value="<?php echo set_value('bullet_1');?>" />
                 </div>
             </div>
-            
-            <div class="col-md-6">
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label>Notes</label>
-                    <textarea name="notes" id="notes" class="form-control wizzy" rows="5"><?php echo set_value('notes');?></textarea>
+                    <label>Bullet 2</label>
+                    <input type="text" name="bullet_2" id="bullet_2" class="form-control" value="<?php echo set_value('bullet_2');?>" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Bullet 3</label>
+                    <input type="text" name="bullet_3" id="bullet_3" class="form-control" value="<?php echo set_value('bullet_3');?>" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Bullet 4</label>
+                    <input type="text" name="bullet_4" id="bullet_4" class="form-control" value="<?php echo set_value('bullet_4');?>" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Bullet 5</label>
+                    <input type="text" name="bullet_5" id="bullet_5" class="form-control" value="<?php echo set_value('bullet_5');?>" />
                 </div>
             </div>
         </div>

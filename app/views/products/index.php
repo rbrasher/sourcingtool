@@ -188,7 +188,7 @@
             </div>
             
             <!-- Not Viable -->
-            <div role="tabpanel" class="tab-pane fade in" id="not_viable">
+            <div role="tabpanel" class="tab-pane fade" id="not_viable">
                 <div class="table-responsive" style="margin-top: 20px;">
                     <table id="not_viable_DT" class="table table-striped">
                         <thead>

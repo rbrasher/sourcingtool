@@ -11,6 +11,7 @@ class Products extends CI_Controller {
         $this->load->model('Products_model');
         $this->load->model('Manufacturers_model');
         $this->load->model('Concepts_model');
+        $this->load->model('Listings_model');
     }
     
     /**
@@ -635,5 +636,54 @@ class Products extends CI_Controller {
         $this->session->set_flashdata('concept_rejected', 'Concept is Unapproved');
         
         redirect('products/edit/' . $product_id);
+    }
+    
+    public function add_listing_for_production_product($id) {
+        //process form uploads
+        $config['upload_path'] = './documents/listings/listing_images/';
+        $config['allowed_types'] = 'jpg|png';
+        $config['overwrite'] = TRUE;
+        $this->load->library('upload', $config);
+        
+        $secondary_files = array();
+        if($this->upload->do_multi_upload("myfiles")) {
+            $secondary_files = $this->upload->get_multi_upload_data();
+        }
+        
+        $filenames = '';
+        
+        $listing_image = array_shift($secondary_files);
+        $primary_image = $listing_image['file_name'];
+        
+        foreach($secondary_files as $file) {
+            $filenames .= $file['file_name'] . '|';
+        }
+        
+        $filenames = rtrim($filenames, "|");
+        
+        $data = array(
+            'product_id'            => $this->input->post('product_id'),
+            'title'                 => $this->input->post('title'),
+            'brand'                 => $this->input->post('brand'),
+            'price'                 => $this->input->post('price'),
+            'sale_price'            => $this->input->post('sale_price'),
+            'bullet_1'              => $this->input->post('bullet_1'),
+            'bullet_2'              => $this->input->post('bullet_2'),
+            'bullet_3'              => $this->input->post('bullet_3'),
+            'bullet_4'              => $this->input->post('bullet_4'),
+            'bullet_5'              => $this->input->post('bullet_5'),
+            'listing_image'         => $primary_image,
+            'secondary_images'      => $filenames,
+            'credibility_site'      => $this->input->post('credibility_site'),
+            'created_modified_by'   => $this->session->userdata('name')
+        );
+        
+        //Insert new Listing
+        $this->Listings_model->insert($data);
+        
+        //set message
+        $this->session->set_flashdata('listing_added', 'Listing added successfully');
+        
+        redirect('products/edit_production/' . $id);
     }
 }

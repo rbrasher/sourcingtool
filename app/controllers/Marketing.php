@@ -6,7 +6,7 @@ class Marketing extends CI_Controller {
         parent::__construct();
         
         if(!$this->session->userdata('logged_in')) {
-            redirect('authentication/login');
+            redirect('authenticate/login');
         }
         
         $this->load->model('Marketing_model');

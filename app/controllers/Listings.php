@@ -5,15 +5,19 @@ class Listings extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
-        if(!$this->session->userdata('logged_in')) {
-            redirect('authentication/login');
-        }
+//        if(!$this->session->userdata('logged_in')) {
+//            redirect('authentication/login');
+//        }
         
         $this->load->model('Listings_model');
         $this->load->model('Products_model');
     }
     
     public function index() {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         $data['products'] = $this->Products_model->get_products('id', 'ASC');
         $data['listings'] = $this->Listings_model->get_listings('id', 'ASC');
         
@@ -24,6 +28,10 @@ class Listings extends CI_Controller {
     }
     
     public function add() {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         //process form uploads
         $config['upload_path'] = './documents/listings/listing_images/';
         $config['allowed_types'] = 'jpg|png';
@@ -33,11 +41,15 @@ class Listings extends CI_Controller {
         //form validation
         $this->form_validation->set_rules('product_id', 'Product', 'required|trim|xss_clean');
         $this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
-        $this->form_validation->set_rules('bullets', 'Bullets', 'trim|xss_clean');
-        // listing images?
-        $this->form_validation->set_rules('product_description', 'Product Description', 'trim|xss_clean');
+        $this->form_validation->set_rules('brand', 'Brand', 'trim|xss_clean');
+        $this->form_validation->set_rules('price', 'Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('sale_price', 'Sale Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_1', 'Bullet 1', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_2', 'Bullet 2', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_3', 'Bullet 3', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_4', 'Bullet 4', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_5', 'Bullet 5', 'trim|xss_clean');
         $this->form_validation->set_rules('credibility_site', 'Credibility Site', 'trim|xss_clean');
-        $this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
         
         $data['products'] = $this->Products_model->get_products('id', 'ASC');
         
@@ -77,15 +89,20 @@ class Listings extends CI_Controller {
             $data = array(
                 'product_id'            => $this->input->post('product_id'),
                 'title'                 => $this->input->post('title'),
-                'bullets'               => $this->input->post('bullets'),
+                'brand'                 => $this->input->post('brand'),
+                'price'                 => $this->input->post('price'),
+                'sale_price'            => $this->input->post('sale_price'),
+                'bullet_1'              => $this->input->post('bullet_1'),
+                'bullet_2'              => $this->input->post('bullet_2'),
+                'bullet_3'              => $this->input->post('bullet_3'),
+                'bullet_4'              => $this->input->post('bullet_4'),
+                'bullet_5'              => $this->input->post('bullet_5'),
                 'listing_image'         => $primary_image,
                 'secondary_images'      => $filenames,
-                'product_description'   => $this->input->post('product_description'),
                 'credibility_site'      => $this->input->post('credibility_site'),
-                'notes'                 => $this->input->post('notes'),
                 'created_modified_by'   => $this->session->userdata('name')
             );
-            
+
             //Insert new listing
             $this->Listings_model->insert($data);
             
@@ -97,14 +114,22 @@ class Listings extends CI_Controller {
     }
     
     public function edit($id) {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         //form validation
         $this->form_validation->set_rules('product_id', 'Product', 'required|trim|xss_clean');
         $this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
-        $this->form_validation->set_rules('bullets', 'Bullets', 'trim|xss_clean');
-        // listing images?
-        $this->form_validation->set_rules('product_description', 'Product Description', 'trim|xss_clean');
+        $this->form_validation->set_rules('brand', 'Brand', 'trim|xss_clean');
+        $this->form_validation->set_rules('price', 'Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('sale_price', 'Sale Price', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_1', 'Bullet 1', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_2', 'Bullet 2', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_3', 'Bullet 3', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_4', 'Bullet 4', 'trim|xss_clean');
+        $this->form_validation->set_rules('bullet_5', 'Bullet 5', 'trim|xss_clean');
         $this->form_validation->set_rules('credibility_site', 'Credibility Site', 'trim|xss_clean');
-        $this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
         
         
         $data['products'] = $this->Products_model->get_products('id', 'ASC');
@@ -120,13 +145,19 @@ class Listings extends CI_Controller {
             $data = array(
                 'product_id'            => $this->input->post('product_id'),
                 'title'                 => $this->input->post('title'),
-                'bullets'               => $this->input->post('bullets'),
-                'product_description'   => $this->input->post('product_description'),
+                'brand'                 => $this->input->post('brand'),
+                'price'                 => $this->input->post('price'),
+                'sale_price'            => $this->input->post('sale_price'),
+                'bullet_1'              => $this->input->post('bullet_1'),
+                'bullet_2'              => $this->input->post('bullet_2'),
+                'bullet_3'              => $this->input->post('bullet_3'),
+                'bullet_4'              => $this->input->post('bullet_4'),
+                'bullet_5'              => $this->input->post('bullet_5'),
+                'secondary_images'      => $this->input->post('secondary_images'),
                 'credibility_site'      => $this->input->post('credibility_site'),
-                'notes'                 => $this->input->post('notes'),
                 'created_modified_by'   => $this->session->userdata('name')
             );
-            
+
             //Insert new listing
             $this->Listings_model->update($data, $id);
             
@@ -147,6 +178,10 @@ class Listings extends CI_Controller {
 //    }
     
     public function review($id) {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         $data = array(
             'approval_status' => 2
         );
@@ -162,6 +197,10 @@ class Listings extends CI_Controller {
     }
     
     public function approve($id) {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         $data = array(
             'approval_status' => 3
         );
@@ -175,6 +214,10 @@ class Listings extends CI_Controller {
     }
     
     public function unapprove($id) {
+        if(!$this->session->userdata('logged_in')) {
+            redirect('authenticate/login');
+        }
+        
         $data = array(
             'approval_status' => 1
         );

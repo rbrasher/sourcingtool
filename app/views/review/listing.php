@@ -29,13 +29,19 @@
                     <td><span style="font-weight: bold;float: left; width: 200px;">Title:</span> <?php echo $listing->title;?></td>
                 </tr>
                 <tr>
-                    <td><span style="font-weight: bold;float: left; width: 200px;">Description:</span> <?php echo $listing->product_description;?></td>
+                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullet 1:</span> <?php echo $listing->bullet_1;?></td>
                 </tr>
                 <tr>
-                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullets:</span> <?php echo $listing->bullets; ?></td>
+                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullet 2:</span> <?php echo $listing->bullet_2; ?></td>
                 </tr>
                 <tr>
-                    <td><span style="font-weight: bold;float: left; width: 200px;">Notes:</span> <?php echo $listing->notes; ?></td>
+                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullet 3:</span> <?php echo $listing->bullet_3; ?></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullet 4:</span> <?php echo $listing->bullet_4;?></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: bold;float: left; width: 200px;">Bullet 5:</span> <?php echo $listing->bullet_5;?></td>
                 </tr>
                 <tr>
                     <td><span style="font-weight: bold;float: left; width: 200px;">Credibility Site:</span> <a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site; ?></a></td>
