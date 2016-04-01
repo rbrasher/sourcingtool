@@ -35,7 +35,7 @@
             <thead>
                 <tr>
                     <th>Product</th>
-                    <th class="centered">Title</th>
+                    <!--<th class="centered">Title</th>-->
                     <th class="centered">Credibility Site</th>
                     <th class="centered">Approval Status</th>
                     <th class="centered">Actions</th>
@@ -46,7 +46,7 @@
                 <?php foreach($listings as $listing) : ?>
                 <tr>
                     <td><a href="<?php echo base_url();?>listings/edit/<?php echo $listing->id;?>"><?php echo $listing->product_name;?></a></td>
-                    <td class="centered"><?php echo $listing->title;?></td>
+                    <!--<td class="centered"><?php //echo $listing->title;?></td>-->
                     <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
                     <td class="centered"><?php echo $listing->approval;?></td>
                     <td class="centered">
@@ -68,7 +68,7 @@
                 <?php endforeach;?>
                 <?php else : ?>
                 <tr>
-                    <td class="centered" colspan="4">No Listings have been entered yet.</td>
+                    <td class="centered" colspan="5">No Listings have been entered yet.</td>
                 </tr>
                 <?php endif;?>
             </tbody>
@@ -80,7 +80,7 @@
     $(document).ready(function() {
         $('#MyDT').DataTable({
             "autoWidth": false,
-            "paging": false,
+            "paging": false
         });
     });
 </script>

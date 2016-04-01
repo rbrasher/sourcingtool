@@ -365,6 +365,7 @@
                             <th class="centered">Secondary Images</th>
                             <th class="centered">Cred Site</th>
                             <th class="centered">Approval Status</th>
+                            <th class="centered">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -421,11 +422,12 @@
                                     }
                                 ?>
                             </td>
+                            <td class="centered"><a class="btn btn-default" title="Amazon Preview" href="<?php echo base_url();?>listings/amazonPreview/<?php echo $listing->id;?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a></td>
                         </tr>
                         <?php endforeach;?>
                         <?php else : ?>
                         <tr>
-                            <td colspan="9" class="centered">There are no Listings for this Product.</td>
+                            <td colspan="10" class="centered">There are no Listings for this Product.</td>
                         </tr>
                         <?php endif;?>
                     </tbody>

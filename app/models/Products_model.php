@@ -297,4 +297,43 @@ class Products_model extends CI_Model {
         
         return $query->result();
     }
+    
+    public function get_rd_count() {
+        $this->db->select('*');
+        $this->db->from('st_products');
+        $this->db->where('approval_status <', 3);
+        
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+    
+    public function get_production_count() {
+        $this->db->select('*');
+        $this->db->from('st_products');
+        $this->db->where('approval_status', 3);
+        
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+    
+    public function get_launch_count($start_date, $end_date) {
+        $this->db->select('*');
+        $this->db->from('st_products');
+        $this->db->where('estimated_launch_date >=', $start_date);
+        $this->db->where('estimated_launch_date <', $end_date);
+        
+        $query = $this->db->get();
+        
+        return $query->num_rows();
+    }
+    
+    public function get_estimated_monthly_margins() {
+        $sql = "SELECT SUM( estimated_margin_per_month ) AS est_margin FROM `st_products` WHERE `approval_status` = 3";
+        
+        $query = $this->db->query($sql);
+        
+        return $query->row();
+    }
 }

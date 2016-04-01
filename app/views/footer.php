@@ -64,10 +64,6 @@
             });
 
         <?php endif;?>
-        
-        <?php if($this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'listings' && $this->uri->segment(2) == 'edit') :?>
-            $(".wizzy").cleditor();
-        <?php endif;?>
             
         <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit_production') :?>
             

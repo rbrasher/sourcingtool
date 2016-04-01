@@ -16,31 +16,93 @@
         <!-- /.row -->
 
         <div class="row">
-            <div class="col-lg-12">
-                
-                <!--
-                <div class="panel panel-default">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-time"></span> Production Products</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <?php //if($tasks) : ?>
-                            <?php //foreach($tasks as $task) : ?>
-                            <a href="<?php //echo base_url();?>tasks/edit/<?php //echo $task->id;?>" class="list-group-item">
-                                <span class="label label-success pull-right" style="font-size: 14px; font-weight: normal;"><span class="glyphicon glyphicon-user"></span> <?php //echo $task->task_owner;?><?php //echo $task->task_due_date;?></span>
-                                <span class="glyphicon glyphicon-ok"></span> <?php //echo $task->task_desc;?>
-                                
-                            </a>
-                            <?php //endforeach;?>
-                            <?php //endif;?>
-                        </div>
-                        <div class="text-right">
-                            <a href="<?php //echo base_url();?>tasks">View All Activity <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-blackboard fa-5x"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><?php echo $rd_count;?></div>
+                                <div>Products in R&D</div>
+                            </div>
                         </div>
                     </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
                 </div>
-                -->
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-lock fa-5x"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><?php echo $production_count;?></div>
+                                <div>Products in Production</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-calendar fa-5x"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><?php echo $launch_count;?></div>
+                                <div>Products Launching - Next 30 Days</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="glyphicon glyphicon-usd fa-5x"></span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><?php echo number_format($est_margin->est_margin, 2, '.', ',');?></div>
+                                <div>Estimated Monthly Margin</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- /.row -->
