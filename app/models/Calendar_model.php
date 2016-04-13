@@ -8,7 +8,7 @@ class Calendar_model extends CI_Model {
     
     public function get_calendar_products() {
         $today = date('Y-m-d');
-        $query = $this->db->query("SELECT id, name AS title, estimated_launch_date AS start FROM `st_products` WHERE `estimated_launch_date` != 0000-00-00 AND `estimated_launch_date` != '' AND `estimated_launch_date` > '" . $today . "' ORDER BY `estimated_launch_date` ASC");
+        $query = $this->db->query("SELECT id, name AS title, estimated_launch_date AS start FROM `st_products` WHERE `estimated_launch_date` != 0000-00-00 AND `estimated_launch_date` != '' AND `estimated_launch_date` >= '" . $today . "' ORDER BY `estimated_launch_date` ASC");
         
         return $query->result();
     }

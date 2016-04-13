@@ -66,33 +66,40 @@
         <?php endif;?>
             
         <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit_production') :?>
-            
-            var total_price = 0, 
-                target_price = 0, 
-                fba_fee_est = 0;
-            
-            var estimated_sales_per_day = 0,
-                margin_per_sale = 0,
-                estimated_margin_per_month = 0;
+            var total_price = $('#total_price').val(),
+                target_price = $('#target_price').val(),
+                fba_fee_est = $('#fba_fee_est').val(),
+                estimated_sales_per_day = $('#estimated_sales_per_day').val(),
+                margin_per_sale = $('#margin_per_sale').val(),
+                estimated_margin_per_month = $('#estimated_margin_per_month').val();
+           
+            logValues();
 
-            $('#total_price').on('blur', function() {
+            $('#total_price').on('change', function() {
                 total_price = this.value;
                 calculate_margin();
+                calculateMonthlyMargin();
+                logValues();
             });
 
-            $('#target_price').on('blur', function() {
+            $('#target_price').on('change', function() {
                 target_price = this.value;
                 calculate_margin();
+                calculateMonthlyMargin();
+                logValues();
             });
 
-            $('#fba_fee_est').on('blur', function() {
+            $('#fba_fee_est').on('change', function() {
                 fba_fee_est = this.value;
                 calculate_margin();
+                calculateMonthlyMargin();
+                logValues();
             });
             
-            $('#estimated_sales_per_day').on('blur', function() {
+            $('#estimated_sales_per_day').on('change', function() {
                 estimated_sales_per_day = this.value;
                 calculateMonthlyMargin();
+                logValues();
             });
             
             function calculateMonthlyMargin() {
@@ -102,10 +109,21 @@
 
             function calculate_margin() {       
                 var margin = ((target_price - fba_fee_est) - total_price);
-                console.log(margin);
+                //console.log(margin);
                 margin_per_sale = margin;
                 $('#margin_per_sale').val(margin.formatMoney(2, '.', ','));
             };
+            
+            function logValues() {
+                console.clear();
+                console.log('Total Price: ' + total_price);
+                console.log('Target Price: ' + target_price);
+                console.log('FBA Fee Est: ' + fba_fee_est);
+                console.log('Est Sales Per Day: ' + estimated_sales_per_day);
+                console.log('Margin Per Sale: ' + margin_per_sale);
+                console.log('Est Margin Per Month: ' + estimated_margin_per_month);
+            }
+            
          <?php endif;?>
         
     });

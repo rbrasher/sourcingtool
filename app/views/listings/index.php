@@ -1,3 +1,14 @@
+<script>
+    function confirmDelete(id) {
+        if(confirm("Are you sure you want to delete this product?") === true) {
+            var loc = "<?php echo base_url();?>listings/delete/" + id;
+            
+            window.location = loc;
+        } else {
+            console.log('Do not delete.');
+        }
+    }
+</script>
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php if($this->session->flashdata('listing_saved')) : ?>
     <div class="alert alert-success alert-dismissable">
@@ -60,10 +71,8 @@
                         <?php if($listing->approval_status == '3') : ?>
                         <a class="btn btn-warning" href="<?php echo base_url();?>listings/unapprove/<?php echo $listing->id;?>" title="Reject"><span class="glyphicon glyphicon-remove-circle"></span></a>
                         <?php endif;?>
-                        <!--
-                        <a class="btn btn-danger" href="<?php //echo base_url();?>listings/delete/<?php //echo $listing->id;?>"><span class="glyphicon glyphicon-trash"></span></a>
-                        -->
-                    </td>    
+                        <a class="btn btn-danger" onclick="confirmDelete(<?php echo $listing->id;?>);" href="javascript:void(0);"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
                 </tr>
                 <?php endforeach;?>
                 <?php else : ?>

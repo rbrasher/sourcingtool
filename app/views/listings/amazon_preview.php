@@ -864,27 +864,22 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     -->
-                                    <?php if($listing->secondary_images) : ?>
-                                    <?php $secondary_images = explode('|', $listing->secondary_images);?>
-                                        <?php foreach($secondary_images as $secondary_image): ?>
                                     
-                                        <li class="a-spacing-small item">
-                                            <span class="a-list-item">
-                                                <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
-                                                    <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
-                                                        <span class="a-button-inner"><input class="a-button-input" type="submit">
-                                                            <span class="a-button-text" aria-hidden="true">
-                                                                <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $secondary_image;?>" />
-                                                            </span>
+                                    <?php if($listing->sec_image_1) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_1;?>" />
                                                         </span>
                                                     </span>
                                                 </span>
                                             </span>
-                                        </li>
-                                    
-                                        <?php endforeach;?>
+                                        </span>
+                                    </li>
                                     <?php else : ?>
-                                    <?php for($i = 0; $i <=5; $i++): ?>
                                     <li class="a-spacing-small item">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
@@ -898,7 +893,156 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                             </span>
                                         </span>
                                     </li>
-                                    <?php endfor;?>
+                                    <?php endif;?>
+                                    
+                                    <?php if($listing->sec_image_2) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_2;?>" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php else : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img alt="" src="https://placeholdit.imgix.net/~text?txtsize=10&txt=NA&w=38&h=50" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php endif;?>
+                                    
+                                    <?php if($listing->sec_image_3) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_3;?>" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php else : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img alt="" src="https://placeholdit.imgix.net/~text?txtsize=10&txt=NA&w=38&h=50" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php endif;?>
+                                    
+                                    <?php if($listing->sec_image_4) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_4;?>" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php else : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img alt="" src="https://placeholdit.imgix.net/~text?txtsize=10&txt=NA&w=38&h=50" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php endif;?>
+                                    
+                                    <?php if($listing->sec_image_5) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_5;?>" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php else : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img alt="" src="https://placeholdit.imgix.net/~text?txtsize=10&txt=NA&w=38&h=50" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php endif;?>
+                                    
+                                    <?php if($listing->sec_image_6) : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_6;?>" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <?php else : ?>
+                                    <li class="a-spacing-small item">
+                                        <span class="a-list-item">
+                                            <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <span class="a-button-inner"><input class="a-button-input" type="submit">
+                                                        <span class="a-button-text" aria-hidden="true">
+                                                            <img alt="" src="https://placeholdit.imgix.net/~text?txtsize=10&txt=NA&w=38&h=50" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
                                     <?php endif;?>
                                     
                                 </ul>

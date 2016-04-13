@@ -5,10 +5,6 @@ class Listings extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
-//        if(!$this->session->userdata('logged_in')) {
-//            redirect('authentication/login');
-//        }
-        
         $this->load->model('Listings_model');
         $this->load->model('Products_model');
     }
@@ -59,32 +55,95 @@ class Listings extends CI_Controller {
             $this->load->view('listings/add');
             $this->load->view('footer');
         } else {
+            $listing_image = '';
+            $sec_image_1 = '';
+            $sec_image_2 = '';
+            $sec_image_3 = '';
+            $sec_image_4 = '';
+            $sec_image_5 = '';
+            $sec_image_6 = '';
+            
             //upload listing images
-//            if(!$this->upload->do_upload('userfile1')) {
-//                $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
-//                
-//                redirect('listings/add');
-//            } else {
-//                $file_data = $this->upload->data();
-//                
-//                $listing_image = $file_data['file_name']; 
+            if(!$this->upload->do_upload('main_image')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
+                
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $listing_image = $file_data['file_name']; 
+            }
+            
+            if(!$this->upload->do_upload('sec_image_1')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
+                
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_1 = $file_data['file_name'];
+            }
+            
+            if(!$this->upload->do_upload('sec_image_2')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_2 = $file_data['file_name'];
+            }
+            
+            if(!$this->upload->do_upload('sec_image_3')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_3 = $file_data['file_name'];
+            }
+            
+            if(!$this->upload->do_upload('sec_image_4')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_4 = $file_data['file_name'];
+            }
+            
+            if(!$this->upload->do_upload('sec_image_5')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_5 = $file_data['file_name'];
+            }
+            
+            if(!$this->upload->do_upload('sec_image_6')) {
+                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
+                redirect('listings/add');
+            } else {
+                $file_data = $this->upload->data();
+                
+                $sec_image_6 = $file_data['file_name'];
+            }
+            
+//            $secondary_files = array();
+//            if($this->upload->do_multi_upload("myfiles")) {
+//                $secondary_files = $this->upload->get_multi_upload_data();
 //            }
-            
-            $secondary_files = array();
-            if($this->upload->do_multi_upload("myfiles")) {
-                $secondary_files = $this->upload->get_multi_upload_data();
-            }
-            
-            $filenames = '';
-            
-            $listing_image = array_shift($secondary_files);
-            $primary_image = $listing_image['file_name'];
-            
-            foreach($secondary_files as $file) {
-                $filenames .= $file['file_name'] . '|';
-            }
-            
-            $filenames = rtrim($filenames, "|");
+//            
+//            $filenames = '';
+//            
+//            $listing_image = array_shift($secondary_files);
+//            $primary_image = $listing_image['file_name'];
+//            
+//            foreach($secondary_files as $file) {
+//                $filenames .= $file['file_name'] . '|';
+//            }
+//            
+//            $filenames = rtrim($filenames, "|");
             
             $data = array(
                 'product_id'            => $this->input->post('product_id'),
@@ -97,8 +156,15 @@ class Listings extends CI_Controller {
                 'bullet_3'              => $this->input->post('bullet_3'),
                 'bullet_4'              => $this->input->post('bullet_4'),
                 'bullet_5'              => $this->input->post('bullet_5'),
-                'listing_image'         => $primary_image,
-                'secondary_images'      => $filenames,
+                //'listing_image'         => $primary_image,
+                'listing_image'         => $listing_image,
+                'sec_image_1'           => $sec_image_1,
+                'sec_image_2'           => $sec_image_2,
+                'sec_image_3'           => $sec_image_3,
+                'sec_image_4'           => $sec_image_4,
+                'sec_image_5'           => $sec_image_5,
+                'sec_image_6'           => $sec_image_6,
+                //'secondary_images'      => $filenames,
                 'credibility_site'      => $this->input->post('credibility_site'),
                 'created_modified_by'   => $this->session->userdata('name')
             );
@@ -153,7 +219,7 @@ class Listings extends CI_Controller {
                 'bullet_3'              => $this->input->post('bullet_3'),
                 'bullet_4'              => $this->input->post('bullet_4'),
                 'bullet_5'              => $this->input->post('bullet_5'),
-                'secondary_images'      => $this->input->post('secondary_images'),
+                //'secondary_images'      => $this->input->post('secondary_images'),
                 'credibility_site'      => $this->input->post('credibility_site'),
                 'created_modified_by'   => $this->session->userdata('name')
             );
@@ -168,14 +234,14 @@ class Listings extends CI_Controller {
         }
     }
     
-//    public function delete($id) {
-//        $this->Listings_model->delete($id);
-//        
-//        //set message
-//        $this->session->set_flashdata('listing_deleted', 'Listing deleted successfully.');
-//        
-//        redirect('listings');
-//    }
+    public function delete($id) {
+        $this->Listings_model->delete($id);
+        
+        //set message
+        $this->session->set_flashdata('listing_deleted', 'Listing deleted successfully.');
+        
+        redirect('listings');
+    }
     
     public function review($id) {
         if(!$this->session->userdata('logged_in')) {

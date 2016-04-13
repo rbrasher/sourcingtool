@@ -645,21 +645,95 @@ class Products extends CI_Controller {
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
         
-        $secondary_files = array();
-        if($this->upload->do_multi_upload("myfiles")) {
-            $secondary_files = $this->upload->get_multi_upload_data();
+        $listing_image = '';
+        $sec_image_1 = '';
+        $sec_image_2 = '';
+        $sec_image_3 = '';
+        $sec_image_4 = '';
+        $sec_image_5 = '';
+        $sec_image_6 = '';
+        
+        //upload listing images
+        if(!$this->upload->do_upload('main_image')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
+
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $listing_image = $file_data['file_name']; 
+        }
+
+        if(!$this->upload->do_upload('sec_image_1')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
+
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_1 = $file_data['file_name'];
+        }
+
+        if(!$this->upload->do_upload('sec_image_2')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_2 = $file_data['file_name'];
+        }
+
+        if(!$this->upload->do_upload('sec_image_3')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_3 = $file_data['file_name'];
+        }
+
+        if(!$this->upload->do_upload('sec_image_4')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_4 = $file_data['file_name'];
+        }
+
+        if(!$this->upload->do_upload('sec_image_5')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_5 = $file_data['file_name'];
+        }
+
+        if(!$this->upload->do_upload('sec_image_6')) {
+            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
+            redirect('products/edit_production/' . $id);
+        } else {
+            $file_data = $this->upload->data();
+
+            $sec_image_6 = $file_data['file_name'];
         }
         
-        $filenames = '';
-        
-        $listing_image = array_shift($secondary_files);
-        $primary_image = $listing_image['file_name'];
-        
-        foreach($secondary_files as $file) {
-            $filenames .= $file['file_name'] . '|';
-        }
-        
-        $filenames = rtrim($filenames, "|");
+//        $secondary_files = array();
+//        if($this->upload->do_multi_upload("myfiles")) {
+//            $secondary_files = $this->upload->get_multi_upload_data();
+//        }
+//        
+//        $filenames = '';
+//        
+//        $listing_image = array_shift($secondary_files);
+//        $primary_image = $listing_image['file_name'];
+//        
+//        foreach($secondary_files as $file) {
+//            $filenames .= $file['file_name'] . '|';
+//        }
+//        
+//        $filenames = rtrim($filenames, "|");
         
         $data = array(
             'product_id'            => $this->input->post('product_id'),
@@ -672,8 +746,14 @@ class Products extends CI_Controller {
             'bullet_3'              => $this->input->post('bullet_3'),
             'bullet_4'              => $this->input->post('bullet_4'),
             'bullet_5'              => $this->input->post('bullet_5'),
-            'listing_image'         => $primary_image,
-            'secondary_images'      => $filenames,
+            'listing_image'         => $listing_image,                  //$primary_image,
+            'sec_image_1'           => $sec_image_1,
+            'sec_image_2'           => $sec_image_2,
+            'sec_image_3'           => $sec_image_3,
+            'sec_image_4'           => $sec_image_4,
+            'sec_image_5'           => $sec_image_5,
+            'sec_image_6'           => $sec_image_6,
+            //'secondary_images'      => $filenames,
             'credibility_site'      => $this->input->post('credibility_site'),
             'created_modified_by'   => $this->session->userdata('name')
         );

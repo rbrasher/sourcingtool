@@ -135,10 +135,10 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Listing Image</label>
-                    <input type="text" name="listing_image" id="listing_image" class="form-control" value="<?php echo $listing->listing_image;?>" readonly />
+                    <input type="text" name="listing_image" id="listing_image" class="form-control" value="<?php echo $listing->listing_image;?>" />
                 </div>
             </div>
-            <div class="col-md-12 centered">
+            <div class="col-md-6 centered">
                 <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->listing_image;?>" />
             </div>
         </div>
@@ -146,17 +146,91 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Secondary Images</label>
-                    <input type="text" name="secondary_images" id="secondary_images" class="form-control" value="<?php echo $listing->secondary_images;?>" />
+                    <label>Secondary Listing Image 1</label>
+                    <input type="text" name="sec_image_1" id="sec_image_1" class="form-control" value="<?php echo $listing->sec_image_1;?>" />
                 </div>
             </div>
-            <?php $images = explode('|', $listing->secondary_images); ?>
-            <?php foreach($images as $image) : ?>
-            <div class="col-md-12 centered">
-                <img style="border:1px solid red; margin-bottom: 20px;" class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $image;?>" />
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_1;?>" />
             </div>
-            <?php endforeach; ?>
         </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Listing Image 2</label>
+                    <input type="text" name="sec_image_2" id="sec_image_2" class="form-control" value="<?php echo $listing->sec_image_2;?>" />
+                </div>
+            </div>
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_2;?>" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Listing Image 3</label>
+                    <input type="text" name="sec_image_3" id="sec_image_3" class="form-control" value="<?php echo $listing->sec_image_3;?>" />
+                </div>
+            </div>
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_3;?>" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Listing Image 4</label>
+                    <input type="text" name="sec_image_4" id="sec_image_4" class="form-control" value="<?php echo $listing->sec_image_4;?>" />
+                </div>
+            </div>
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_4;?>" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Listing Image 5</label>
+                    <input type="text" name="sec_image_5" id="sec_image_5" class="form-control" value="<?php echo $listing->sec_image_5;?>" />
+                </div>
+            </div>
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_5;?>" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Listing Image 6</label>
+                    <input type="text" name="sec_image_6" id="sec_image_6" class="form-control" value="<?php echo $listing->sec_image_6;?>" />
+                </div>
+            </div>
+            <div class="col-md-6 centered">
+                <img class="scale-with-grid" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_6;?>" />
+            </div>
+        </div>
+        
+        <!--
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Secondary Images</label>
+                    <input type="text" name="secondary_images" id="secondary_images" class="form-control" value="<?php //echo $listing->secondary_images;?>" />
+                </div>
+            </div>
+            <?php //$images = explode('|', $listing->secondary_images); ?>
+            <?php //foreach($images as $image) : ?>
+            <div class="col-md-12 centered">
+                <img style="border:1px solid red; margin-bottom: 20px;" class="scale-with-grid" src="<?php //echo base_url();?>documents/listings/listing_images/<?php //echo $image;?>" />
+            </div>
+            <?php //endforeach; ?>
+        </div>
+        -->
         
     </form>
 </div>

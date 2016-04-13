@@ -127,9 +127,63 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Listing Image & Secondary Images</label>
-                    <!--<input type="file" name="userfile1" size="20" />-->
-                    <input type="file" name="myfiles[]" id="myfiles" multiple />
+                    <label>Main Listing Image</label>
+                    <input type="file" name="main_image" size="20" />
+                    <!--<input type="file" name="myfiles[]" id="myfiles" multiple />-->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 1</label>
+                    <input type="file" name="sec_image_1" size="20" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 2</label>
+                    <input type="file" name="sec_image_2" size="20" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 3</label>
+                    <input type="file" name="sec_image_3" size="20" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 4</label>
+                    <input type="file" name="sec_image_4" size="20" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 5</label>
+                    <input type="file" name="sec_image_5" size="20" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Secondary Listing Image 6</label>
+                    <input type="file" name="sec_image_6" size="20" />
                 </div>
             </div>
         </div>

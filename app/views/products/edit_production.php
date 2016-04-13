@@ -1,3 +1,14 @@
+<script>
+    function confirmDelete(id) {
+        if(confirm("Are you sure you want to delete this product?") === true) {
+            var loc = "<?php echo base_url();?>listings/delete/" + id;
+
+            window.location = loc;
+        } else {
+            console.log('Do not delete.');
+        }
+    }
+</script>
 <div class="container-fluid" style="margin-top: 70px !important;">
     <?php echo validation_errors('<p class="alert alert-danger">', '</p>');?>
     
@@ -39,7 +50,7 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-                    <li><a href="<?php echo base_url();?>products"><span class="glyphicon glyphicon-blackboard"></span> Products</a></li>
+                    <li><a href="<?php echo base_url();?>products/production"><span class="glyphicon glyphicon-blackboard"></span> Products</a></li>
                     <li class="active"><span class="glyphicon glyphicon-pencil"></span> Edit Product</li>
                 </ol>
             </div>
@@ -365,7 +376,7 @@
                             <th class="centered">Secondary Images</th>
                             <th class="centered">Cred Site</th>
                             <th class="centered">Approval Status</th>
-                            <th class="centered">Actions</th>
+                            <th class="centered" width="100">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -405,7 +416,41 @@
                                 ?>
                             </td>
                             <td class="centered"><?php echo $listing->listing_image ? 'Yes' : 'None';?></td>
-                            <td class="centered"><?php echo $listing->secondary_images ? 'Yes' : 'None';?></td>
+                            <td class="centered">
+                                <?php 
+                                    $sec_image_count = 0;
+                                    
+                                    if($listing->sec_image_1) {
+                                        $sec_image_count++;
+                                    } 
+                                    
+                                    if($listing->sec_image_2) {
+                                        $sec_image_count++;
+                                    } 
+                                    
+                                    if($listing->sec_image_3) {
+                                        $sec_image_count++;
+                                    } 
+                                    
+                                    if($listing->sec_image_4) {
+                                        $sec_image_count++;
+                                    } 
+                                    
+                                    if($listing->sec_image_5) {
+                                        $sec_image_count++;
+                                    } 
+                                    
+                                    if($listing->sec_image_6) {
+                                        $sec_image_count++;
+                                    }
+                                    
+                                    if($sec_image_count > 0) {
+                                        echo 'Yes (' . $sec_image_count . ' images)';
+                                    } else {
+                                        echo 'No';
+                                    }
+                                ?>
+                            </td>
                             <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
                             <td class="centered">
                                 <?php 
@@ -422,7 +467,10 @@
                                     }
                                 ?>
                             </td>
-                            <td class="centered"><a class="btn btn-default" title="Amazon Preview" href="<?php echo base_url();?>listings/amazonPreview/<?php echo $listing->id;?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                            <td class="centered" width="100">
+                                <a class="btn btn-default" title="Amazon Preview" href="<?php echo base_url();?>listings/amazonPreview/<?php echo $listing->id;?>" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="btn btn-danger" title="Delete Listing" href="javascript:void(0)" onclick="confirmDelete(<?php echo $listing->id;?>);"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
                         </tr>
                         <?php endforeach;?>
                         <?php else : ?>
@@ -1006,17 +1054,62 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Credibility Site</label><span style="margin-left: 10px;font-style:italic;">(e.g. http://amazon.com)</span>
                                     <input type="text" name="credibility_site" id="credibility_site" class="form-control" value="<?php echo set_value('credibility_site');?>" />
                                 </div>
                             </div>
                             
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Listing Image & Secondary Images</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png)</span>
-                                    <input type="file" name="myfiles[]" id="myfiles" multiple />
+                                    <label>Main Listing Image</label>
+                                    <input type="file" name="main_image" size="20" />
+                                    
+                                    <!--<label>Listing Image & Secondary Images</label><span style="margin-left: 10px; font-style:italic;">(Allowed Types: jpg, png)</span>-->
+                                    <!--<input type="file" name="myfiles[]" id="myfiles" multiple />-->
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 1</label>
+                                    <input type="file" name="sec_image_1" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 2</label>
+                                    <input type="file" name="sec_image_2" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 3</label>
+                                    <input type="file" name="sec_image_3" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 4</label>
+                                    <input type="file" name="sec_image_4" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 5</label>
+                                    <input type="file" name="sec_image_5" size="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Secondary Listing Image 6</label>
+                                    <input type="file" name="sec_image_6" size="20" />
                                 </div>
                             </div>
                             
