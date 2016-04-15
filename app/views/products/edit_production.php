@@ -1,8 +1,8 @@
 <script>
     function confirmDelete(id) {
-        if(confirm("Are you sure you want to delete this product?") === true) {
+        if(confirm("Are you sure you want to delete this listing?") === true) {
             var loc = "<?php echo base_url();?>listings/delete/" + id;
-
+            
             window.location = loc;
         } else {
             console.log('Do not delete.');
@@ -131,27 +131,28 @@
         </div>
         
         <div class="row" style="margin-top: 40px;">
+            <!--
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Best BSR</label>
-                    <input type="text" name="best_bsr" id="best_bsr" class="form-control" value="<?php echo $product->best_bsr;?>" placeholder="Enter Best BSR" />
+                    <input type="text" name="best_bsr" id="best_bsr" class="form-control" value="<?php //echo $product->best_bsr;?>" placeholder="Enter Best BSR" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Top 3 Avg BSR</label>
-                    <input type="text" name="top_3_avg_bsr" id="top_3_avg_bsr" class="form-control" value="<?php echo $product->top_3_avg_bsr;?>" placeholder="Enter Top 3 Avg BSR" />
+                    <input type="text" name="top_3_avg_bsr" id="top_3_avg_bsr" class="form-control" value="<?php //echo $product->top_3_avg_bsr;?>" placeholder="Enter Top 3 Avg BSR" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Top 10 Avg BSR</label>
-                    <input type="text" name="top_10_avg_bsr" id="top_10_avg_bsr" class="form-control" value="<?php echo $product->top_10_avg_bsr;?>" placeholder="Enter Top 10 Avg BSR" />
+                    <input type="text" name="top_10_avg_bsr" id="top_10_avg_bsr" class="form-control" value="<?php //echo $product->top_10_avg_bsr;?>" placeholder="Enter Top 10 Avg BSR" />
                 </div>
             </div>
-            
+            -->
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Target Price</label>
@@ -202,14 +203,9 @@
                     <input type="text" name="qty_ordered" id="qty_ordered" class="form-control" value="<?php echo $product->qty_ordered;?>" />
                 </div>
             </div>
-            
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Expected Ship Date</label>
-                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php echo $product->expected_ship_date;?>" />
-                </div>
-            </div>
-            
+        </div>
+        
+        <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Ship Method</label>
@@ -220,9 +216,14 @@
                     </select>
                 </div>
             </div>
-        </div>
-        
-        <div class="row">
+            
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Expected Ship Date</label>
+                    <input type="text" name="expected_ship_date" id="expected_ship_date" class="form-control datep" value="<?php echo $product->expected_ship_date;?>" />
+                </div>
+            </div>
+            
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Estimated Arrival Date</label>
@@ -243,36 +244,39 @@
                     <input type="text" name="estimated_launch_date" id="estimated_launch_date" class="form-control datep" value="<?php echo $product->estimated_launch_date;?>" />
                 </div>
             </div>
-            
+            <!--
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Competitor Price Example</label>
-                    <input type="text" name="competitor_price_example" id="competitor_price_example" class="form-control" value="<?php echo $product->competitor_price_example;?>" />
+                    <input type="text" name="competitor_price_example" id="competitor_price_example" class="form-control" value="<?php //echo $product->competitor_price_example;?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Competitor Qty Example</label>
-                    <input type="text" name="competitor_qty_example" id="competitor_qty_example" class="form-control" value="<?php echo $product->competitor_qty_example;?>" />
+                    <input type="text" name="competitor_qty_example" id="competitor_qty_example" class="form-control" value="<?php //echo $product->competitor_qty_example;?>" />
                 </div>
             </div>
             
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Marketing Hook</label>
-                    <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php echo $product->mktg_hook;?>" />
+                    <input type="text" name="marketing_hook" id="marketing_hook" class="form-control" value="<?php //echo $product->mktg_hook;?>" />
                 </div>
             </div>
+            -->
         </div>
         
         <div class="row">
+            <!--
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Competitor Link <span style="color: gray; font-style:italic;">(e.g. Amazon Link)</span></label>
-                    <input type="text" name="competitor_link" id="competitor_link" class="form-control" value="<?php echo $product->competitor_link;?>" />
+                    <input type="text" name="competitor_link" id="competitor_link" class="form-control" value="<?php //echo $product->competitor_link;?>" />
                 </div>
             </div>
+            -->
             
             <div class="col-md-4">
                 <div class="form-group">
@@ -290,12 +294,15 @@
                 </div>
             </div>
             
+            <!--
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Sourcing Due Date</label>
-                    <input type="text" name="sourcing_due_date" id="sourcing_due_date" class="form-control datep" value="<?php echo $product->sourcing_due_date;?>" />
+                    <input type="text" name="sourcing_due_date" id="sourcing_due_date" class="form-control datep" value="<?php //echo $product->sourcing_due_date;?>" />
                 </div>
             </div>
+            -->
+            
         </div>
         
     </form>
@@ -374,6 +381,7 @@
                             <th class="centered">Bullets</th>
                             <th class="centered">Listing Image</th>
                             <th class="centered">Secondary Images</th>
+                            <th class="centered">Zip File</th>
                             <th class="centered">Cred Site</th>
                             <th class="centered">Approval Status</th>
                             <th class="centered" width="100">Actions</th>
@@ -451,6 +459,7 @@
                                     }
                                 ?>
                             </td>
+                            <td class="centered"><a href="<?php echo base_url() . 'documents/listings/listing_images/' . $listing->zip_file;?>"><?php echo $listing->zip_file;?></a></td>
                             <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
                             <td class="centered">
                                 <?php 

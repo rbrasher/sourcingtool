@@ -215,9 +215,9 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('graphics', 'Graphics', 'trim|xss_clean');
         $this->form_validation->set_rules('packaging', 'Packaging', 'trim|xss_clean');
         $this->form_validation->set_rules('confidence_level', 'Confidence Level', 'trim|xss_clean');
-        $this->form_validation->set_rules('best_bsr', 'Best BSR', 'trim|xss_clean');
-        $this->form_validation->set_rules('top_3_avg_bsr', 'Top 3 Avg BSR', 'trim|xss_clean');
-        $this->form_validation->set_rules('top_10_avg_bsr', 'Top 10 Avg BSR', 'trim|xss_clean');
+        //$this->form_validation->set_rules('best_bsr', 'Best BSR', 'trim|xss_clean');
+        //$this->form_validation->set_rules('top_3_avg_bsr', 'Top 3 Avg BSR', 'trim|xss_clean');
+        //$this->form_validation->set_rules('top_10_avg_bsr', 'Top 10 Avg BSR', 'trim|xss_clean');
         $this->form_validation->set_rules('target_price', 'Target Price', 'trim|xss_clean');
         $this->form_validation->set_rules('fba_fee_est', 'FBA Fee Est', 'trim|xss_clean');
         $this->form_validation->set_rules('margin_per_sale', 'Margin Per Sale', 'trim|xss_clean');
@@ -230,12 +230,12 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('estimated_arrival_date', 'Estimated Arrival Date', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_date_at_fba', 'Estimated Date at FBA', 'trim|xss_clean');
         $this->form_validation->set_rules('estimated_launch_date', 'Estimated Launch Date', 'trim|xss_clean');
-        $this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
-        $this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
-        $this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
-        $this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
+        //$this->form_validation->set_rules('competitor_price_example', 'Competitor Price Example', 'trim|xss_clean');
+        //$this->form_validation->set_rules('competitor_qty_example', 'Competitor Qty Example', 'trim|xss_clean');
+        //$this->form_validation->set_rules('marketing_hook', 'Marketing Hook', 'trim|xss_clean');
+        //$this->form_validation->set_rules('competitor_link', 'Competitor Link', 'trim|xss_clean');
         $this->form_validation->set_rules('assigned_to', 'Assigned To', 'trim|xss_clean|min_length[3]');
-        $this->form_validation->set_rules('sourcing_due_date', 'Sourcing Due Date', 'trim|xss_clean');
+        //$this->form_validation->set_rules('sourcing_due_date', 'Sourcing Due Date', 'trim|xss_clean');
         
         $data['product'] = $this->Products_model->get_product($id);
         $data['graphics'] = $this->Products_model->get_graphics();
@@ -268,9 +268,9 @@ class Products extends CI_Controller {
                 'graphics'                          => $this->input->post('graphics'),
                 'packaging'                         => $this->input->post('packaging'),
                 'confidence_level'                  => $this->input->post('confidence_level'),
-                'best_bsr'                          => $this->input->post('best_bsr'),
-                'top_3_avg_bsr'                     => $this->input->post('top_3_avg_bsr'),
-                'top_10_avg_bsr'                    => $this->input->post('top_10_avg_bsr'),
+                //'best_bsr'                          => $this->input->post('best_bsr'),
+                //'top_3_avg_bsr'                     => $this->input->post('top_3_avg_bsr'),
+                //'top_10_avg_bsr'                    => $this->input->post('top_10_avg_bsr'),
                 'target_price'                      => $this->input->post('target_price'),
                 'fba_fee_est'                       => $this->input->post('fba_fee_est'),
                 'margin_per_sale'                   => $this->input->post('margin_per_sale'),
@@ -283,12 +283,12 @@ class Products extends CI_Controller {
                 'estimated_arrival_date'            => $this->input->post('estimated_arrival_date'),
                 'estimated_date_at_fba'             => $this->input->post('estimated_date_at_fba'),
                 'estimated_launch_date'             => $this->input->post('estimated_launch_date'),
-                'competitor_price_example'          => $this->input->post('competitor_price_example'),
-                'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
-                'mktg_hook'                         => $this->input->post('marketing_hook'),
-                'competitor_link'                   => $this->input->post('competitor_link'),
+                //'competitor_price_example'          => $this->input->post('competitor_price_example'),
+                //'competitor_qty_example'            => $this->input->post('competitor_qty_example'),
+                //'mktg_hook'                         => $this->input->post('marketing_hook'),
+                //'competitor_link'                   => $this->input->post('competitor_link'),
                 'assigned_to'                       => $this->input->post('assigned_to'),
-                'sourcing_due_date'                 => $this->input->post('sourcing_due_date'),
+                //'sourcing_due_date'                 => $this->input->post('sourcing_due_date'),
                 'created_modified_by'               => $this->session->userdata('name')
             );
             
@@ -644,96 +644,120 @@ class Products extends CI_Controller {
         $config['allowed_types'] = 'jpg|png';
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
+        $this->load->library('zip');
         
-        $listing_image = '';
-        $sec_image_1 = '';
-        $sec_image_2 = '';
-        $sec_image_3 = '';
-        $sec_image_4 = '';
-        $sec_image_5 = '';
-        $sec_image_6 = '';
-        
-        //upload listing images
-        if(!$this->upload->do_upload('main_image')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
+        if($_FILES) {
+            //upload listing images
+            if(strlen($_FILES['main_image']['name']) > 0) {
+                if(!$this->upload->do_upload('main_image')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
 
-            redirect('products/edit_production/' . $id);
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $listing_image = $file_data['file_name']; 
+                }
+            } else {
+                $listing_image = '';
+            }
+
+            if(strlen($_FILES['sec_image_1']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_1')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
+
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_1 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_1 = '';
+            }
+
+            if(strlen($_FILES['sec_image_2']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_2')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_2 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_2 = '';
+            }
+
+            if(strlen($_FILES['sec_image_3']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_3')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_3 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_3 = '';
+            }
+
+            if(strlen($_FILES['sec_image_4']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_4')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_4 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_4 = '';
+            }
+
+            if(strlen($_FILES['sec_image_5']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_5')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_5 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_5 = '';
+            }
+
+            if(strlen($_FILES['sec_image_6']['name']) > 0) {
+                if(!$this->upload->do_upload('sec_image_6')) {
+                    $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
+                    redirect('listings/add');
+                } else {
+                    $file_data = $this->upload->data();
+
+                    $sec_image_6 = $file_data['file_name'];
+                }
+            } else {
+                $sec_image_6 = '';
+            }
+
+            $zip_name = $this->input->post('product_id') . '_listing_images.zip';
+
+            $zip_data = array(
+                $listing_image  => $this->zip->read_file($config['upload_path'] . $listing_image),
+                $sec_image_1    => $this->zip->read_file($config['upload_path'] . $sec_image_1),
+                $sec_image_2    => $this->zip->read_file($config['upload_path'] . $sec_image_2),
+                $sec_image_3    => $this->zip->read_file($config['upload_path'] . $sec_image_3),
+                $sec_image_4    => $this->zip->read_file($config['upload_path'] . $sec_image_4),
+                $sec_image_5    => $this->zip->read_file($config['upload_path'] . $sec_image_5),
+                $sec_image_6    => $this->zip->read_file($config['upload_path'] . $sec_image_6)
+            );
+
+            $this->zip->add_data($zip_data);
+            $this->zip->archive($config['upload_path'] . $zip_name);
         } else {
-            $file_data = $this->upload->data();
-
-            $listing_image = $file_data['file_name']; 
+            $zip_name = '';
         }
-
-        if(!$this->upload->do_upload('sec_image_1')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
-
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_1 = $file_data['file_name'];
-        }
-
-        if(!$this->upload->do_upload('sec_image_2')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_2 = $file_data['file_name'];
-        }
-
-        if(!$this->upload->do_upload('sec_image_3')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_3 = $file_data['file_name'];
-        }
-
-        if(!$this->upload->do_upload('sec_image_4')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_4 = $file_data['file_name'];
-        }
-
-        if(!$this->upload->do_upload('sec_image_5')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_5 = $file_data['file_name'];
-        }
-
-        if(!$this->upload->do_upload('sec_image_6')) {
-            $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
-            redirect('products/edit_production/' . $id);
-        } else {
-            $file_data = $this->upload->data();
-
-            $sec_image_6 = $file_data['file_name'];
-        }
-        
-//        $secondary_files = array();
-//        if($this->upload->do_multi_upload("myfiles")) {
-//            $secondary_files = $this->upload->get_multi_upload_data();
-//        }
-//        
-//        $filenames = '';
-//        
-//        $listing_image = array_shift($secondary_files);
-//        $primary_image = $listing_image['file_name'];
-//        
-//        foreach($secondary_files as $file) {
-//            $filenames .= $file['file_name'] . '|';
-//        }
-//        
-//        $filenames = rtrim($filenames, "|");
         
         $data = array(
             'product_id'            => $this->input->post('product_id'),
@@ -746,14 +770,14 @@ class Products extends CI_Controller {
             'bullet_3'              => $this->input->post('bullet_3'),
             'bullet_4'              => $this->input->post('bullet_4'),
             'bullet_5'              => $this->input->post('bullet_5'),
-            'listing_image'         => $listing_image,                  //$primary_image,
+            'listing_image'         => $listing_image,
             'sec_image_1'           => $sec_image_1,
             'sec_image_2'           => $sec_image_2,
             'sec_image_3'           => $sec_image_3,
             'sec_image_4'           => $sec_image_4,
             'sec_image_5'           => $sec_image_5,
             'sec_image_6'           => $sec_image_6,
-            //'secondary_images'      => $filenames,
+            'zip_file'              => $zip_name,
             'credibility_site'      => $this->input->post('credibility_site'),
             'created_modified_by'   => $this->session->userdata('name')
         );

@@ -49,6 +49,7 @@
                     <!--<th class="centered">Title</th>-->
                     <th class="centered">Credibility Site</th>
                     <th class="centered">Approval Status</th>
+                    <th class="centered">Listing Images</th>
                     <th class="centered">Actions</th>
                 </tr>
             </thead>
@@ -60,6 +61,7 @@
                     <!--<td class="centered"><?php //echo $listing->title;?></td>-->
                     <td class="centered"><a href="<?php echo $listing->credibility_site;?>" target="_blank"><?php echo $listing->credibility_site;?></a></td>
                     <td class="centered"><?php echo $listing->approval;?></td>
+                    <td class="centered"><a href="<?php echo base_url() . 'documents/listings/listing_images/' . $listing->zip_file;?>"><?php echo $listing->zip_file;?></a></td>
                     <td class="centered">
                         <a class="btn btn-default" href="<?php echo base_url();?>listings/amazonPreview/<?php echo $listing->id;?>" title="Amazon Preview" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
                         <?php if($listing->approval_status == '1') : ?>

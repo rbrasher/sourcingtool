@@ -28,6 +28,8 @@ class Listings extends CI_Controller {
             redirect('authenticate/login');
         }
         
+        $this->load->library('zip');
+        
         //process form uploads
         $config['upload_path'] = './documents/listings/listing_images/';
         $config['allowed_types'] = 'jpg|png';
@@ -55,95 +57,118 @@ class Listings extends CI_Controller {
             $this->load->view('listings/add');
             $this->load->view('footer');
         } else {
-            $listing_image = '';
-            $sec_image_1 = '';
-            $sec_image_2 = '';
-            $sec_image_3 = '';
-            $sec_image_4 = '';
-            $sec_image_5 = '';
-            $sec_image_6 = '';
-            
-            //upload listing images
-            if(!$this->upload->do_upload('main_image')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
-                
-                redirect('listings/add');
+            if($_FILES) {
+                //upload listing images
+                if(strlen($_FILES['main_image']['name']) > 0) {
+                    if(!$this->upload->do_upload('main_image')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading the Listing Image.');
+
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $listing_image = $file_data['file_name']; 
+                    }
+                } else {
+                    $listing_image = '';
+                }
+
+                if(strlen($_FILES['sec_image_1']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_1')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
+
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_1 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_1 = '';
+                }
+
+                if(strlen($_FILES['sec_image_2']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_2')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_2 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_2 = '';
+                }
+
+                if(strlen($_FILES['sec_image_3']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_3')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_3 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_3 = '';
+                }
+
+                if(strlen($_FILES['sec_image_4']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_4')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_4 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_4 = '';
+                }
+
+                if(strlen($_FILES['sec_image_5']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_5')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_5 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_5 = '';
+                }
+
+                if(strlen($_FILES['sec_image_6']['name']) > 0) {
+                    if(!$this->upload->do_upload('sec_image_6')) {
+                        $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
+                        redirect('listings/add');
+                    } else {
+                        $file_data = $this->upload->data();
+
+                        $sec_image_6 = $file_data['file_name'];
+                    }
+                } else {
+                    $sec_image_6 = '';
+                }
+
+                $zip_name = $this->input->post('product_id') . '_listing_images.zip';
+
+                $zip_data = array(
+                    $listing_image  => $this->zip->read_file($config['upload_path'] . $listing_image),
+                    $sec_image_1    => $this->zip->read_file($config['upload_path'] . $sec_image_1),
+                    $sec_image_2    => $this->zip->read_file($config['upload_path'] . $sec_image_2),
+                    $sec_image_3    => $this->zip->read_file($config['upload_path'] . $sec_image_3),
+                    $sec_image_4    => $this->zip->read_file($config['upload_path'] . $sec_image_4),
+                    $sec_image_5    => $this->zip->read_file($config['upload_path'] . $sec_image_5),
+                    $sec_image_6    => $this->zip->read_file($config['upload_path'] . $sec_image_6)
+                );
+
+                $this->zip->add_data($zip_data);
+                $this->zip->archive($config['upload_path'] . $zip_name);
             } else {
-                $file_data = $this->upload->data();
-                
-                $listing_image = $file_data['file_name']; 
+                $zip_name = '';
             }
-            
-            if(!$this->upload->do_upload('sec_image_1')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 1');
-                
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_1 = $file_data['file_name'];
-            }
-            
-            if(!$this->upload->do_upload('sec_image_2')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 2');
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_2 = $file_data['file_name'];
-            }
-            
-            if(!$this->upload->do_upload('sec_image_3')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 3');
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_3 = $file_data['file_name'];
-            }
-            
-            if(!$this->upload->do_upload('sec_image_4')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 4');
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_4 = $file_data['file_name'];
-            }
-            
-            if(!$this->upload->do_upload('sec_image_5')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 5');
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_5 = $file_data['file_name'];
-            }
-            
-            if(!$this->upload->do_upload('sec_image_6')) {
-                $this->session->set_flashdata('upload_error', 'There was an error uploading Secondary Listing Image 6');
-                redirect('listings/add');
-            } else {
-                $file_data = $this->upload->data();
-                
-                $sec_image_6 = $file_data['file_name'];
-            }
-            
-//            $secondary_files = array();
-//            if($this->upload->do_multi_upload("myfiles")) {
-//                $secondary_files = $this->upload->get_multi_upload_data();
-//            }
-//            
-//            $filenames = '';
-//            
-//            $listing_image = array_shift($secondary_files);
-//            $primary_image = $listing_image['file_name'];
-//            
-//            foreach($secondary_files as $file) {
-//                $filenames .= $file['file_name'] . '|';
-//            }
-//            
-//            $filenames = rtrim($filenames, "|");
             
             $data = array(
                 'product_id'            => $this->input->post('product_id'),
@@ -156,7 +181,6 @@ class Listings extends CI_Controller {
                 'bullet_3'              => $this->input->post('bullet_3'),
                 'bullet_4'              => $this->input->post('bullet_4'),
                 'bullet_5'              => $this->input->post('bullet_5'),
-                //'listing_image'         => $primary_image,
                 'listing_image'         => $listing_image,
                 'sec_image_1'           => $sec_image_1,
                 'sec_image_2'           => $sec_image_2,
@@ -164,7 +188,7 @@ class Listings extends CI_Controller {
                 'sec_image_4'           => $sec_image_4,
                 'sec_image_5'           => $sec_image_5,
                 'sec_image_6'           => $sec_image_6,
-                //'secondary_images'      => $filenames,
+                'zip_file'              => $zip_name,
                 'credibility_site'      => $this->input->post('credibility_site'),
                 'created_modified_by'   => $this->session->userdata('name')
             );
