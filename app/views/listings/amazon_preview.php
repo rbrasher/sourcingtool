@@ -278,6 +278,126 @@ span.amtchelp { background: url(http://g-ecx.images-amazon.com/images/G/01/Selle
 #defaultChildDropdown_feature_div .a-dropdown-container .a-button-dropdown { display: none !important;}
 div#navSwmHoliday.nav-focus {border: none;margin: 0;}
 </style>
+
+<link rel="stylesheet" href="<?php echo base_url();?>bootstrap/css/multizoom.css" />
+<script src="<?php echo base_url();?>bootstrap/js/jquery-1.11.1.min.js"></script>
+<script src="<?php echo base_url();?>bootstrap/js/multizoom.js"></script>
+
+<script>
+    jQuery(document).ready(function($){
+        $('#landingImage').addimagezoom({
+            //zoomrange: [1, 3],
+            disablewheel: true,
+            magnifiersize: [800,600],
+            curshade: true,
+            cursorshadecolor: "#fdffd5",
+            imagevertcenter: true,
+        });
+        
+        $('#sec1').click(function() {
+            var img = $('#sec1 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec1 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+        
+        $('#sec2').click(function() {
+            var img = $('#sec2 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec2 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+        
+        $('#sec3').click(function() {
+            var img = $('#sec3 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec3 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+        
+        $('#sec4').click(function() {
+            var img = $('#sec4 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec4 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+        
+        $('#sec5').click(function() {
+            var img = $('#sec5 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec5 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+        
+        $('#sec6').click(function() {
+            var img = $('#sec6 img').attr('src');
+            var thumb = $('#landingImage').attr('src');
+            
+            $('#landingImage').attr('src', img);
+            $('#sec6 img').attr('src', thumb);
+            
+            $('#landingImage').addimagezoom({
+                //zoomrange: [1, 3],
+                disablewheel: true,
+                magnifiersize: [800,600],
+                curshade: true,
+                cursorshadecolor: "#fdffd5",
+                imagevertcenter: true,
+            });
+        });
+    });
+</script>
+
 </head>  
 
 <body id="dp" class="major_appliances en_US a-auix_ux_57388-t1 a-auix_ux_63571-c a-aui_49697-t1 a-aui_51744-c a-aui_57326-c a-aui_58736-c a-aui_accessibility_49860-c a-aui_attr_validations_1_51371-c a-aui_bolt_62845-c a-aui_ux_47524-t1 a-aui_ux_49594-c a-aui_ux_56217-c a-aui_ux_59374-c a-aui_ux_59797-c a-aui_ux_60000-c">
@@ -846,7 +966,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
 
                             <div id="altImages" class="a-fixed-left-grid-col a-col-left" style="width:58px;margin-left:-58px;_margin-left:-29px;float:left;">
 
-                                <div id="thumbs-image" class="a-hidden" customfunctionname="(function(id, state, onloadFunction){ P.when('A').execute(function(A){ A.trigger('image-block-twister-swatch-click', id, state, onloadFunction); }); });"></div>
+                                <!--<div id="thumbs-image" class="a-hidden" customfunctionname="(function(id, state, onloadFunction){ P.when('A').execute(function(A){ A.trigger('image-block-twister-swatch-click', id, state, onloadFunction); }); });"></div>-->
                                 <!-- secondary images -->
                                 <ul class="a-nostyle a-button-list a-vertical a-spacing-top-extra-large">
                                     <!--
@@ -866,21 +986,29 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     -->
                                     
                                     <?php if($listing->sec_image_1) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec1" class="a-spacing-small item multizoom1 thumbs">
+                                        <!--
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
+                                                -->
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
+                                                    <!--
                                                     <span class="a-button-inner"><input class="a-button-input" type="submit">
                                                         <span class="a-button-text" aria-hidden="true">
-                                                            <img width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_1;?>" />
+                                                    -->
+                                                            <img data-lens="true" width="38" height="50" alt="" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->sec_image_1;?>" />
+                                                    <!--
                                                         </span>
                                                     </span>
+                                                    -->
                                                 </span>
+                                                <!--
                                             </span>
                                         </span>
+                                        -->
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec1" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -896,7 +1024,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     <?php endif;?>
                                     
                                     <?php if($listing->sec_image_2) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec2" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -910,7 +1038,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec2" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -926,7 +1054,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     <?php endif;?>
                                     
                                     <?php if($listing->sec_image_3) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec3" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -940,7 +1068,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec3" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -956,7 +1084,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     <?php endif;?>
                                     
                                     <?php if($listing->sec_image_4) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec4" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -970,7 +1098,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec4" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -986,7 +1114,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     <?php endif;?>
                                     
                                     <?php if($listing->sec_image_5) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec5" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -1000,7 +1128,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec5" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -1016,7 +1144,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                     <?php endif;?>
                                     
                                     <?php if($listing->sec_image_6) : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec6" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -1030,7 +1158,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         </span>
                                     </li>
                                     <?php else : ?>
-                                    <li class="a-spacing-small item">
+                                    <li id="sec6" class="a-spacing-small item multizoom1 thumbs">
                                         <span class="a-list-item">
                                             <span class="a-declarative" data-action="thumb-action" data-thumb-action="{&quot;thumbnailIndex&quot;:&quot;0&quot;,&quot;variant&quot;:&quot;MAIN&quot;,&quot;index&quot;:0,&quot;type&quot;:&quot;image&quot;}">
                                                 <span class="a-button a-button-selected a-button-thumbnail a-button-toggle a-button-focus">
@@ -1076,11 +1204,11 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
                                         <ul class="a-nostyle a-horizontal list maintain-height">
                                             <li class="image item itemNo0 selected maintain-height">
                                                 <span class="a-list-item">
-                                                    <span class="a-declarative" data-action="main-image-click" data-main-image-click="{}">
-                                                        <div id="imgTagWrapperId" class="imgTagWrapper">
+                                                    <span class="a-declarative">
+                                                        <div id="imgTagWrapperId" class="imgTagWrapper targetarea">
                                                             <!-- main image -->
                                                             <?php if($listing->listing_image) : ?>
-                                                                <img width="342" height="342" alt="<?php echo $listing->title;?>" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->listing_image;?>" class="a-dynamic-image  a-stretch-horizontal" id="landingImage" style="max-width:522px;max-height:522px;" />
+                                                                <img width="342" height="342" alt="<?php echo $listing->title;?>" src="<?php echo base_url();?>documents/listings/listing_images/<?php echo $listing->listing_image;?>" class="a-dynamic-image  a-stretch-horizontal" id="landingImage" style="max-width:522px;max-height:522px;" data-lens="true" />
                                                             <?php else: ?>
                                                                 <img alt="<?php echo $listing->title;?>" src="https://placeholdit.imgix.net/~text?txtsize=32&txt=Image+Not+Available&w=342&h=342" class="a-dynamic-image  a-stretch-horizontal" id="landingImage" style="max-width:522px;max-height: 522px;" />
                                                             <?php endif;?>
