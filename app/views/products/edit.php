@@ -271,9 +271,7 @@
                             <td class="centered"><a href="<?php echo base_url();?>documents/brochures/<?php echo $manufacturer->brochure;?>" target="_blank"><?php echo $manufacturer->brochure;?></a></td>
                             <td class="centered">
                                 <?php if($manufacturer->is_primary == 0) : ?>
-                                <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a>
-                                <?php elseif($manufacturer->is_primary == 1) : ?>
-                                <a class="btn btn-danger" href="<?php echo base_url();?>products/remove_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Remove As Primary"><span class="glyphicon glyphicon-remove-circle"></span></a> 
+                                <a class="btn btn-primary" href="<?php echo base_url();?>products/set_as_primary_manufacturer/<?php echo $product->id;?>/<?php echo $manufacturer->id;?>" title="Set As Primary"><span class="glyphicon glyphicon-ok-circle"></span></a> 
                                 <?php endif;?>
                             </td>
                         </tr>

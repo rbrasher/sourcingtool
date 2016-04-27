@@ -8,7 +8,8 @@
             dateFormat: "yy-mm-dd"
         });
         
-        <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit') : ?>
+        <?php if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit') : ?>
+        <?php //if($this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'add' || $this->uri->segment(1) == 'products' && $this->uri->segment(2) == 'edit') : ?>
             $('#toggle').click(function(e) {
                 e.preventDefault();
 

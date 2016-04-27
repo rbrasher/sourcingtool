@@ -389,7 +389,27 @@ class Products extends CI_Controller {
             $brochure = '';
         }
         
+        //does another manufacturer exist for this product?
+        $manufacturers = $this->Products_model->get_manufacturers_for_product($id);
+        $product = $this->Products_model->get_product($id);
+        
+        if(!$manufacturers) {
+            
+            $margin_per_sale = $this->calculate_margin($product->target_price, $product->fba_fee_est, $this->input->post('total_price'));
+            $estimated_margin_per_month = $this->calculate_monthly_margin($margin_per_sale, $product->estimated_sales_per_day);
+            
+            $product_data = array(
+                'status'                        => 2,
+                'quantity_per_package'          => $this->input->post('qty_per_package'),
+                'total_price'                   => $this->input->post('total_price'),
+                'item_price'                    => $this->input->post('price_per_item'),
+                'margin_per_sale'               => $margin_per_sale,
+                'estimated_margin_per_month'    => $estimated_margin_per_month
+            );
 
+            $this->Products_model->update($product_data, $id);
+        }
+        
         $data = array(
             'name'                  => $this->input->post('manufacturer_name'),
             'product_id'            => $this->input->post('product_id'),
@@ -410,12 +430,6 @@ class Products extends CI_Controller {
 
         //Insert new manufacturer
         $this->Manufacturers_model->insert($data);
-        
-        $product = array(
-            'status' => 2
-        );
-        //update product status to "Getting Quotes" (status => 2)
-        $this->Products_model->update($product, $data['product_id']);
 
         //set message
         $this->session->set_flashdata('manufacturer_saved', 'Manufacturer added successfully.');
@@ -444,6 +458,26 @@ class Products extends CI_Controller {
             $brochure = '';
         }
         
+        //does another manufacturer exist for this product?
+        $manufacturers = $this->Products_model->get_manufacturers_for_product($id);
+        $product = $this->Products_model->get_product($id);
+        
+        if(!$manufacturers) {
+            
+            $margin_per_sale = $this->calculate_margin($product->target_price, $product->fba_fee_est, $this->input->post('total_price'));
+            $estimated_margin_per_month = $this->calculate_monthly_margin($margin_per_sale, $product->estimated_sales_per_day);
+            
+            $product_data = array(
+                'status'                        => 2,
+                'quantity_per_package'          => $this->input->post('qty_per_package'),
+                'total_price'                   => $this->input->post('total_price'),
+                'item_price'                    => $this->input->post('price_per_item'),
+                'margin_per_sale'               => $margin_per_sale,
+                'estimated_margin_per_month'    => $estimated_margin_per_month
+            );
+
+            $this->Products_model->update($product_data, $id);
+        }
 
         $data = array(
             'name'                  => $this->input->post('manufacturer_name'),
@@ -510,6 +544,44 @@ class Products extends CI_Controller {
     }
     
     public function set_as_primary_manufacturer($product_id, $manufacturer_id) {
+        $manufacturers = $this->Products_model->get_manufacturers_for_product($product_id);
+        
+        if($manufacturers) {
+            //clear out all other primary manufacturers
+            foreach($manufacturers as $manufacturer) {
+                if($manufacturer->is_primary == 1) {
+                    $data = array(
+                        'is_primary' => 0
+                    );
+                    
+                    $this->Manufacturers_model->update($data, $manufacturer->id);
+                }
+            }
+        }
+        
+        $product = $this->Products_model->get_product($product_id);
+        $manufacturer = $this->Manufacturers_model->get_manufacturer($manufacturer_id);
+        
+        $margin_per_sale = $this->calculate_margin($product->target_price, $product->fba_fee_est, $manufacturer->total_price);
+        $estimated_margin_per_month = $this->calculate_monthly_margin($margin_per_sale, $product->estimated_sales_per_day);
+        
+        if($product->status < 4) {
+            $status = 4;
+        } else {
+            $status = $product->status;
+        }
+        
+        $product_data = array(
+            'status'                        => $status,
+            'quantity_per_package'          => $manufacturer->qty_per_package,
+            'total_price'                   => $manufacturer->total_price,
+            'item_price'                    => $manufacturer->price_per_item,
+            'margin_per_sale'               => $margin_per_sale,
+            'estimated_margin_per_month'    => $estimated_margin_per_month
+        );
+        
+        $this->Products_model->update($product_data, $product_id);
+        
         $data = array(
             'is_primary' => 1
         );
@@ -519,6 +591,8 @@ class Products extends CI_Controller {
         redirect('products/edit/' . $product_id);
     }
     
+    //this is no longer used
+    /*
     public function remove_as_primary_manufacturer($product_id, $manufacturer_id) {
         $data = array(
             'is_primary' => 0
@@ -528,8 +602,47 @@ class Products extends CI_Controller {
         
         redirect('products/edit/' . $product_id);
     }
+    */
     
     public function set_as_primary_production_manufacturer($product_id, $manufacturer_id) {
+        $manufacturers = $this->Products_model->get_manufacturers_for_product($product_id);
+        
+        if($manufacturers) {
+            //clear out all other primary manufacturers
+            foreach($manufacturers as $manufacturer) {
+                if($manufacturer->is_primary == 1) {
+                    $data = array(
+                        'is_primary' => 0
+                    );
+                    
+                    $this->Manufacturers_model->update($data, $manufacturer->id);
+                }
+            }
+        }
+        
+        $product = $this->Products_model->get_product($product_id);
+        $manufacturer = $this->Manufacturers_model->get_manufacturer($manufacturer_id);
+        
+        $margin_per_sale = $this->calculate_margin($product->target_price, $product->fba_fee_est, $manufacturer->total_price);
+        $estimated_margin_per_month = $this->calculate_monthly_margin($margin_per_sale, $product->estimated_sales_per_day);
+        
+        if($product->status < 4) {
+            $status = 4;
+        } else {
+            $status = $product->status;
+        }
+        
+        $product_data = array(
+            'status'                        => $status,
+            'quantity_per_package'          => $manufacturer->qty_per_package,
+            'total_price'                   => $manufacturer->total_price,
+            'item_price'                    => $manufacturer->price_per_item,
+            'margin_per_sale'               => $margin_per_sale,
+            'estimated_margin_per_month'    => $estimated_margin_per_month
+        );
+        
+        $this->Products_model->update($product_data, $product_id);
+        
         $data = array(
             'is_primary' => 1
         );
@@ -539,6 +652,8 @@ class Products extends CI_Controller {
         redirect('products/edit_production/' . $product_id);
     }
     
+    //this is no longer used
+    /*
     public function remove_as_primary_production_manufacturer($product_id, $manufacturer_id) {
         $data = array(
             'is_primary' => 0
@@ -548,6 +663,8 @@ class Products extends CI_Controller {
         
         redirect('products/edit_production/' . $product_id);
     }
+     * 
+     */
     
     public function add_concept_from_product($id) {
         $config['upload_path'] = './documents/concepts/';
@@ -789,5 +906,16 @@ class Products extends CI_Controller {
         $this->session->set_flashdata('listing_added', 'Listing added successfully');
         
         redirect('products/edit_production/' . $id);
+    }
+    
+    public static function calculate_margin($target_price, $fba_fee_est, $total_price) {
+        $margin = (($target_price - $fba_fee_est) - $total_price);
+        
+        return $margin;
+    }
+    
+    public static function calculate_monthly_margin($margin_per_sale, $est_sales_per_day) {
+        $estimated_margin_per_month = ($margin_per_sale * $est_sales_per_day) * 30;
+        return $estimated_margin_per_month;
     }
 }

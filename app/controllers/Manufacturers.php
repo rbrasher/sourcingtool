@@ -76,6 +76,29 @@ class Manufacturers extends CI_Controller {
                 $brochure = '';
             }
             
+            $product_id = $this->input->post('product_id');
+            //does another manufacturer exist for this product?
+            $manufacturers = $this->Products_model->get_manufacturers_for_product($product_id);
+            $product = $this->Products_model->get_product($product_id);
+            
+            $is_primary = $this->input->post('is_primary');
+            
+            if(!$manufacturers || $is_primary == 1) {
+                //re-calculate margins if not equal to zero
+                $margin_per_sale = $this->calculate_margin($product->target_price, $product->fba_fee_est, $this->input->post('total_price'));
+                $estimated_margin_per_month = $this->calculate_monthly_margin($margin_per_sale, $product->estimated_sales_per_day);
+
+                $product_data = array(
+                    'quantity_per_package'          => $this->input->post('qty_per_package'),
+                    'total_price'                   => $this->input->post('total_price'),
+                    'item_price'                    => $this->input->post('price_per_item'),
+                    'margin_per_sale'               => $margin_per_sale,
+                    'estimated_margin_per_month'    => $estimated_margin_per_month
+                );
+                
+                $this->Products_model->update($product_data, $product_id);
+            }
+            
             $data = array(
                 'name'                  => $this->input->post('name'),
                 'product_id'            => $this->input->post('product_id'),
@@ -208,4 +231,15 @@ class Manufacturers extends CI_Controller {
 //        
 //        redirect('manufacturers');
 //    }
+    
+    public static function calculate_margin($target_price, $fba_fee_est, $total_price) {
+        $margin = (($target_price - $fba_fee_est) - $total_price);
+        
+        return $margin;
+    }
+    
+    public static function calculate_monthly_margin($margin_per_sale, $est_sales_per_day) {
+        $estimated_margin_per_month = ($margin_per_sale * $est_sales_per_day) * 30;
+        return $estimated_margin_per_month;
+    }
 }
