@@ -70,7 +70,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Owner</label>
-                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $this->session->userdata('name');//echo set_value('owner');?>" readonly />
+                    <input type="text" name="owner" id="owner" class="form-control" value="<?php echo $this->session->userdata('name');?>" readonly />
                 </div>
             </div>
         </div>

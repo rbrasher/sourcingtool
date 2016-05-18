@@ -295,6 +295,7 @@
                         <option value="eamon">Eamon</option>
                         <option value="eric">Eric</option>
                         <option value="fredy">Fredy</option>
+                        <option value="james">James</option>
                         <option value="quinn">Quinn</option>
                         <option value="yang">Yang</option>
                         <option value="ron">Ron - Do not use!</option>

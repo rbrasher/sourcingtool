@@ -287,6 +287,7 @@
                         <option value="eamon" <?php if($product->assigned_to == 'eamon') {echo 'selected';}?>>Eamon</option>
                         <option value="eric" <?php if($product->assigned_to == 'eric') {echo 'selected';};?>>Eric</option>
                         <option value="fredy" <?php if($product->assigned_to == 'fredy') {echo 'selected';};?>>Fredy</option>
+                        <option value="james" <?php if($product->assigned_to == 'james') {echo 'selected';};?>>James</option>
                         <option value="quinn" <?php if($product->assigned_to == 'quinn') {echo 'selected';};?>>Quinn</option>
                         <option value="yang" <?php if($product->assigned_to == 'yang') {echo 'selected';};?>>Yang</option>
                         <option value="ron" <?php if($product->assigned_to == 'ron') {echo 'selected';};?>>Ron - Do not use!</option>
