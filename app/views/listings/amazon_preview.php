@@ -968,7 +968,7 @@ div#navSwmHoliday.nav-focus {border: none;margin: 0;}
 
                                 <!--<div id="thumbs-image" class="a-hidden" customfunctionname="(function(id, state, onloadFunction){ P.when('A').execute(function(A){ A.trigger('image-block-twister-swatch-click', id, state, onloadFunction); }); });"></div>-->
                                 <!-- secondary images -->
-                                <?php if($listing_image->sec_image_1) :?>
+                                <?php if($listing->sec_image_1) :?>
                                 <ul class="a-nostyle a-button-list a-vertical a-spacing-top-extra-large">
                                     <!--
                                     <li class="a-spacing-small item">
