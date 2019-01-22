@@ -62,12 +62,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-//DEV
+//Prod
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'amznpub.cgacn5bepgyu.us-east-1.rds.amazonaws.com',
+	'username' => 'sourcingtool',
+	'password' => 'j2jMwfEjSvXnx3St',
 	'database' => 'sourcing_tool',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
